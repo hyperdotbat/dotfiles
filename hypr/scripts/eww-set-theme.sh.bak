@@ -1,0 +1,21 @@
+#!/bin/bash
+
+is_light_theme=$1
+
+if [ "$is_light_theme" == "true" ] || [ "$is_light_theme" == "dark"  ]; then
+	ln -sf ~/.config/eww/maincolortheme_dark.scss ~/.config/eww/maincolortheme.scss
+	echo "false" > ~/.config/eww/maincolortheme_islight.txt
+	gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+	gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+	lookandfeeltool -a org.kde.breezedark.desktop
+	kitten themes --reload-in=all "Gruvbox Dark"
+	echo "Dark theme"
+else
+	ln -sf ~/.config/eww/maincolortheme_light.scss ~/.config/eww/maincolortheme.scss
+	echo "true" > ~/.config/eww/maincolortheme_islight.txt
+	gsettings set org.gnome.desktop.interface color-scheme prefer-light
+	gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+	lookandfeeltool -a org.kde.breeze.desktop
+	kitten themes --reload-in=all "Gruvbox Light Soft"
+	echo "Light theme"
+fi

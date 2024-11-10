@@ -1,0 +1,230 @@
+;; ┏┓ ┏━┓┏━┓
+;; ┣┻┓┣━┫┣┳┛
+;; ┗━┛╹ ╹╹┗╸
+
+(defwindow bar
+  :monitor 0
+  :stacking "fg"
+  :namespace "bar"
+  :exclusive true
+  :geometry (geometry
+    :x "0%"
+    :y "-1%"
+    :width "134%"
+    :height "1%"
+    :anchor "top center"
+  )
+
+  (revealer
+    :reveal reveal_bar
+    :transition "slidedown"
+    :duration "250ms"
+
+    (centerbox
+      :orientation "h"
+      :class "container"
+
+      (left)
+      (center)
+      (right)
+    )
+  )
+)
+
+;; ┏━┓┏━╸┏━╸╺┳╸╻┏━┓┏┓╻┏━┓
+;; ┗━┓┣╸ ┃   ┃ ┃┃ ┃┃┗┫┗━┓
+;; ┗━┛┗━╸┗━╸ ╹ ╹┗━┛╹ ╹┗━┛
+
+(defwidget left []
+  (box
+    :orientation "h"
+    :halign "start"
+    :space-evenly false
+    :spacing 6
+
+    (Menu :music {v_has_player.yes == true ? v_music : v_has_player})
+    (Workspaces)
+  )
+)
+
+(defwidget center []
+  (eventbox :cursor "pointer"
+      (button
+	    :orientation "h"
+	    :halign "center"
+	    :onclick `~/.config/hypr/scripts/rofi-toggle-special.sh`
+      :onmiddleclick "hyprctl dispatch togglespecialworkspace"
+      :onrightclick "exec kitty ~ &"
+
+	    (ActiveWindow)
+    )
+  )
+)
+
+(defwidget right []
+  (box
+    :orientation "h"
+    :halign "end"
+
+    (Controls)
+  )
+)
+
+;; ╻ ╻╻╺┳┓┏━╸┏━╸╺┳╸┏━┓
+;; ┃╻┃┃ ┃┃┃╺┓┣╸  ┃ ┗━┓
+;; ┗┻┛╹╺┻┛┗━┛┗━╸ ╹ ┗━┛
+
+(defwidget Menu [music]
+  (eventbox :cursor "pointer"
+    (button
+      :class "box menu ${music.status == 'Playing' ? 'cava' : 'arch'}"
+      :onclick `~/.config/eww/shared/scripts/togglesidebar.sh`
+
+      {music.status == "Playing" ? v_cava : "󰣇"}
+  ))
+)
+
+(defwidget Workspaces []
+  (box
+    :class "box workspaces"
+    :orientation "h"
+    :onmiddleclick "hyprctl dispatch togglespecialworkspace"
+    :onscrollup "hyprctl dispatch workspace +1"
+    :onscrolldown "hyprctl dispatch workspace -1"
+
+    (for workspace in v_workspaces
+      (eventbox :cursor "pointer"
+        (button
+          :class {workspace.active ? "active" : ""}
+          :onclick "hyprctl dispatch workspace ${workspace.name}"
+          :valign "center"
+          :halign "center"
+      ))
+    )
+  )
+)
+
+(defwidget ActiveWindow []
+  ;; (eventbox
+  ;;   :cursor "pointer"
+  ;;   :onclick "~/.config/hypr/scripts/rofi-toggle.sh"
+
+    (box
+      :class "box activewindow"
+      :space-evenly false
+      :spacing 16
+
+      (label
+        :class "icon"
+        :text {v_activewindow.icon}
+        :wrap true
+      )
+
+      (label
+        :class "divider"
+        :text ""
+      )
+
+      (label
+        :class "window"
+        :text {v_activewindow.class}
+        :limit-width 32
+      )
+  ;;   )
+  )
+)
+
+(defwidget Controls []
+  (box
+    :class "controls box"
+    :orientation "h"
+    :space-evenly false
+
+    (label
+      :class "time"
+      :text {v_date.time}
+      :tooltip {v_date.date}
+      :onclick ""
+    )
+
+    (label
+      :class "divider"
+      :text ""
+    )
+
+	(box
+		(systray
+			:icon-size 19
+			:spacing 7
+			:pack_direction "down"
+			:prepend-new true
+		)
+	)
+	
+    (eventbox :cursor "pointer" :visible {v_network_primary != "None"}
+      (button
+        :class "network ${reveal_network == true ? 'active' : ''}"
+        :onclick "~/.config/eww/shared/scripts/togglenetwork.sh"
+        :onmiddleclick "~/.config/hypr/scripts/disconnect-wifi.sh"
+        :onrightclick "nmcli device wifi connect HyperTPLink"
+        :tooltip {v_network_wifi.connected.ssid}
+
+        {v_network_primary == "ethernet" ? "󰈀" : v_network_wifi.connected.icon}
+      )
+    )
+    
+	(eventbox :cursor "pointer"
+	  :onscroll "~/.config/eww/bar/scripts/adjust-volume.sh {}"
+      (button
+        :class "volume"
+        :tooltip "Vol: ${v_volume}%"
+        :onclick "pavucontrol &"
+        :onmiddleclick "~/.config/hypr/scripts/volumecontrol.sh -o m"
+        :onrightclick "~/volume-sound.sh"
+
+        ""
+      )
+    )
+    
+    (eventbox :cursor "pointer"
+      :onscroll "~/.config/eww/bar/scripts/adjust-brightness.sh {}"
+      :onmiddleclick "~/.config/eww/bar/scripts/toggle-brightness.sh"
+      (button
+        :class {v_battery.status == "Full" || v_battery.status == "Charging" && v_battery.capacity > 90 ? "battery-full" : v_battery.capacity > 50 ? "battery" : v_battery0.capacity > 40 ? "battery-weak" : "battery-dead"}
+        :tooltip {v_battery.status != "Removed" ? "Brightness: ${v_brightness}
+${v_battery.status}: ${v_battery.capacity}%
+${v_battery0.status}: ${v_battery0.capacity}%" : "No Battery"}
+		:onclick "kcmshell6 kcm_powerdevilprofilesconfig"
+		:onmiddleclick "~/.config/eww/bar/scripts/toggle-brightness.sh"
+
+        {v_battery.icon}
+      )
+    )
+
+    (eventbox :cursor "pointer"
+      (button
+        :class "notif ${reveal_notif == true ? 'active' : ''}"
+        :onmiddleclick "dunstctl close-all"
+        :onclick "~/.config/eww/shared/scripts/togglenotif.sh"
+
+        "󰂚"
+      )
+    )
+
+    (label
+      :class "divider"
+      :text ""
+    )
+
+    (eventbox :cursor "pointer"
+      (button
+        :class "shutdown"
+        :onmiddleclick "shutdown --n now"
+        :onrightclick "systemctl suspend"
+        :onclick "~/.config/eww/shared/scripts/togglelogout.sh"
+
+        "⏻"
+      )
+    )
+  )
+)

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+is_light_theme_file=~/.config/eww/maincolortheme_islight.txt
+if [ -f "$is_light_theme_file" ]; then
+	is_light_theme=$(cat ~/.config/eww/maincolortheme_islight.txt)
+	"$HOME/.config/hypr/scripts/eww-set-theme.sh" $is_light_theme
+	# echo !is_light_theme > ~/.config/eww/maincolortheme_islight.txt
+	# echo "Light theme: ${!is_light_theme}"
+else
+	echo "false" > ~/.config/eww/maincolortheme_islight.txt
+fi
