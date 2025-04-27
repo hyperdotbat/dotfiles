@@ -1,0 +1,30 @@
+#include ~/.config/kitty/console_colors.conf
+include ~/.config/kitty/dracula.conf
+#include ~/.config/kitty/everforest_dark_medium.conf
+#include ~/.config/kitty/everblush.conf
+
+if env KITTY_COLOR_SCHEME="homelab"; then
+    include color_schemes/console_colors.conf
+fi
+
+
+font_family      JetBrains Mono Nerd Font
+bold_font        JetBrains Mono Nerd Font Bold
+italic_font      JetBrains Mono Nerd Font Italic
+bold_italic_font      JetBrains Mono Nerd Font Bold Italic
+font_size        12.0
+
+#clear_all_shortcuts no
+
+padding_width 0
+padding_height 0
+show_window_options no
+initial_window_width 80
+initial_window_height 24
+
+
+
+# BEGIN_KITTY_THEME
+# Gruvbox Dark
+include current-theme.conf
+# END_KITTY_THEME

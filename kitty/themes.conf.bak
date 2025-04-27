@@ -1,0 +1,12 @@
+include ~/.config/color_schemes/console_colors.conf
+include ~/.config/color_schemes/dracula.conf
+#include ~/.config/color_schemes/everforest_dark_medium.conf
+#include ~/.config/color_schemes/everblush.conf
+
+# Dracula titlebar
+# wayland_titlebar_color #21222c
+
+# BEGIN_KITTY_THEME
+# Adwaita dark
+include current-theme.conf
+# END_KITTY_THEME
