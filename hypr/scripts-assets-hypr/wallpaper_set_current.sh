@@ -1,13 +1,16 @@
 #!/bin/bash
 cd "$(dirname "$0")" || exit 1
 
-WALLPAPERS_DIR="~/Pictures/Wallpapers"
+WALLPAPERS_DIR_OG="~/Pictures/Wallpapers"
 wallpapers_dir_file=".wallpapers_dir"
 if [ -f "$wallpapers_dir_file" ]; then
-    WALLPAPERS_DIR=$(<$wallpapers_dir_file)
+    WALLPAPERS_DIR_OG=$(<$wallpapers_dir_file)
 else
-    echo "$WALLPAPERS_DIR" > "$wallpapers_dir_file"
+    echo "$WALLPAPERS_DIR_OG" > "$wallpapers_dir_file"
 fi
+
+WALLPAPERS_DIR="${WALLPAPERS_DIR_OG/#\~/$HOME}"
+WALLPAPERS_DIR="${WALLPAPERS_DIR%/}"
 
 WALLPAPER_CURRENT="Abstract/nord-shards.png"
 wallpaper_current_path=".wallpaper_current_path_cache"

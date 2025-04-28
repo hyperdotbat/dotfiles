@@ -1,0 +1,29 @@
+
+window#waybar {
+    background: #282a36;
+    color: white;
+}
+tooltip {
+  background: rgba(40, 42, 54, 1.0);
+  border: 1px solid white;
+}
+tooltip label {
+  color: white;
+}
+#workspaces button {
+    background: transparent;
+    color: white;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button:hover, #workspaces button.special:hover {
+    background: rgba(189, 147, 249, 1);
+    color: white
+}
+#workspaces button.active, #workspaces button.special.active {
+    background: rgba(80, 250, 123, 1);
+    color: rgba(40, 42, 54, 1);
+}
+#workspaces button.special {
+    color: rgba(255, 255, 255, 0.5);
+}

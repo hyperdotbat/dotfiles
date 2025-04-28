@@ -1,14 +1,18 @@
 #!/bin/bash
 
-CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"
-CONFIG_FILES=("$CONFIG_DIR/waybar/config.jsonc" "$CONFIG_DIR/waybar/style.css")
+CONFIG_DIR_OG="${XDG_CONFIG_HOME:-$HOME/.config}/waybar"
+
+# Resolve symlink
+CONFIG_DIR=$CONFIG_DIR_OG
+if [ -L "$CONFIG_DIR" ]; then
+    CONFIG_DIR="$(readlink -f "$CONFIG_DIR_OG")"
+fi
+echo "$CONFIG_DIR"
 
 trap "killall waybar" EXIT
-#trap "killall -SIGUSR2 waybar" EXIT
 
 while true; do
     waybar &
-    inotifywait -e create,modify "${CONFIG_FILES[@]}"
+    inotifywait -e create,modify -r "$CONFIG_DIR"
     killall waybar
-    #killall -SIGUSR2 waybar
 done

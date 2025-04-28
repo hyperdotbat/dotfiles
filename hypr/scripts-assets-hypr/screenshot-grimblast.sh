@@ -19,7 +19,6 @@ if [ "$SAVE_SCREENSHOTS" = true ]; then
     else
         echo "$SCREENSHOTS_DIR_OG" > "$screenshots_dir_file"
     fi
-    # [[ "$SCREENSHOTS_DIR_OG" != */ ]] && SCREENSHOTS_DIR_OG="${SCREENSHOTS_DIR_OG}/"
     SCREENSHOTS_DIR="${SCREENSHOTS_DIR_OG%/}"
     SCREENSHOTS_DIR="${SCREENSHOTS_DIR_OG/#\~/$HOME}"
 

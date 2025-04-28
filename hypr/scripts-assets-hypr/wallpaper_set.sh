@@ -18,7 +18,7 @@ fi
 
 
 if [ "$WALLPAPER_TOOL" == "swww" ]; then
-    SWWW_TRANSITION_TYPE="grow"
+    SWWW_TRANSITION_TYPE="wipe"
     SWWW_TRANSITION_DURATION=2
     SWWW_TRANSITION_FPS=60 #165
 

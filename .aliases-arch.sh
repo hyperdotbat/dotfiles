@@ -25,4 +25,5 @@ alias update='tmux new-session -A -s update bash -ic "btrfs-snapshot \"BeforeUpd
 
 alias hyprconfig="cd ~/.config/hypr && code ." #ranger" #"v ~/.config/hypr/hyprland.conf"
 alias hyprcfg="hyprconfig"
+alias dotfilescfg="cd ~/dotfiles && code ."
 
