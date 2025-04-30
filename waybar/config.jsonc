@@ -9,12 +9,11 @@
     "modules-left": [
         "hyprland/workspaces",
         "hyprland/submap",
-        "hyprland/scratchpad",
         "custom/media"
     ],
     "modules-center": [
         //"hyprland/window"
-	"clock"
+	    "clock"
     ],
     "modules-right": [
         "mpd",
@@ -59,13 +58,6 @@
     },
     "hyprland/submap": {
         "format": "<span style=\"italic\">{}</span>"
-    },
-    "hyprland/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", " "],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
     },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}%  ",
@@ -113,14 +105,18 @@
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         //"format-alt": "{:%Y-%m-%d}"
         "format": "{:%H:%M | %Y-%m-%d}",
-	"on-click": "$HOME/.config/hypr/scripts-assets-hypr/launch-rofi.sh"
+	    "on-click": "$HOME/.config/hypr/scripts-assets-hypr/launch-rofi.sh",
+	    "on-click-right": "gnome-calendar"
     },
     "cpu": {
         "format": "{usage}%  ",
-        "tooltip": false
+        "tooltip": false,
+        "on-click": "control"
     },
     "memory": {
-        "format": "{}%  "
+        "format": "{}%  ",
+        "on-click": "$HOME/.config/hypr/scripts-assets-hypr/screenshot-grimblast.sh area",
+        "on-click-right": "$HOME/.config/hypr/scripts-assets-hypr/screenshots-dir-open.sh"
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -128,7 +124,8 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": ["", "", ""],
+        "on-click": "$HOME/.config/hypr/scripts-assets-hypr/open-task-manager.sh",
     },
   //"backlight": {
   //    // "device": "acpi_video1",

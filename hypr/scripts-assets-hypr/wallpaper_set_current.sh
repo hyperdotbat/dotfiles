@@ -2,7 +2,7 @@
 cd "$(dirname "$0")" || exit 1
 
 WALLPAPERS_DIR_OG="~/Pictures/Wallpapers"
-wallpapers_dir_file=".wallpapers_dir"
+wallpapers_dir_file=".wallpapers_dir_cache"
 if [ -f "$wallpapers_dir_file" ]; then
     WALLPAPERS_DIR_OG=$(<$wallpapers_dir_file)
 else
@@ -17,7 +17,7 @@ wallpaper_current_path=".wallpaper_current_path_cache"
 if [ -f "$wallpaper_current_path" ]; then
     WALLPAPER_CURRENT=$(<$wallpaper_current_path)
 else
-    echo "" > "$wallpaper_current_path"
+    touch "$wallpaper_current_path"
     echo "WALLPAPER_CURRENT is empty"
     exit 1
 fi

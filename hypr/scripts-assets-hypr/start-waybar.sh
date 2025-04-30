@@ -9,10 +9,17 @@ if [ -L "$CONFIG_DIR" ]; then
 fi
 echo "$CONFIG_DIR"
 
+# trap "killall -SIGUSR2 waybar" EXIT
 trap "killall waybar" EXIT
 
+# waybar &
 while true; do
+    # Make any files that dont exist but should
+    [ -f "$CONFIG_DIR/.dark-mode-import_cache.css" ] || touch "$CONFIG_DIR/.dark-mode-import_cache.css"
+    [ -f "$CONFIG_DIR/.overrides.css" ] || touch "$CONFIG_DIR/.overrides.css"
+
     waybar &
     inotifywait -e create,modify -r "$CONFIG_DIR"
+    # killall -SIGUSR2 waybar
     killall waybar
 done

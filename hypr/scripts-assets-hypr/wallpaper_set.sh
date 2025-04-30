@@ -18,7 +18,7 @@ fi
 
 
 if [ "$WALLPAPER_TOOL" == "swww" ]; then
-    SWWW_TRANSITION_TYPE="wipe"
+    SWWW_TRANSITION_TYPE="grow"
     SWWW_TRANSITION_DURATION=2
     SWWW_TRANSITION_FPS=60 #165
 
@@ -31,6 +31,7 @@ if [ "$WALLPAPER_TOOL" == "swww" ]; then
         echo "Failed to set wallpaper: $WALLPAPER"
         exit 1
     fi
+    echo "$WALLPAPER"
 fi
 if [ "$WALLPAPER_TOOL" == "hyprpaper" ]; then
     HYPRPAPER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprpaper.conf"
@@ -42,6 +43,8 @@ if [ "$WALLPAPER_TOOL" == "hyprpaper" ]; then
 
     hyprctl hyprpaper wallpaper DP-1,"$WALLPAPER"
     hyprctl hyprpaper wallpaper DP-2,"$WALLPAPER"
+
+    echo "$WALLPAPER"
 
     cat > "$HYPRPAPER_CONFIG" <<EOF
 preload = $WALLPAPER

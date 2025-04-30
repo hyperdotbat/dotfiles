@@ -25,10 +25,10 @@ if [ "$SAVE_SCREENSHOTS" = true ]; then
     SCREENSHOT_NAME="$(date '+%Y-%m-%d_%H-%M-%S').png"
     #SCREENSHOT_NAME="Screenshot From $(date '+%Y-%m-%d %H-%M-%S').png" # GNOME format
     screenshot_name_template_file=".screenshot_name_template"
-    if [ ! -f "$screenshot_name_template_file" ]; then
+    if [ -f "$screenshot_name_template_file" ]; then
         SCREENSHOT_NAME=$(eval echo $(<$screenshot_name_template_file))
     else
-        echo "\$(date '+%Y-%m-%d %H-%M-%S').png" > "$screenshot_name_template_file"
+        echo "\$(date '+%Y-%m-%d_%H-%M-%S').png" > "$screenshot_name_template_file"
     fi
     echo "$SCREENSHOT_NAME"
 

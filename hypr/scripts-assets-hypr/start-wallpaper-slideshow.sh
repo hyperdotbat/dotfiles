@@ -53,7 +53,7 @@ if [ "$SLIDESHOW_ENABLED" = true ]; then
 
                 if [[ -n "$SELECTED" ]]; then
                     # Overwrite current wallpapers directory path
-                    echo "${WALLPAPERS_DIR_OG/#\/$HOME/~}" > ".wallpapers_dir"
+                    echo "${WALLPAPERS_DIR/#\/$HOME/~}" > ".wallpapers_dir_cache"
 
                     WALLPAPER="$WALLPAPERS_DIR/$SELECTED"
                     "$WALLPAPER_SET_SCRIPT" "$WALLPAPER"

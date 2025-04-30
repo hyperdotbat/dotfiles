@@ -38,18 +38,42 @@ else
         exit 1
     fi
 
-    SELECTED=$( (printf 'Pick Random\n'; printf '%s\n' "${WALLPAPERS[@]}") | rofi -dmenu -p "Pick a wallpaper")
-    # SELECTED=$(printf '%s\n' "${WALLPAPERS[@]}" | rofi -dmenu -p "Pick a wallpaper")
+    # scale for monitor x res
+    x_monres=$(hyprctl -j monitors | jq '.[] | select(.focused==true) | .width')
+    monitor_scale=$(hyprctl -j monitors | jq '.[] | select (.focused == true) | .scale' | sed 's/\.//')
+    x_monres=$(( x_monres * 17 / monitor_scale ))
 
-    if [[ "$SELECTED" == "Pick Random" ]]; then
+    # set rofi override
+    elem_border=$(( hypr_border * 3 ))
+    r_override=""
+    wallpaper_picker_rofi_override=".wallpaper_picker_rofi_override.rasi"
+    if [ -f "$wallpaper_picker_rofi_override" ]; then
+        r_override=$(<$wallpaper_picker_rofi_override)
+    fi
+
+
+    entries=""
+    for file in "${WALLPAPERS[@]}"; do
+        file_path=$WALLPAPERS_DIR/$file
+        entries+="$file\x00icon\x1f$file_path\n"
+    done
+
+    SELECTED=$(echo -e "Random\n$entries" | rofi -dmenu -theme-str "$r_override" -markup-rows -p "Pick a wallpaper")
+    # Simple text based selection
+    # SELECTED=$((printf 'Random\n'; printf '%s\n' "${WALLPAPERS[@]}") | rofi -dmenu -p "Pick a wallpaper")
+    # Simple text based selection with icons
+    # SELECTED=$(echo -e "Random\n$entries" | rofi -dmenu -markup-rows -p "Pick a wallpaper")
+
+    if [[ "$SELECTED" == "Random" ]]; then
         SELECTED="${WALLPAPERS[RANDOM % ${#WALLPAPERS[@]}]}"
     fi
 
     if [[ -n "$SELECTED" ]]; then
         # Overwrite current wallpapers directory path
-        echo "${WALLPAPERS_DIR_OG/#\/$HOME/~}" > ".wallpapers_dir"
+        echo "${WALLPAPERS_DIR/#\/$HOME/~}" > ".wallpapers_dir_cache"
 
         WALLPAPER="$WALLPAPERS_DIR/$SELECTED"
+        echo "$WALLPAPER"
         "$WALLPAPER_SET_SCRIPT" "$WALLPAPER"
     else
         echo "No wallpaper selected."

@@ -1,0 +1,30 @@
+window#waybar {
+    color: white;
+    background: linear-gradient(0deg, rgb(2, 2, 3) 0%, rgb(17, 18, 23) 49%, rgb(26, 27, 35) 49%, rgb(39, 41, 53) 100%);
+    /* Smoother gradient */
+    /* background: linear-gradient(0deg, black 0%, rgb(39, 41, 53) 40%, rgba(40, 42, 54, 1) 60%, black 100%); */
+}
+#workspaces{
+    /* Eases the transition outside with smoother gradients */
+    /* box-shadow: 20px 0px 20px 20px rgba(40, 42, 54, 1); */
+}
+#workspaces button{
+    /* Dark mode inwards glow*/
+    /* box-shadow:inset 0px 0px 5px 5px rgba(40, 42, 54, 1); */
+}
+#workspaces button {
+    color: white;
+}
+#workspaces button.active {
+    background: linear-gradient(0deg, rgb(199, 163, 250) 0%, rgb(191, 149, 249) 49%, rgb(214, 188, 251) 49%, rgb(252, 250, 255) 100%);
+}
+tooltip {
+    background: radial-gradient(rgb(39, 41, 53), rgb(2, 2, 3));
+    border: 1px solid white;
+}
+tooltip label {
+    color: white;
+}
+*{
+    text-shadow: 0px 0px 2px white;
+}
