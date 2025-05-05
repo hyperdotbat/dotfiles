@@ -15,7 +15,7 @@ trap "killall waybar" EXIT
 # waybar &
 while true; do
     # Make any files that dont exist but should
-    [ -f "$CONFIG_DIR/.dark-mode-import_cache.css" ] || touch "$CONFIG_DIR/.dark-mode-import_cache.css"
+    [ -f "$CONFIG_DIR/.import-darkmode_cache.css" ] || touch "$CONFIG_DIR/.import-darkmode_cache.css"
     [ -f "$CONFIG_DIR/.overrides.css" ] || touch "$CONFIG_DIR/.overrides.css"
 
     waybar &

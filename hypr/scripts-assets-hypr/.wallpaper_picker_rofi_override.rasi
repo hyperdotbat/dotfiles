@@ -75,7 +75,7 @@ element-icon {
     border-radius: 0px;
 }
 element-text {
-    padding: 10px 0px 0px 0px;
+    padding: 0px 0px 20px 0px;
     horizontal-align: 0.5;
     wrap: true;
     max-width: 100%;

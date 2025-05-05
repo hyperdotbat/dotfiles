@@ -1,6 +1,6 @@
 // -*- mode: jsonc -*-
 {
-    "layer": "top", // Waybar at top layer
+    "layer": "bot",
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
@@ -34,8 +34,12 @@
     ],
     // Modules configuration
     "hyprland/workspaces": {
-	"show-special": true,
+        "DP-2": [ 1, 2, 3, 4, 5 ],
+        // "DP-1": [ 6 ],
+        "DP-1": [ 6, 7, 8, 9, 10 ],
+	    "show-special": true,
         //"all-outputs": true,
+        "move-to-monitor": true,
         "warp-on-scroll": false,
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
@@ -172,7 +176,7 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-	"max-volume": 150,
+	    "max-volume": 150,
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
@@ -188,7 +192,11 @@
             "car": " ",
             "default": ["", " ", " "]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-scroll-up": "$HOME/.config/hypr/scripts-assets-hypr/volume-set.sh +",
+        "on-scroll-down": "$HOME/.config/hypr/scripts-assets-hypr/volume-set.sh -"
     },
     "custom/media": {
         "format": "{icon} {text}",
@@ -213,6 +221,8 @@
     //			"suspend": "systemctl suspend",
     //			"hibernate": "systemctl hibernate"
     //		}
-    	"on-click": "wlogout"
+    	"on-click": "wlogout",
+    	"on-click-right": "$HOME/.config/hypr/scripts-assets-hypr/power-button.sh", //"systemctl sleep",
+    	"on-click-middle": "systemctl poweroff"
     }
 }

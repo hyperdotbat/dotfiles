@@ -38,13 +38,7 @@ else
         exit 1
     fi
 
-    # scale for monitor x res
-    x_monres=$(hyprctl -j monitors | jq '.[] | select(.focused==true) | .width')
-    monitor_scale=$(hyprctl -j monitors | jq '.[] | select (.focused == true) | .scale' | sed 's/\.//')
-    x_monres=$(( x_monres * 17 / monitor_scale ))
-
     # set rofi override
-    elem_border=$(( hypr_border * 3 ))
     r_override=""
     wallpaper_picker_rofi_override=".wallpaper_picker_rofi_override.rasi"
     if [ -f "$wallpaper_picker_rofi_override" ]; then

@@ -3,6 +3,8 @@ cd "$(dirname "$0")" || exit 1
 
 SAVE_SCREENSHOTS=true
 SAVE_SCREENSHOTS_IN_MONTH_DIR=true
+PLAY_SOUND=true
+PLAY_SOUND_VOLUME=0.2
 
 if [ -z "$1" ]; then
     echo "Provide type, possible are: 'active' 'area' 'output' 'screen'"
@@ -21,6 +23,7 @@ if [ "$SAVE_SCREENSHOTS" = true ]; then
     fi
     SCREENSHOTS_DIR="${SCREENSHOTS_DIR_OG%/}"
     SCREENSHOTS_DIR="${SCREENSHOTS_DIR_OG/#\~/$HOME}"
+    mkdir -p "$SCREENSHOTS_DIR"
 
     SCREENSHOT_NAME="$(date '+%Y-%m-%d_%H-%M-%S').png"
     #SCREENSHOT_NAME="Screenshot From $(date '+%Y-%m-%d %H-%M-%S').png" # GNOME format
@@ -39,7 +42,7 @@ if [ "$SAVE_SCREENSHOTS" = true ]; then
         FINAL_PATH="$SCREENSHOTS_DIR/$MONTH_DIR/$SCREENSHOT_NAME"
     fi
 
-    grimblast copysave "$TYPE" "$FINAL_PATH"
+    grimblast copysave "$TYPE" "$FINAL_PATH" && play screenshot.wav vol $PLAY_SOUND_VOLUME
 else
-    grimblast copy "$TYPE"
+    grimblast copy "$TYPE" && play screenshot.wav vol $PLAY_SOUND_VOLUME
 fi
