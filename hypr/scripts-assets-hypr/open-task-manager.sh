@@ -1,3 +1,4 @@
 #!/bin/bash
-#gnome-system-monitor
-flatpak run net.nokyan.Resources
+#gnome-system-monitor &
+flatpak run net.nokyan.Resources &
+disown

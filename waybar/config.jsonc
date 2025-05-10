@@ -105,12 +105,12 @@
         // }
     },
     "clock": {
-        // "timezone": "America/New_York",
+        // "timezone": "Europe/Warsav",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        //"format-alt": "{:%Y-%m-%d}"
         "format": "{:%H:%M | %Y-%m-%d}",
-	    "on-click": "$HOME/.config/hypr/scripts-assets-hypr/launch-rofi.sh",
-	    "on-click-right": "gnome-calendar"
+	    "on-click": "$HOME/.config/hypr/scripts-assets-hypr/rofi-launcher.sh",
+	    "on-click-right": "gnome-calendar",
+	    "on-click-middle": "gnome-weather"
     },
     "cpu": {
         "format": "{usage}%  ",

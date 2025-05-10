@@ -24,3 +24,5 @@ wlogout
 better-control
 sox
 bc
+ttf-jetbrains-mono-nerd
+ttf-ms-fonts

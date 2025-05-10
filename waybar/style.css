@@ -1,11 +1,4 @@
+@import url("style-defaults.css");
 @import url("style-aero-metal.css");
-@import url(".import-darkmode_cache.css");
-@import url(".overrides.css");
-* {
-  border: none;
-  border-radius: 0;
-  font-family: "JetBrainsMonoNL Nerd Font", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  min-height: 0;
-}/*# sourceMappingURL=style.css.map */
+@import url("dynamic-imports.css");
+@import url(".overrides.css");/*# sourceMappingURL=style.css.map */

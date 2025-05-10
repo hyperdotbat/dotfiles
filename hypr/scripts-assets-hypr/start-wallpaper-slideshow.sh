@@ -27,6 +27,9 @@ if [ "$SLIDESHOW_ENABLED" = true ]; then
             if [ "$1" = "--dry-run" ]; then
                 exit 1
             fi
+            if [ "$1" = "--force" ] || [ "$1" = "-f" ]; then
+                TIME_DIFF=(60*SLIDESHOW_FREQUENCY)
+            fi
         fi
         
         if (( TIME_DIFF >= 60 * SLIDESHOW_FREQUENCY )) || { [[ "$FORCE_REFRESH_ON_START" = true && "$FIRST_RUN_PASSED" = false ]]; }; then
@@ -40,7 +43,6 @@ if [ "$SLIDESHOW_ENABLED" = true ]; then
             else
                 echo "$WALLPAPERS_DIR_OG" > "$wallpapers_dir_file"
             fi
-
             WALLPAPERS_DIR="${WALLPAPERS_DIR_OG/#\~/$HOME}"
             WALLPAPERS_DIR="${WALLPAPERS_DIR%/}"
 
@@ -84,6 +86,9 @@ if [ "$SLIDESHOW_ENABLED" = true ]; then
                 
                 echo "$CURRENT_DATE" > "$wallpapers_slideshow_timer_file"
             fi
+        fi
+        if [ "$1" = "--force" ] || [ "$1" = "-f" ]; then
+            exit 0
         fi
         sleep $SLEEP_TIME_SEC
         FIRST_RUN_PASSED=true

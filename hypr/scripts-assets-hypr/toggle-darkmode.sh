@@ -1,10 +1,10 @@
 #!/bin/bash
 cd "$(dirname "$0")" || exit 1
 
-DARKMODE_ENABLE=false
+DARKMODE_ENABLE=true
 isdarkmode_file=".is-darkmode_cache"
 if [ -f "$isdarkmode_file" ] && grep -q '[^[:space:]]' "$isdarkmode_file"; then
-    DARKMODE_ENABLE=true
+    DARKMODE_ENABLE=false
 fi
 
 if [ -n "$1" ]; then
@@ -15,10 +15,12 @@ if [ -n "$1" ]; then
     fi
 fi
 
-if [ "$DARKMODE_ENABLE" = false ]; then
+if [ "$DARKMODE_ENABLE" = true ]; then
     echo 'true' > $isdarkmode_file
+    echo "Dark mode"
 else
     echo '' > $isdarkmode_file
+    echo "Light mode"
 fi
 
 HYPRLAND_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/hypr"

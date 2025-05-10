@@ -1,57 +1,13 @@
-configuration{
+configuration {
     timeout {
         delay:  20;
     }
+    //matching: "fuzzy";
+    ignored-prefixes: [ ".", "_" ];
+    hover-select: true;
+    steal-focus: true;
 }
 
-/* Vertical list */
-/* window {
-    width: 95%;
-    height: 82%;
-}
-listview {
-    columns: 1;
-}
-element {
-    orientation: vertical;
-    padding: 0px;
-    size:1px;
-    size: 10%;
-}
-element-icon {
-    size: 40%;
-    border-radius: 0px;
-    padding: -100px;
-}
-element-text {
-    padding: 0px 0px 9px 0px;
-    horizontal-align: 0.5;
-    wrap: true;
-} */
-
-/* Horizontal list v1 */
-/* window {
-    width: 95%;
-    height: 35%;
-    height: 95%;
-}
-listview {
-    columns: 4;
-}
-element {
-    orientation: vertical;
-}
-element-icon {
-    size: 35%;
-    border-radius: 0px;
-    padding: -60px;
-}
-element-text {
-    padding: 0px 0px 9px 0px;
-    horizontal-align: 0.5;
-} */
-
-/* Horizontal list v2? */
 window {
     width: 95%;
     height: 540px;

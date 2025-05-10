@@ -1,17 +1,8 @@
-* {
-    border: none;
-    border-radius: 0;
-    font-family: "JetBrainsMonoNL Nerd Font", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    min-height: 0;
-}
-
+@import url("style-defaults.css");
 
 // @import url("style-dracula-flat.css");
 @import url("style-aero-metal.css");
 
-// This file's content will get replaced to source the correct file when dark mode is applied
-@import url(".import-darkmode_cache.css");
+@import url("dynamic-imports.css");
 
 @import url(".overrides.css");

@@ -1,0 +1,12 @@
+#window {
+    border-radius:    0;
+}
+element-icon{
+    size: 40px;
+}
+element-text{
+    padding: 0px 0px 0px 15px;
+}
+/*listview{
+    columns: 4;
+}*/
