@@ -48,30 +48,19 @@ configuration{
 SELECTED=$(printf "%s\n" "${options[@]}" | rofi -dmenu -theme-str "$r_override" -markup-rows -i -p "" -me-select-entry '' -me-accept-entry 'MousePrimary')
 
 killall rofi
-if [[ "$SELECTED" == $_text_pick_wallpaper_from_slideshow ]]; then
-    WALLPAPERS_DIR_OG="~/Pictures/Wallpapers"
-    wallpapers_dir_file=".wallpapers_dir_slideshow"
-    if [ -f "$wallpapers_dir_file" ]; then
-        WALLPAPERS_DIR_OG=$(<$wallpapers_dir_file)
-    else
-        echo "$WALLPAPERS_DIR_OG" > "$wallpapers_dir_file"
-    fi
-    WALLPAPERS_DIR="${WALLPAPERS_DIR_OG/#\~/$HOME}"
-    WALLPAPERS_DIR="${WALLPAPERS_DIR%/}"
-
-    ./wallpaper_picker.sh "$WALLPAPERS_DIR"
+if [[ "$SELECTED" == "$_text_pick_wallpaper_from_slideshow" ]]; then
+    ./wallpaper_picker_slideshow.sh
     exit 0
-    #TODO: Make picking manually from slideshow reset the timer
 fi
-if [[ "$SELECTED" == $_text_toggle_wallpaper_slideshow ]]; then
+if [[ "$SELECTED" == "$_text_toggle_wallpaper_slideshow" ]]; then
     ./toggle-wallpaper-slideshow.sh
     exit 0
 fi
-if [[ "$SELECTED" == $_text_toggle_darkmode_daemon ]]; then
+if [[ "$SELECTED" == "$_text_toggle_darkmode_daemon" ]]; then
     ./toggle-darkmode-daemon.sh
     exit 0
 fi
-if [[ "$SELECTED" == $_text_toggle_hyprsunset_daemon ]]; then
+if [[ "$SELECTED" == "$_text_toggle_hyprsunset_daemon" ]]; then
     ./toggle-hyprsunset-daemon.sh
     exit 0
 fi

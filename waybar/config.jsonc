@@ -35,7 +35,6 @@
     // Modules configuration
     "hyprland/workspaces": {
         "DP-2": [ 1, 2, 3, 4, 5 ],
-        // "DP-1": [ 6 ],
         "DP-1": [ 6, 7, 8, 9, 10 ],
 	    "show-special": true,
         //"all-outputs": true,
@@ -43,22 +42,33 @@
         "warp-on-scroll": false,
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "format": "{name} {icon}",
+        // "format": "{name} {icon}",
+        "format": "{icon}",
+        // "format": "{id}",
         "format-icons": {
-            "1": " ",
-            "2": " ",
-            "3": " ",
-            "4": " ",
-            "5": " ",
-            "urgent": " ",
-            "focused": " ",
-            "default": "",//" "
-	    //"special": "☆" 
-        }
+            "1": "1  ",
+            "2": "2  ",
+            "3": "3  ",
+            "4": "4  ",
+            "5": "5  ",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "10": "0",
+            // "urgent": " ",
+            // "focused": " ",
+            // "default": "",//" ",
+            // "special": "☆" ,
+            "dc": "󰙯 ",
+            "spc": " ",
+            "gpt": "󰚩 ",
+        },
     },
     "hyprland/window": {
         "separate-outputs": true,
-	"format": "<span font='9' rise='-4444'>{}</span>"
+	    // "format": "<span rise='-4444'>{title}</span>",
+        // "icon": true
     },
     "hyprland/submap": {
         "format": "<span style=\"italic\">{}</span>"
@@ -176,7 +186,7 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-	    "max-volume": 150,
+	    // "max-volume": 150,
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
@@ -222,7 +232,7 @@
     //			"hibernate": "systemctl hibernate"
     //		}
     	"on-click": "wlogout",
-    	"on-click-right": "$HOME/.config/hypr/scripts-assets-hypr/power-button.sh", //"systemctl sleep",
+    	"on-click-right": "$HOME/.config/hypr/scripts-assets-hypr/suspend.sh",
     	"on-click-middle": "systemctl poweroff"
     }
 }

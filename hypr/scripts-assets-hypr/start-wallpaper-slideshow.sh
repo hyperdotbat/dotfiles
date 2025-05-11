@@ -2,16 +2,29 @@
 cd "$(dirname "$0")" || exit 1
 
 SLIDESHOW_ENABLED=true
+SEPERATE_DARKMODE_DIR=true
 SLIDESHOW_FREQUENCY=60
 SLEEP_TIME_SEC=60
 # ignores if time condition was already met at the beginning, for eg. turned off at night?; dont refresh immediately in the morning
 IGNORE_FIRST_RUN=false
 FORCE_REFRESH_ON_START=false
 
-FIRST_RUN_PASSED=false
+isdarkmode_file=".is-darkmode_cache"
 
+FIRST_RUN_PASSED=false
+isdarkmode=false
+
+
+if [ "$SLIDESHOW_ENABLED" = false ]; then
+    echo "Slideshow is disabled"
+    exit 1
+fi
 if [ "$SLIDESHOW_ENABLED" = true ]; then
     while true; do
+        if [ -f "$isdarkmode_file" ] && grep -q '[^[:space:]]' "$isdarkmode_file"; then
+            isdarkmode=true
+        fi
+
         CURRENT_DATE=$(date +%s)
         LAST_SLIDESHOW_RUN_TIME=$CURRENT_DATE
 
@@ -30,19 +43,33 @@ if [ "$SLIDESHOW_ENABLED" = true ]; then
             if [ "$1" = "--force" ] || [ "$1" = "-f" ]; then
                 TIME_DIFF=(60*SLIDESHOW_FREQUENCY)
             fi
+            if [ "$1" = "--update" ] || [ "$1" = "-u" ]; then
+                echo "$CURRENT_DATE" > "$wallpapers_slideshow_timer_file"
+                echo $((SLIDESHOW_FREQUENCY - (TIME_DIFF / 60)))
+                exit 1
+            fi
         fi
         
         if (( TIME_DIFF >= 60 * SLIDESHOW_FREQUENCY )) || { [[ "$FORCE_REFRESH_ON_START" = true && "$FIRST_RUN_PASSED" = false ]]; }; then
             WALLPAPER_SET_SCRIPT="./wallpaper_set_save.sh"
 
-            # You can absolutely have a separate slideshow directory
-            WALLPAPERS_DIR_OG="~/Pictures/Wallpapers" #"~/Pictures/Wallpapers-Slideshow"
+            WALLPAPERS_DIR_OG="~/Pictures/Wallpapers-Slideshow"
             wallpapers_dir_file=".wallpapers_dir_slideshow"
             if [ -f "$wallpapers_dir_file" ]; then
                 WALLPAPERS_DIR_OG=$(<$wallpapers_dir_file)
             else
                 echo "$WALLPAPERS_DIR_OG" > "$wallpapers_dir_file"
             fi
+            if [ "$SEPERATE_DARKMODE_DIR" = true ] && [ "$isdarkmode" = true ]; then
+                WALLPAPERS_DIR_OG="~/Pictures/Wallpapers-Slideshow_dark"
+                wallpapers_darkmode_dir_file=".wallpapers_dir_slideshow_dark"
+                if [ -f "$wallpapers_darkmode_dir_file" ]; then
+                    WALLPAPERS_DIR_OG=$(<$wallpapers_darkmode_dir_file)
+                else
+                    echo "$WALLPAPERS_DIR_OG" > "$wallpapers_darkmode_dir_file"
+                fi
+            fi
+
             WALLPAPERS_DIR="${WALLPAPERS_DIR_OG/#\~/$HOME}"
             WALLPAPERS_DIR="${WALLPAPERS_DIR%/}"
 
@@ -54,7 +81,7 @@ if [ "$SLIDESHOW_ENABLED" = true ]; then
                     # extractable shared piece of code with `wallpaper_picker.sh`
                     WALLPAPER_TOOL="hyprpaper"
                     wallpaper_tool_file=".wallpaper_set_tool"
-                    if [ -f "$wallpaper_tool_file" ]; then
+                    if [ -f "$wallpaper_tool_file" ] && grep -q '[^[:space:]]' "$wallpaper_tool_file"; then
                         WALLPAPER_TOOL=$(<$wallpaper_tool_file)
                     else
                         echo "$WALLPAPER_TOOL" > "$wallpaper_tool_file"
@@ -79,8 +106,17 @@ if [ "$SLIDESHOW_ENABLED" = true ]; then
 
                         WALLPAPER="$WALLPAPERS_DIR/$SELECTED"
                         "$WALLPAPER_SET_SCRIPT" "$WALLPAPER"
+
+                        isdarkmode_wallpaper_file=".is-darkmode-wallpaper_cache"
+                        if [ "$isdarkmode" = true ]; then
+                            echo 'true' > $isdarkmode_wallpaper_file
+                        else
+                            echo '' > $isdarkmode_wallpaper_file
+                        fi
+                        exit 0
                     else
                         echo "No wallpaper selected."
+                        exit 1
                     fi
                 fi
                 

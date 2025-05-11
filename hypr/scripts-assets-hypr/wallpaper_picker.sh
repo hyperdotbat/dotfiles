@@ -1,9 +1,10 @@
 #!/bin/bash
 cd "$(dirname "$0")" || exit 1
 
+SEARCH_RECURSIVELY=true
 IGNORE_HIDDEN=true
 SHOW_RANDOM_SELECTION=false
-SEARCH_RECURSIVELY=true
+
 USE_THEME_OVERRIDE=true
 USE_ICONS_EVEN_IN_SIMPLE_MODE=true
 
@@ -18,17 +19,15 @@ else
     echo "$WALLPAPERS_DIR_OG" > "$wallpapers_dir_file"
 fi
 
-if [ -n "$1" ]; then
-    if [ "$1" = "--non-recursive" ]; then
+for arg in "$1" "$2"; do
+    if [[ "$arg" == "-n" || "$arg" == "--non-recursive" ]]; then
         SEARCH_RECURSIVELY=false
-    else
-        WALLPAPERS_DIR_OG="$1"
+    elif [[ "$arg" == "-r" || "$arg" == "--recursive" ]]; then
+        SEARCH_RECURSIVELY=true
+    elif [[ "$arg" != "" && "$arg" != -* ]]; then
+        WALLPAPERS_DIR_OG="$arg"
     fi
-
-    if [ -n "$2" ]; then
-        WALLPAPERS_DIR_OG="$2"
-    fi
-fi
+done
 
 WALLPAPERS_DIR="${WALLPAPERS_DIR_OG/#\~/$HOME}"
 WALLPAPERS_DIR="${WALLPAPERS_DIR%/}"
@@ -45,15 +44,37 @@ else
     # extractable shared piece of code with `start-wallpaper-slideshow.sh`
     WALLPAPER_TOOL="hyprpaper"
     wallpaper_tool_file=".wallpaper_set_tool"
-    if [ -f "$wallpaper_tool_file" ]; then
+    if [ -f "$wallpaper_tool_file" ] && grep -q '[^[:space:]]' "$wallpaper_tool_file"; then
         WALLPAPER_TOOL=$(<$wallpaper_tool_file)
     else
         echo "$WALLPAPER_TOOL" > "$wallpaper_tool_file"
     fi
     if [ "$WALLPAPER_TOOL" == "swww" ]; then
-        mapfile -t WALLPAPERS < <(find -L "$WALLPAPERS_DIR" $depth_param -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) | sed "s|$WALLPAPERS_DIR/||" | sort)
+        mapfile -t WALLPAPERS < <(
+            find -L "$WALLPAPERS_DIR" $depth_param -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) | sed "s|$WALLPAPERS_DIR/||" |
+            sort
+        )
     else
-        mapfile -t WALLPAPERS < <(find -L "$WALLPAPERS_DIR" $depth_param -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | sed "s|$WALLPAPERS_DIR/||" | sort)
+        ## untested
+        filter_animated_webps() {
+            while read -r wp; do
+                ext="${wp##*.}"
+                if [[ "$ext" =~ ^[Ww][Ee][Bb][Pp]$ ]]; then
+                    # Check if animated
+                    if webpmux -info "$WALLPAPERS_DIR/$wp" 2>/dev/null | grep -q "Animation"; then
+                        continue
+                    fi
+                fi
+                echo "$wp"
+            done
+        }
+
+        mapfile -t WALLPAPERS < <(
+            find -L "$WALLPAPERS_DIR" $depth_param -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) |
+            sed "s|$WALLPAPERS_DIR/||" |
+            sort |
+            filter_animated_webps
+        )
     fi
 
     if [ "$IGNORE_HIDDEN" = true ]; then
@@ -63,7 +84,7 @@ else
     fi
 
     if [[ ${#WALLPAPERS[@]} -eq 0 ]]; then
-        echo "No wallpapers found in $WALLPAPERS_DIR"
+        echo "No valid wallpapers found in $WALLPAPERS_DIR"
         exit 1
     fi
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-~/scripts/autostarts.sh &
+~/scripts/hyprland-autostarts.sh &
 
 # Steam preloaded with extest for Steam Input to work in Desktop Mode (mainly for Sunshine)
 # https://github.com/Supreeeme/extest
