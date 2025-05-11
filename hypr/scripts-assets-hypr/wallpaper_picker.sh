@@ -4,6 +4,7 @@ cd "$(dirname "$0")" || exit 1
 SEARCH_RECURSIVELY=true
 IGNORE_HIDDEN=true
 SHOW_RANDOM_SELECTION=false
+FILTEROUT_ANIMATED_FOR_OTHER_THAN_SWWW=false # not really needed as for eg. hyprpaper should just set the first frame of .gif or .webp as static
 
 USE_THEME_OVERRIDE=true
 USE_ICONS_EVEN_IN_SIMPLE_MODE=true
@@ -13,7 +14,7 @@ WALLPAPER_SET_SCRIPT="./wallpaper_set_save.sh"
 WALLPAPERS_DIR_OG="~/Pictures/Wallpapers"
 # Picker is the only one that should always work from "all" directory
 wallpapers_dir_file=".wallpapers_dir"
-if [ -f "$wallpapers_dir_file" ]; then
+if [ -f "$wallpapers_dir_file" ] && grep -q '[^[:space:]]' "$wallpapers_dir_file"; then
     WALLPAPERS_DIR_OG=$(<$wallpapers_dir_file)
 else
     echo "$WALLPAPERS_DIR_OG" > "$wallpapers_dir_file"
@@ -49,19 +50,18 @@ else
     else
         echo "$WALLPAPER_TOOL" > "$wallpaper_tool_file"
     fi
-    if [ "$WALLPAPER_TOOL" == "swww" ]; then
+    if [ "$WALLPAPER_TOOL" == "swww" ] || [ "$FILTEROUT_ANIMATED_FOR_OTHER_THAN_SWWW" = false ]; then
         mapfile -t WALLPAPERS < <(
-            find -L "$WALLPAPERS_DIR" $depth_param -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) | sed "s|$WALLPAPERS_DIR/||" |
+            find -L "$WALLPAPERS_DIR" $depth_param -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) |
+            sed "s|$WALLPAPERS_DIR/||" |
             sort
         )
     else
-        ## untested
         filter_animated_webps() {
             while read -r wp; do
                 ext="${wp##*.}"
                 if [[ "$ext" =~ ^[Ww][Ee][Bb][Pp]$ ]]; then
-                    # Check if animated
-                    if webpmux -info "$WALLPAPERS_DIR/$wp" 2>/dev/null | grep -q "Animation"; then
+                    if webpmux -info "$WALLPAPERS_DIR/$wp" 2>/dev/null | grep -q "animation"; then
                         continue
                     fi
                 fi
@@ -90,9 +90,9 @@ else
 
     # set rofi override
     r_override=""
-    wallpaper_picker_rofi_override=".wallpaper_picker_rofi_override.rasi"
-    if [ -f "$wallpaper_picker_rofi_override" ]; then
-        r_override=$(<$wallpaper_picker_rofi_override)
+    wallpaper_picker_rofi_override_file=".wallpaper_picker_rofi_override.rasi"
+    if [ -f "$wallpaper_picker_rofi_override_file" ]; then
+        r_override=$(<$wallpaper_picker_rofi_override_file)
     fi
 
     # change icon size based on aspect ratio

@@ -9,6 +9,7 @@ configuration {
     foreground: #000000;
     background-color: #ffffff;
     active-background: #50fa7b;
+    //active-background: linear-gradient(to left,rgb(0, 0, 0),rgb(80, 250, 123));
     active-foreground: #000000;
     urgent-background: #ff5555;
     urgent-foreground: #282a36;

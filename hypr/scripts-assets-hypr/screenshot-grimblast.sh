@@ -11,8 +11,14 @@ if [ -z "$1" ]; then
     echo "Provide type, possible are: 'active' 'area' 'output' 'screen'"
     exit 1
 fi
-
 TYPE=$1
+
+if [ "$TYPE" == "active" ]; then
+    focused_window=$(hyprctl activewindow 2>/dev/null)
+    if [ -z "$focused_window" ] || [ "$focused_window" == "Invalid" ]; then
+        TYPE="output"
+    fi
+fi
 
 freeze_param=""
 if [ "$FREEZE" = true ]; then

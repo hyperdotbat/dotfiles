@@ -76,3 +76,10 @@ if [ "$UPDATE_WALLPAPER_SLIDESHOW" = true ]; then
         fi
     fi
 fi
+
+## GTK etc
+if [ "$DARKMODE_ENABLE" = true ]; then
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+else
+    gsettings set org.gnome.desktop.interface color-scheme prefer-light
+fi

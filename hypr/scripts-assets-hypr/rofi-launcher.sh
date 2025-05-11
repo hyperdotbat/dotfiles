@@ -1,17 +1,33 @@
 #!/bin/bash
 cd "$(dirname "$0")" || exit 1
 
+USE_NERD_FONT_ICONS=true
+
 _text_app_launcher="App Launcher"
 _text_wallpaper_picker="Wallpaper Picker"
+_text_file_browser="File Browser"
 _text_terminal="Terminal"
 _text_hyprsunset="Hyprsunset"
 _text_darkmode="Toggle darkmode"
 _text_dotfiles="Configure dotfiles"
 _text_logout_menu="Logout Menu"
 _text_more="More options..."
+
+if [ "$USE_NERD_FONT_ICONS" = true ]; then
+    _text_app_launcher=" $_text_app_launcher"
+    _text_wallpaper_picker=" $_text_wallpaper_picker"
+    _text_file_browser=" $_text_file_browser"
+    _text_terminal=" $_text_terminal"
+    _text_hyprsunset=" $_text_hyprsunset"
+    _text_darkmode=" $_text_darkmode"
+    _text_dotfiles=" $_text_dotfiles"
+    _text_logout_menu=" $_text_logout_menu"
+fi
+
 options=(
     "$_text_app_launcher"
     "$_text_wallpaper_picker"
+    "$_text_file_browser"
     "$_text_terminal"
     "$_text_hyprsunset"
     "$_text_darkmode"
@@ -19,75 +35,58 @@ options=(
     "$_text_logout_menu"
     "$_text_more"
 )
-# icons=(
-#   " "
-#   " "
-#   " "
-#   " "
-#   "  "
-#   "  "
-#   " "
-#   " "
-# )
 
-# entries=""
-# fixed_width=3
-# for i in "${!options[@]}"; do
-#     icon=$(printf "%-${fixed_width}s" "${icons[$i]}")
-#     # entries+="$icon\x00icon\x1f${options[$i]}"
-#     # entries+="${options[$i]}\x00icon\x1f${icons[$i]}"
-#     # entries+="${icons[$i]}${options[$i]}"
-#     entries+="$icon${options[$i]}"
-#     # entries+="${options[$i]}\x00icon\x1f$icon"
-
-#     if [[ $i -lt $((${#options[@]} - 1)) ]]; then
-#         entries+="\n"
-#     fi
-# done
-
-r_override="""
-configuration{
-    eh: 1;
-    hover-select: true;
-    steal-focus: true;
-    show-icons: false;
+r_override=""
+rofi_override_file=".rofi_launcher_override.rasi"
+if [ -f "$rofi_override_file" ]; then
+    r_override=$(<$rofi_override_file)
+fi
+if [ "$USE_NERD_FONT_ICONS" = true ]; then
+    r_override+="""
+* {
+    font: 'JetBrainsMono Nerd Font 12';
 }
 """
+fi
 
 SELECTED=$(printf "%s\n" "${options[@]}" | rofi -dmenu -theme-str "$r_override" -markup-rows -i -p "" -me-select-entry '' -me-accept-entry 'MousePrimary')
-# SELECTED=$(echo -e "$entries" | rofi -dmenu -theme-str "$r_override" -markup-rows -i -p "" -me-select-entry '' -me-accept-entry 'MousePrimary')
 
 killall rofi
 if [[ "$SELECTED" == "$_text_app_launcher" ]]; then
-    ./launch-rofi.sh
+    ./launch-rofi.sh &
     exit 0
 fi
 if [[ "$SELECTED" == "$_text_wallpaper_picker" ]]; then
-    ./wallpaper_picker.sh
+    ./wallpaper_picker.sh &
     exit 0
 fi
-if [[ "$SELECTED" == "$_text_hyprsunset" ]]; then
-    ./hyprsunset-toggle.sh
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_darkmode" ]]; then
-    ./toggle-darkmode.sh
+if [[ "$SELECTED" == "$_text_file_browser" ]]; then
+    thunar ~ &
     exit 0
 fi
 if [[ "$SELECTED" == "$_text_terminal" ]]; then
-    kitty $HOME
+    kitty $HOME &
+    exit 0
+fi
+if [[ "$SELECTED" == "$_text_hyprsunset" ]]; then
+    ./hyprsunset-toggle.sh &
+    exit 0
+fi
+if [[ "$SELECTED" == "$_text_darkmode" ]]; then
+    ./toggle-darkmode.sh &
     exit 0
 fi
 if [[ "$SELECTED" == "$_text_dotfiles" ]]; then
-    code $HOME/dotfiles
+    code $HOME/dotfiles &
     exit 0
 fi
 if [[ "$SELECTED" == "$_text_logout_menu" ]]; then
-    wlogout
+    wlogout &
     exit 0
 fi
 if [[ "$SELECTED" == "$_text_more" ]]; then
-    ./rofi-launcher-submenu_settings.sh
+    ./rofi-launcher-submenu_settings.sh &
     exit 0
 fi
-fi
+
+disown

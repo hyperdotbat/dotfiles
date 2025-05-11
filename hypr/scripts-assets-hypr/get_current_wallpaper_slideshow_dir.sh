@@ -13,11 +13,11 @@ fi
 
 if [ "$SEPERATE_DARKMODE_DIR" = true ] && [ "$isdarkmode" = true ]; then
     wallpapers_darkmode_dir_file=".wallpapers_dir_slideshow_dark"
-    if [ -f "$wallpapers_darkmode_dir_file" ]; then
+    if [ -f "$wallpapers_darkmode_dir_file" ] && grep -q '[^[:space:]]' "$wallpapers_darkmode_dir_file"; then
         wallpapers_dir=$(<$wallpapers_darkmode_dir_file)
     fi
 else
-    if [ -f "$wallpapers_dir_file" ]; then
+    if [ -f "$wallpapers_dir_file" ] && grep -q '[^[:space:]]' "$wallpapers_dir_file"; then
         wallpapers_dir=$(<$wallpapers_dir_file)
     fi
 fi

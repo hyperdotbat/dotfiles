@@ -1,5 +1,6 @@
 #window {
     border-radius:    0;
+    width: 35%;
 }
 element-icon{
     size: 40px;

@@ -1,0 +1,12 @@
+configuration{
+    eh: 1;
+    hover-select: true;
+    steal-focus: true;
+    show-icons: false;
+}
+window {
+  height: 49%;
+}
+#element {
+    padding: 10px;
+}

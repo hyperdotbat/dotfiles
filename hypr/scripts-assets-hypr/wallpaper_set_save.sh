@@ -12,7 +12,7 @@ WALLPAPER_FULL_PATH_OG=$1
 
 WALLPAPERS_DIR_OG="~/Pictures/Wallpapers/"
 wallpapers_dir_file=".wallpapers_dir_cache"
-if [ -f "$wallpapers_dir_file" ]; then
+if [ -f "$wallpapers_dir_file" ] && grep -q '[^[:space:]]' "$wallpapers_dir_file"; then
     WALLPAPERS_DIR_OG=$(<$wallpapers_dir_file)
 else
     # Rewrite after new changes to include the `.wallpapers_dir` path
