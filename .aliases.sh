@@ -207,6 +207,10 @@ flac-replace-cover(){
 	metaflac --remove --block-type=PICTURE "$1" && metaflac --import-picture-from="$2" "$1"
 }
 
+pixelart_upscale(){
+	magick "$1" -scale "${2:-400%}" -interpolate Nearest "${1%.*}_upscaled.${1##*.}"
+}
+
 #alias mv-from-children='find . -mindepth 2 -type f -exec mv -t . {} +'
 
 alias restart-audio-engine='systemctl --user restart pipewire pipewire-pulse pipewire-virtual-sinks wireplumber'

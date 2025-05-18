@@ -3,6 +3,9 @@ window#waybar {
     background: linear-gradient(0deg, rgb(2, 2, 3) 0%, rgb(17, 18, 23) 49%, rgb(26, 27, 35) 49%, rgb(39, 41, 53) 100%);
     /* Smoother gradient */
     /* background: linear-gradient(0deg, black 0%, rgb(39, 41, 53) 40%, rgba(40, 42, 54, 1) 60%, black 100%); */
+
+    box-shadow:inset 0px 0px 0px 0px #000000;
+    box-shadow:inset 0px 0px 5px 5px #000000;
 }
 #workspaces{
     /* Eases the transition outside with smoother gradients */
@@ -26,5 +29,5 @@ tooltip label {
     color: white;
 }
 *{
-    text-shadow: 0px 0px 2px white;
+    text-shadow: 0px 0px 2px rgba(255,255,255,0.5);
 }

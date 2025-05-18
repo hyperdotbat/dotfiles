@@ -26,3 +26,4 @@ sox
 bc
 ttf-jetbrains-mono-nerd
 ttf-ms-fonts
+ttf-segoe-ui-variable

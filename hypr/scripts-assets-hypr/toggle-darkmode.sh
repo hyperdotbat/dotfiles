@@ -25,6 +25,13 @@ else
     echo "Light mode"
 fi
 
+## GTK etc
+if [ "$DARKMODE_ENABLE" = true ]; then
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+else
+    gsettings set org.gnome.desktop.interface color-scheme prefer-light
+fi
+
 ## Hyprwm
 HYPRLAND_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/hypr"
 HYPRLAND_override_darkmode_file="$HYPRLAND_CONFIG_DIR/.import-darkmode_cache.conf"
@@ -66,20 +73,20 @@ if [ "$UPDATE_WALLPAPER_SLIDESHOW" = true ]; then
     isdarkmode_wallpaper_file=".is-darkmode-wallpaper_cache"
     if [ "$DARKMODE_ENABLE" = true ]; then
         if [ ! -f "$isdarkmode_wallpaper_file" ] || ! grep -q '[^[:space:]]' "$isdarkmode_wallpaper_file"; then
+        SCRIPT_NAME="start-wallpaper-slideshow.sh"
+        if pgrep -f "$SCRIPT_NAME" > /dev/null; then
             echo "Setting dark wallpaper slideshow"
-            ./start-wallpaper-slideshow.sh --force
+            nohup "./$SCRIPT_NAME --force" > /dev/null 2>&1 &
+        else
+            echo "Wallpaper slideshow not running, not changing."
         fi
     else
         if [ -f "$isdarkmode_wallpaper_file" ] && grep -q '[^[:space:]]' "$isdarkmode_wallpaper_file"; then
+        if pgrep -f "$SCRIPT_NAME" > /dev/null; then
             echo "Setting light wallpaper slideshow"
-            ./start-wallpaper-slideshow.sh --force
+            nohup "./$SCRIPT_NAME --force" > /dev/null 2>&1 &
+        else
+            echo "Wallpaper slideshow not running, not changing."
         fi
     fi
-fi
-
-## GTK etc
-if [ "$DARKMODE_ENABLE" = true ]; then
-    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-else
-    gsettings set org.gnome.desktop.interface color-scheme prefer-light
 fi

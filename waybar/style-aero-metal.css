@@ -1,5 +1,5 @@
 * {
-    font-family: "Segoe UI"
+    font-family: "Segoe UI Variable Static Text", "Segoe UI", "JetBrainsMonoNL Nerd Font";
 }
 window#waybar {
     color: black;
@@ -10,6 +10,13 @@ window#waybar {
 
     /* OG metalic sheen */
     background: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(219,219,219,1) 49%, rgba(235,235,235,1) 49%, rgba(252,252,252,1) 100%);
+    /* Blueish tint */
+    background: linear-gradient(0deg, rgba(207,207,220,1) 0%, rgba(219,219,230,1) 49%, rgba(235,235,250,1) 49%, rgba(250,250,255,1) 100%);
+    /* Coloring tests */
+    /* background: linear-gradient(0deg, rgba(207,220,207,1) 0%, rgba(219,230,219,1) 49%, rgba(235,250,235,1) 49%, rgba(250,255,250,1) 100%); */
+    /* background: linear-gradient(0deg, rgb(215, 235, 208) 0%, rgb(225, 240, 219) 49%, rgb(243, 255, 235) 49%, rgb(253, 255, 250)100%); */
+    /* background: linear-gradient(0deg, rgb(225, 235, 208) 0%, rgb(235, 240, 219) 49%, rgb(253, 255, 235) 49%, rgb(255, 255, 250)100%); */
+    
     /* Gradual metalic gradient */
     /* background: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(219,219,219,1) 60%, rgba(235,235,235,1) 79%, rgba(252,252,252,1) 100%); */
     /* Mirrored metalic */
@@ -20,7 +27,7 @@ window#waybar {
     /* box-shadow:inset 0px 0px 5px 0px black; */
     /* box-shadow:inset 0px 0px 5px 5px #ffe5c9; */
     /* box-shadow:inset 0px 0px 5px 5px #ffb86c; */
-    /* box-shadow:inset 0px 0px 5px 5px #ffffff; */
+    box-shadow:inset 0px 0px 5px 5px #ffffff;
 
     /* border-bottom: 3px solid white; */
 }
@@ -66,12 +73,17 @@ window#waybar {
     color: #282a36;
 }
 tooltip {
-    background: radial-gradient(rgba(252,252,252,1), rgba(207,207,207,1));
+    background: radial-gradient(rgba(250,250,255,1), rgba(207,207,220,1));
     border: 1px solid black;
+    
+    /* box-shadow: inset 0px 0px 5px 5px white; */
+    /* box-shadow: 0px 0px 5px 5px rgba(207,207,220,1); */
+    /* box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 1); */
 }
 tooltip label {
     color: black;
 }
 *{
     text-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+    /* text-shadow: 0px 0px 2px rgba(255,255,255,1); */
 }

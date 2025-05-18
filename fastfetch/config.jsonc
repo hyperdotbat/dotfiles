@@ -1,41 +1,128 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
-    "source": "~/.config/fastfetch/hyper_ascii.txt",
+    "source": "~/.config/fastfetch/hyper_ascii_smaller.txt",
     "color": {
       "1": "green",
       "2": "cyan"
     }
   },
+  "display": {
+    "separator": " ",
+    "color": {
+        "keys": "light_green",
+    },
+  },
   "modules": [
-    "title",
-    "separator",
-    //"os",
-    "host",
-    "kernel",
-    "uptime",
-    "packages",
-    "shell",
-    //"display",
-    "de",
-    "wm",
-    //"wmtheme",
-    //"theme",
-    //"icons",
-    //"font",
-    //"cursor",
-    "terminal",
-    "terminalfont",
-    "cpu",
-    "gpu",
-    "memory",
+    // "title",
+    {
+      "type": "custom",
+      // "key": "┌─────────── Hardware Information ──────────┐"
+      "key": "\u001b[97m┌─────────── Hardware Information ──────────┐"
+    },
+    {
+      "type": "host",
+      "key": " ​​ 󰌢 ",
+    },
+    {
+      "type": "cpu",
+      "key": " ​​ 󰍛 ",
+    },
+    {
+      "type": "gpu",
+      "key": " ​ ​󰘚 ",
+    },
+    {
+      "type": "memory",
+      "key": " ​​  ",
+    },
     //"swap",
-    "disk",
-    //"localip",
-    "battery",
-    "poweradapter",
-    //"locale",
-    "break",
-    "colors"
-  ]
+    {
+      "type": "disk",
+      "key": " ​  ",
+    },
+    // {
+    //   "type": "display",
+    //   "key": " ​ ​󰍹 ",
+    // },
+    {
+      "type": "battery",
+      "key": " ​ ​󱈑 ",
+    },
+    // "poweradapter",
+    {
+      "type": "custom",
+      // "key": "├─────────── Software Information ──────────┤"
+      "key": "\u001b[97m├─────────── Software Information ──────────┤"
+    },
+    // {
+    //   "type": "os",
+    //   "key": "​ ​ 󰣇 ",
+    // },
+    {
+      "type": "kernel",
+      "key": " ​ ​ ",
+    },
+    {
+      "type": "de",
+      "key": " ​​  ",
+    },
+    {
+      "type": "wm",
+      "key": " ​​  ",
+    },
+    // {
+    //   "type": "theme",
+    //   "key": "​​  󰉼 ",
+    // },
+    // {
+    //   "type": "icons",
+    //   "key": "​​  󰀻 ",
+    // },
+    {
+      "type": "shell",
+      "key": " ​​  ",
+    },
+    {
+      "type": "terminal",
+      "key": " ​ ​ ",
+    },
+    // {
+    //   "type": "terminalfont",
+    //   "key": " ​   ",
+    // },
+    // {
+    //   "type": "font",
+    //   "key": " ​   ",
+    // },
+    // {
+    //   "type": "locale",
+    //   "key": "​   ",
+    // },
+    {
+      "type": "packages",
+      "key": "​ ​ 󰏖 ",
+    },
+    {
+      "type": "uptime",
+      "key": " ​ 󰊠 ",
+    },
+    // {
+    //   "type": "localip",
+    //   "key": "​   ",
+    // },
+    // {
+    //   "type": "media",
+    //   "key": "​ ​ 󰝚 ",
+    // },
+    // "break",
+    // "colors"
+    {
+      "type": "custom",
+      // "key": "└───────────────────────────────────────────┘"
+      // "key": "\u001b[97m└───────────────────────── \u001b[0m\u001b[38;5;0m \u001b[0m\u001b[38;5;1m \u001b[0m\u001b[38;5;2m \u001b[0m\u001b[38;5;3m \u001b[0m\u001b[38;5;4m \u001b[0m\u001b[38;5;5m \u001b[0m\u001b[38;5;6m \u001b[0m\u001b[38;5;15m \u001b[0m\u001b[39m─┘\u001b[0m"
+      // "key": "└───────────────────────── \u001b[0m\u001b[38;5;0m \u001b[0m\u001b[38;5;1m \u001b[0m\u001b[38;5;2m \u001b[0m\u001b[38;5;3m \u001b[0m\u001b[38;5;4m \u001b[0m\u001b[38;5;5m \u001b[0m\u001b[38;5;6m \u001b[0m\u001b[38;5;15m \u001b[0m\u001b[36m─┘\u001b[0m"
+      "key": "\u001b[97m└─ \u001b[0m\u001b[30m \u001b[31m \u001b[32m \u001b[33m \u001b[34m \u001b[35m \u001b[36m \u001b[37m \u001b[0m─────── \u001b[97m \u001b[96m \u001b[95m \u001b[94m \u001b[93m \u001b[92m \u001b[91m \u001b[90m \u001b[0m\u001b[39m─┘\u001b[0m"
+    },
+  ],
 }

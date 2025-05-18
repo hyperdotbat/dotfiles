@@ -5,11 +5,10 @@ configuration {
 }
 
 * {
-    font: "Segoe UI Variable Static Text 12", "Segoe UI 12";
-    foreground: #000000;
-    background-color: rgba(250,250,255,1);
-    active-background: #50fa7b;
-    //active-background: linear-gradient(to left,rgb(0, 0, 0),rgb(80, 250, 123));
+    font: "Segoe UI Variable Static Text 12","Segoe UI 12";
+    foreground: #ffffff;
+    background-color: #1A1B23;
+    active-background: #c7a3fa;
     active-foreground: #000000;
     urgent-background: #ff5555;
     urgent-foreground: #282a36;
@@ -73,15 +72,15 @@ configuration {
 }
 #element.selected.normal {
     background-color: @selected-background;
-    text-color:       @foreground;
+    text-color:       @active-foreground;
 }
 #element.selected.urgent {
     background-color: @selected-urgent-background;
-    text-color:       @foreground;
+    text-color:       @active-foreground;
 }
 #element.selected.active {
     background-color: @selected-active-background;
-    text-color:       @foreground;
+    text-color:       @active-foreground;
 }
 #element.alternate.normal {
     background-color: @background-color;
