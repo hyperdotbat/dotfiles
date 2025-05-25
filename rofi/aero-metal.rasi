@@ -18,16 +18,21 @@ configuration {
     selected-active-background: @active-background;
     separatorcolor: @active-background;
     bordercolor: @active-background;
+    bordercolor: rgba(207,207,220,1);
 }
 
 #window {
-    background-color: @background-color;
+    //background-color: @background-color;
     //background-image: linear-gradient(to bottom, #ffffff, rgb(165, 165, 165));
     //background-image: linear-gradient(to bottom, rgba(207,207,207,1)/0%, rgba(219,219,219,1)/49%, rgba(235,235,235,1)/49%, rgba(252,252,252,1)/100%);
     //background-color: linear-gradient(90deg, red/0%, green/50%, blue/100%);
     //background-image: linear-gradient(to bottom, black/20%, white/20%, black/10%);
     //background-image: linear-gradient(to bottom, white/49%, black/49%, white/100%);
     //background-image: linear-gradient(to bottom, black/10%, white, black/10%);
+    //background-color: linear-gradient(to left,rgba(250,250,255,1),rgba(255,255,255,1));
+    //background-color: linear-gradient(to bottom,rgba(250,250,255,1),rgba(0,0,0,1));
+    background-image: linear-gradient(to bottom, #fafaff, #ffffff, #fafaff);
+    background-image: linear-gradient(to bottom, rgba(207,207,207,1), #ffffff, rgba(207,207,207,1));
     border:           3;
     border-radius:    0;
     border-color:     @bordercolor;
@@ -41,10 +46,12 @@ configuration {
 #message {
     border:       0px;
     border-color: @separatorcolor;
+    background-color: transparent;
     padding:      1px;
 }
 #textbox {
     text-color: @foreground;
+    background-color: transparent;
 }
 #listview {
     fixed-height: 0;
@@ -57,10 +64,11 @@ configuration {
 }
 #element {
     border:  0;
-    padding: 3px ;
+    padding: 6px;
 }
 #element.normal.normal {
     background-color: @background-color;
+    background-color: transparent;
     text-color:       @foreground;
 }
 #element.normal.urgent {
@@ -74,17 +82,26 @@ configuration {
 #element.selected.normal {
     background-color: @selected-background;
     text-color:       @foreground;
+    //background-image: linear-gradient(to bottom, rgba(161, 252, 184, 1), rgba(186, 253, 203, 1));
+
+    border: 5px solid;
+    border-color: #50fa7b55;
+    border-radius: 0px;
+
+    /* Glow selection */
+    border: 0px solid;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, rgba(161, 252, 184, 0), rgba(161, 252, 184, 1), rgba(161, 252, 184, 1), rgba(161, 252, 184, 0));
 }
 #element.selected.urgent {
     background-color: @selected-urgent-background;
     text-color:       @foreground;
 }
 #element.selected.active {
-    background-color: @selected-active-background;
-    text-color:       @foreground;
 }
 #element.alternate.normal {
     background-color: @background-color;
+    background-color: transparent;
     text-color:       @foreground;
 }
 #element.alternate.urgent {
@@ -100,10 +117,12 @@ configuration {
     border:       0;
     handle-width: 8px ;
     padding:      0;
+    background-color: transparent;
 }
 #sidebar {
     border:       2px dash 0px 0px ;
     border-color: @separatorcolor;
+    background-color: transparent;
 }
 #button.selected {
     background-color: @selected-background;
@@ -113,18 +132,22 @@ configuration {
     spacing:    0;
     text-color: @foreground;
     padding:    1px ;
+    background-color: transparent;
 }
 #case-indicator {
     spacing:    0;
     text-color: @foreground;
+    background-color: transparent;
 }
 #entry {
     spacing:    0;
     text-color: @foreground;
+    background-color: transparent;
 }
 #prompt {
     spacing:    0;
     text-color: @foreground;
+    background-color: transparent;
 }
 #inputbar {
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
@@ -134,6 +157,7 @@ configuration {
     str:        ">";
     margin:     0px 0.3em 0em 0em ;
     text-color: @foreground;
+    background-color: transparent;
 }
 element-text, element-icon {
     background-color: inherit;

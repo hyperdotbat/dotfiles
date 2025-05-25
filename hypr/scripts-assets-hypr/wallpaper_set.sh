@@ -18,13 +18,26 @@ fi
 
 
 if [ "$WALLPAPER_TOOL" == "swww" ]; then
-    SWWW_TRANSITION_TYPE="grow"
     SWWW_TRANSITION_DURATION=2
     SWWW_TRANSITION_FPS=60 #165
+
+    SWWW_TRANSITION_TYPE="grow" # "wipe"
+    SWWW_TRANSITION_RANDOM=true # will choose between "any" and "wipe", cause "random" seems to sometimes break?
+    if [ "$SWWW_TRANSITION_RANDOM" = true ]; then
+        _SWWW_TRANSITION_RANDOM_TYPES=("any" "wipe")
+        SWWW_TRANSITION_TYPE=${_SWWW_TRANSITION_RANDOM_TYPES[RANDOM % ${#_SWWW_TRANSITION_RANDOM_TYPES[@]}]}
+    fi
+    
+    SWWW_WIPE_ANGLE=30
+    SWWW_WIPE_RANDOM_ANGLE=true
+    if [ "$SWWW_WIPE_RANDOM_ANGLE" = true ]; then
+        SWWW_WIPE_ANGLE=$((RANDOM % 360))
+    fi
 
     if ! swww img "$WALLPAPER" \
 	    --transition-type "$SWWW_TRANSITION_TYPE" \
 	    --transition-duration "$SWWW_TRANSITION_DURATION" \
+        --transition-angle "$SWWW_WIPE_ANGLE" \
 	    --transition-fps "$SWWW_TRANSITION_FPS" \
 	    --resize=crop \
     ; then

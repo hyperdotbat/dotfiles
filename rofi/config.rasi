@@ -29,7 +29,7 @@ configuration {
 /*	cycle: true;*/
 /*	sidebar-mode: false;*/
 
-	//hover-select: true;
+	hover-select: true;
 
 /*	eh: 1;*/
 /*	auto-select: false;*/
@@ -85,14 +85,17 @@ configuration {
 /*	kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+h";*/
 /*	kb-remove-to-eol: "Control+k";*/
 /*	kb-remove-to-sol: "Control+u";*/
+
 /*	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";*/
+	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter,Control+space";
+
 /*	kb-accept-custom: "Control+Return";*/
 /*	kb-accept-custom-alt: "Control+Shift+Return";*/
 /*	kb-accept-alt: "Shift+Return";*/
 /*	kb-delete-entry: "Shift+Delete";*/
 /*	kb-mode-next: "Shift+Right,Control+Tab";*/
 	kb-mode-next: "Tab,MouseSecondary";
-	kb-mode-previous: "ISO_Left_Tab";
+	kb-mode-previous: "ISO_Left_Tab,Shift+MouseSecondary";
 /*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
 /*	kb-mode-complete: "Control+l";*/
 /*	kb-row-left: "Control+Page_Up";*/
@@ -109,6 +112,7 @@ configuration {
 /*	kb-row-first: "Home,KP_Home";*/
 /*	kb-row-last: "End,KP_End";*/
 /*	kb-row-select: "Control+space";*/
+	kb-row-select: "";
 /*	kb-screenshot: "Alt+S";*/
 /*	kb-ellipsize: "Alt+period";*/
 /*	kb-toggle-case-sensitivity: "grave,dead_grave";*/
@@ -147,12 +151,12 @@ configuration {
 /*	kb-select-10: "Super+0";*/
 /*	kb-entry-history-up: "Control+Up";*/
 /*	kb-entry-history-down: "Control+Down";*/
-/*	ml-row-left: "ScrollLeft";*/
-/*	ml-row-right: "ScrollRight";*/
-	ml-row-up: "ScrollUp";
-	ml-row-down: "ScrollDown";
-/*	me-select-entry: "MousePrimary";*/
-/*	me-accept-entry: "MouseDPrimary";*/
+	ml-row-left: "ScrollUp";
+	ml-row-right: "ScrollDown";
+	ml-row-up: "";
+	ml-row-down: "";
+	me-select-entry: "";
+	me-accept-entry: "MousePrimary";
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 /*  timeout {
       action: "kb-cancel";

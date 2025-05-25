@@ -45,6 +45,7 @@ alias ssh_cenovo="~/scripts/ssh_cenovo.sh"
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 alias anicli='ani-cli'
+alias ytx='yt-x'
 
 alias fetch='fastfetch' #'neofetch'
 alias ff='fastfetch'
@@ -142,6 +143,22 @@ vidcut() {
     output_file="${4:-${input_file%.*}_cut.${input_file##*.}}"
 
     ffmpeg -i "$input_file" -ss "$start_time" -to "$end_time" \
+	-map 0 \
+	-c copy \
+	"$output_file"
+}
+vidcut-re() {
+    if [ $# -lt 3 ]; then
+        echo "Usage: vidcut <input_file> <start_time> <end_time> [output_file]"
+        return 1
+    fi
+
+    input_file="$1"
+    start_time="$2"
+    end_time="$3"
+    output_file="${4:-${input_file%.*}_cut.${input_file##*.}}"
+
+    ffmpeg -i "$input_file" -ss "$start_time" -to "$end_time" \
 	-c:v libx264 \
 	-r 30 \
 	-c:a aac \
@@ -219,9 +236,9 @@ alias restart-display-manager="sudo systemctl restart display-manager"
 alias untar-gz='tar -xvzf'
 alias untar-xz='tar -xvJf'
 
-alias syssleep='systemctl sleep'
 alias findprocess='ps aux | grep -i'
 
+alias clock='tty-clock -c'
 # Goofy ahh
 alias lavat-lava='lavat -c yellow -R1 -k red'
 alias lavat-candy='lavat -c green -R1 -k magenta'

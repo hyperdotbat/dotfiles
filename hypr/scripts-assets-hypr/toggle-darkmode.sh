@@ -71,22 +71,27 @@ fi
 ## Wallpaper slideshow update
 if [ "$UPDATE_WALLPAPER_SLIDESHOW" = true ]; then
     isdarkmode_wallpaper_file=".is-darkmode-wallpaper_cache"
+    SCRIPT_NAME="start-wallpaper-slideshow.sh"
+
     if [ "$DARKMODE_ENABLE" = true ]; then
         if [ ! -f "$isdarkmode_wallpaper_file" ] || ! grep -q '[^[:space:]]' "$isdarkmode_wallpaper_file"; then
-        SCRIPT_NAME="start-wallpaper-slideshow.sh"
-        if pgrep -f "$SCRIPT_NAME" > /dev/null; then
-            echo "Setting dark wallpaper slideshow"
-            nohup "./$SCRIPT_NAME --force" > /dev/null 2>&1 &
-        else
-            echo "Wallpaper slideshow not running, not changing."
+            if pgrep -f "$SCRIPT_NAME" > /dev/null; then
+                echo "Setting dark wallpaper slideshow"
+                nohup "./$SCRIPT_NAME" --force > /dev/null 2>&1 &
+                echo 'true' > $isdarkmode_wallpaper_file
+            else
+                echo "Wallpaper slideshow not running, not changing."
+            fi
         fi
     else
         if [ -f "$isdarkmode_wallpaper_file" ] && grep -q '[^[:space:]]' "$isdarkmode_wallpaper_file"; then
-        if pgrep -f "$SCRIPT_NAME" > /dev/null; then
-            echo "Setting light wallpaper slideshow"
-            nohup "./$SCRIPT_NAME --force" > /dev/null 2>&1 &
-        else
-            echo "Wallpaper slideshow not running, not changing."
+            if pgrep -f "$SCRIPT_NAME" > /dev/null; then
+                echo "Setting light wallpaper slideshow"
+                nohup "./$SCRIPT_NAME" --force > /dev/null 2>&1 &
+                echo '' > $isdarkmode_wallpaper_file
+            else
+                echo "Wallpaper slideshow not running, not changing."
+            fi
         fi
     fi
 fi

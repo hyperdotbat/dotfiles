@@ -1,11 +1,26 @@
 configuration {
-    timeout {
+    /*timeout {
         delay:  20;
-    }
+    }*/
     //matching: "fuzzy";
-    ignored-prefixes: [ ".", "_" ];
     hover-select: true;
     steal-focus: true;
+	ml-row-left: "";
+	ml-row-right: "";
+	ml-row-up: "";
+	ml-row-down: "";
+	me-select-entry: "";
+	me-accept-entry: "MousePrimary";
+	kb-move-char-back: "";
+	kb-move-char-forward: "";
+	kb-element-next: "Right";
+	kb-element-prev: "Left";
+	kb-row-up: "Control+p";
+	kb-row-down: "Control+n";
+	kb-page-prev: "Page_Up,Up,ScrollUp";
+	kb-page-next: "Page_Down,Down,ScrollDown";
+	kb-row-select: "";
+    kb-accept-entry: "Control+j,Control+m,Return,KP_Enter,Control+space";
 }
 
 window {

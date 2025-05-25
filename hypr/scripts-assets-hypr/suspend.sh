@@ -1,6 +1,7 @@
 #!/bin/bash
 cd "$(dirname "$0")" || exit 1
-LOCK_ON_SUSPEND=true
+
+LOCK_ON_SUSPEND=false
 
 if [ -n "$1" ]; then
     if [ "$1" = "--lock" ]; then

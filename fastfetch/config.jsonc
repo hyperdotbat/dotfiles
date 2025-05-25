@@ -107,10 +107,10 @@
       "type": "uptime",
       "key": " ​ 󰊠 ",
     },
-    // {
-    //   "type": "localip",
-    //   "key": "​   ",
-    // },
+    {
+       "type": "localip",
+       "key": "​   ",
+    },
     // {
     //   "type": "media",
     //   "key": "​ ​ 󰝚 ",
