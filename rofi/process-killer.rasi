@@ -1,0 +1,98 @@
+/*
+ * Simple Dark Rofi Process Killer Theme
+ * Save as ~/.config/rofi/process-killer.rasi
+ */
+
+* {
+    background-color: #2b2b2b;
+    text-color: #ffffff;
+    border-color: #555555;
+    selected-background: #4a90e2;
+    selected-text: #ffffff;
+    font: "monospace 10";
+}
+
+window {
+    width: 95%;
+    height: 85%;
+    padding: 10px;
+    border: 1px solid;
+    background-color: @background-color;
+}
+
+mainbox {
+    children: [ "inputbar", "listview" ];
+    spacing: 10px;
+}
+
+inputbar {
+    children: [ "prompt", "entry" ];
+    background-color: #333333;
+    padding: 8px;
+    spacing: 10px;
+}
+
+prompt {
+    text-color: #cccccc;
+    font: "monospace bold 11";
+}
+
+entry {
+    text-color: @text-color;
+    placeholder: "Filter processes...";
+    placeholder-color: #888888;
+}
+
+listview {
+    lines: 20;
+    columns: 1;
+    scrollbar: true;
+    background-color: #1e1e1e;
+    border: 1px solid #555555;
+    padding: 5px;
+    spacing: 2px;
+    /* Critical settings for wrapping */
+    dynamic: true;
+    fixed-height: false;
+}
+
+element {
+    padding: 6px;
+    spacing: 0px;
+    /* This is key for wrapping to work */
+    children: [ "element-text" ];
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @text-color;
+}
+
+element selected.normal {
+    background-color: @selected-background;
+    text-color: @selected-text;
+    font: "monospace bold 10";
+}
+
+element alternate.normal {
+    background-color: #262626;
+    text-color: @text-color;
+}
+
+element-text {
+    /* These are the most important settings for text wrapping */
+    wrap: true;
+    markup: false;
+    vertical-align: 0.0;
+    horizontal-align: 0.0;
+    expand: true;
+    font: "monospace 9";
+}
+
+scrollbar {
+    width: 6px;
+    border: 0;
+    handle-color: #666666;
+    handle-width: 6px;
+    padding: 0;
+}

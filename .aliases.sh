@@ -9,6 +9,9 @@ alias inv='nvim "$(fzf -m --preview="bat --color=always {}")"'
 alias sinv='sudo -E nvim "$(fzf -m --preview="bat --color=always {}")"'
 alias vsc='vscodium'
 
+alias yz='yazi'
+alias f='yazi'
+
 alias tm='tmux'
 alias tmuxt='tmux new-session -A -t'
 alias tmuxssh='tmuxt ssh'
@@ -226,6 +229,10 @@ flac-replace-cover(){
 
 pixelart_upscale(){
 	magick "$1" -scale "${2:-400%}" -interpolate Nearest "${1%.*}_upscaled.${1##*.}"
+}
+
+flac-extract-cover-rockbox(){
+	ffmpeg -i "$1" -an -vcodec copy cover.jpg && mogrify -resize 500x500\! -interlace none cover.jpg
 }
 
 #alias mv-from-children='find . -mindepth 2 -type f -exec mv -t . {} +'

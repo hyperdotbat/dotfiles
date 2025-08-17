@@ -5,4 +5,6 @@
 # https://github.com/Supreeeme/extest
 ~/Apps/steam-launcher.sh -silent
 
+flatpak run com.bitwarden.desktop
+
 disown

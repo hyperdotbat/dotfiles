@@ -19,6 +19,7 @@ grimblast-git
 rofi
 rofimoji
 wtype
+clipse
 dunst
 wlogout
 better-control

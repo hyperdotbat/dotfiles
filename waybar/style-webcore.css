@@ -1,0 +1,63 @@
+* {
+    /* font-family: "ChicagoFLF", "MS Sans Serif", "Tahoma"; */
+    font-weight: bold;
+}
+window#waybar {
+    color: black;
+    background: #C0C0C0;
+    background: linear-gradient(90deg, #808080 0%, #B5B5B5 100%);
+    box-shadow:inset 0px 1px 0px 1px white;
+}
+#workspaces{
+    /* Eases the transition outside with smoother gradients*/
+    /* box-shadow: 20px 0px 20px 20px #fcfcfc; */
+}
+#workspaces button:not(:first-child){
+    border-left: 1px solid black;
+}
+#workspaces button:not(:last-child){
+    border-right: 1px solid black;
+}
+#workspaces button:last-child{
+    border-right: 2px solid black;
+}
+#workspaces button{
+    /* color: black; */
+    /* border: none; */
+    /* outline: solid 5px #757575; */
+    /* box-shadow:inset 0px 0px 0px 1px #fcfcfc; */
+
+    /* White inwards glow */
+    /* box-shadow:inset 0px 0px 5px 5px #fcfcfc; */
+}
+#workspaces button {
+    color: black;
+}
+#workspaces button:hover, #workspaces button.special:hover {
+    background: transparent;
+    background: #808080;
+    /* border-bottom: 3px solid #ffb86c; */
+    /* color: #ffb86c; */
+    color: white;
+}
+#workspaces button.active {
+    background: #000080;
+    color: white;
+    /* border-bottom: 3px solid transparent; */
+}
+#workspaces button.special.active, #workspaces button.urgent {
+    /* background: #FFB0D7; */
+    background: #B800AE;
+    color: white;
+}
+tooltip {
+    background: #C0C0C0;
+    border: 2px solid black;
+    
+    /* box-shadow: inset 0px 0px 5px 5px white; */
+    /* box-shadow: 0px 0px 5px 5px rgba(207,207,220,1); */
+    /* box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 1); */
+}
+tooltip label {
+    color: black;
+}

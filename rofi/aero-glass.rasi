@@ -1,15 +1,14 @@
 configuration {
     show-icons:      true;
     display-drun:    "";
-    disable-history: false;
 }
 
 * {
-    font: "Segoe UI Variable Static Text 12","Segoe UI 12";
-    foreground: #ffffff;
-    background-color: #1A1B23;
-    background-color: rgb(39, 41, 53);
-    active-background: #c7a3fa;
+    font: "Segoe UI Variable Static Text 12", "Segoe UI 12";
+    foreground: white;
+    background-color: rgba(0,0,0,0.2);
+    active-background: #50fa7b;
+    //active-background: linear-gradient(to left,rgb(0, 0, 0),rgb(80, 250, 123));
     active-foreground: #000000;
     urgent-background: #ff5555;
     urgent-foreground: #282a36;
@@ -18,20 +17,28 @@ configuration {
     selected-active-background: @active-background;
     separatorcolor: @active-background;
     bordercolor: @active-background;
-    bordercolor: black;
+    bordercolor: rgba(255,255,255,0.5);
 }
 
 #window {
-    background-color: @background-color;
+    //background-color: @background-color;
     //background-image: linear-gradient(to bottom, #ffffff, rgb(165, 165, 165));
     //background-image: linear-gradient(to bottom, rgba(207,207,207,1)/0%, rgba(219,219,219,1)/49%, rgba(235,235,235,1)/49%, rgba(252,252,252,1)/100%);
     //background-color: linear-gradient(90deg, red/0%, green/50%, blue/100%);
     //background-image: linear-gradient(to bottom, black/20%, white/20%, black/10%);
     //background-image: linear-gradient(to bottom, white/49%, black/49%, white/100%);
     //background-image: linear-gradient(to bottom, black/10%, white, black/10%);
-    background-image: linear-gradient(to bottom, black, rgb(39, 41, 53), black);
+    //background-color: linear-gradient(to left,rgba(250,250,255,1),rgba(255,255,255,1));
+    //background-color: linear-gradient(to bottom,rgba(250,250,255,1),rgba(0,0,0,1));
+    //background-image: linear-gradient(to bottom, #fafaff, #ffffff, #fafaff);
+    //background-image: linear-gradient(to bottom, rgba(207,207,207,0.2), #ffffff, rgba(207,207,207,0.2));
+    //background-image: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.05));
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(255,255,255,0.05), rgba(0,0,0,0.25));
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.05), rgba(255,255,255,0.25));
+
     border:           3;
-    border-radius:    0;
+    border-radius:    8;
     border-color:     @bordercolor;
     padding:          15;
 }
@@ -78,24 +85,26 @@ configuration {
 }
 #element.selected.normal {
     background-color: @selected-background;
-    text-color:       @active-foreground;
+    text-color:       @foreground;
+    //background-image: linear-gradient(to bottom, rgba(161, 252, 184, 1), rgba(186, 253, 203, 1));
 
     border: 5px solid;
-    border-color: #c7a3fa55;
-    border-radius: 0px;
+    border-color: #50fa7b55;
+    border-radius: 10px;
 
     /* Glow selection */
     border: 0px solid;
     background-color: transparent;
-    background-image: linear-gradient(to bottom, rgba(199, 163, 250, 0),rgba(199, 163, 250, 1), rgba(199, 163, 250, 1), rgba(199, 163, 250, 0));
+    background-image: linear-gradient(to bottom, rgba(161, 252, 184, 0), rgba(161, 252, 184, 0.4), rgba(161, 252, 184, 0.4), rgba(161, 252, 184, 0));
+    //background-image: linear-gradient(to bottom, rgba(161, 252, 184, 0),rgba(21, 166, 154, 0.4), rgba(21, 166, 154, 0.4), rgba(161, 252, 184, 0)); //Interesting dual color effect
+    //background-image: linear-gradient(to bottom, rgba(21, 166, 154, 0),rgba(21, 166, 154, 0.4), rgba(21, 166, 154, 0.4), rgba(21, 166, 154, 0));
+    background-image: linear-gradient(to bottom, rgba(141, 255, 169, 0), rgba(141, 255, 169, 0.4), rgba(141, 255, 169, 0.4), rgba(141, 255, 169, 0));
 }
 #element.selected.urgent {
     background-color: @selected-urgent-background;
-    text-color:       @active-foreground;
+    text-color:       @foreground;
 }
 #element.selected.active {
-    background-color: @selected-active-background;
-    text-color:       @active-foreground;
 }
 #element.alternate.normal {
     background-color: @background-color;
@@ -129,8 +138,8 @@ configuration {
 #inputbar {
     spacing:    0;
     text-color: @foreground;
-    background-color: transparent;
     padding:    1px ;
+    background-color: transparent;
 }
 #case-indicator {
     spacing:    0;

@@ -5,6 +5,7 @@ USE_NERD_FONT_ICONS=true
 
 _text_app_launcher="App Launcher"
 _text_wallpaper_picker="Wallpaper Picker"
+_text_window_switcher="Window Switcher"
 _text_file_browser="File Browser"
 _text_terminal="Terminal"
 _text_hyprsunset="Hyprsunset"
@@ -26,6 +27,7 @@ fi
 if [ "$USE_NERD_FONT_ICONS" = true ]; then
     _text_app_launcher=" $_text_app_launcher"
     _text_wallpaper_picker=" $_text_wallpaper_picker"
+    _text_window_switcher=" $_text_window_switcher"
     _text_file_browser=" $_text_file_browser"
     _text_terminal=" $_text_terminal"
     _text_hyprsunset=" $_text_hyprsunset"
@@ -37,6 +39,7 @@ fi
 options=(
     "$_text_app_launcher"
     "$_text_wallpaper_picker"
+    "$_text_window_switcher"
     "$_text_file_browser"
     "$_text_terminal"
     "$_text_hyprsunset"
@@ -70,8 +73,13 @@ fi
 aspect_r=$((x_monres * 10 / y_monres))
 if (( aspect_r < 10 )); then
     R_WIDTH=64
-    R_HEIGHT=28
+    R_HEIGHT=30
     r_override+="#window { width: ${R_WIDTH}%; height: ${R_HEIGHT}%; }"
+fi
+
+if pgrep -x rofi; then
+    killall rofi
+    exit 0
 fi
 
 SELECTED=$(printf "%s\n" "${options[@]}" | rofi -dmenu -theme-str "$r_override" -markup-rows -i -p "" -me-select-entry '' -me-accept-entry 'MousePrimary')
@@ -83,6 +91,11 @@ if [[ "$SELECTED" == "$_text_app_launcher" ]]; then
 fi
 if [[ "$SELECTED" == "$_text_wallpaper_picker" ]]; then
     ./wallpaper_picker.sh &
+    exit 0
+fi
+if [[ "$SELECTED" == "$_text_window_switcher" ]]; then
+    ./hyprswitch.sh &
+    # hyprswitch gui
     exit 0
 fi
 if [[ "$SELECTED" == "$_text_file_browser" ]]; then

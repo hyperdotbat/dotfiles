@@ -1,0 +1,100 @@
+* {
+    font-family: "Segoe UI Variable Static Text", "Segoe UI", "JetBrainsMonoNL Nerd Font", "sans-serif";
+    /* font-weight: bold; */
+}
+window#waybar {
+    color: white;
+
+    /* background: linear-gradient(0deg, rgba(207,207,220,1) 0%, rgba(219,219,230,1) 49%, rgba(235,235,250,1) 49%, rgba(250,250,255,1) 100%); */
+    /* backdrop-filter: blur(10px); */
+    background-color: rgba(255, 255, 255, 0.2);
+    /* background-image: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.05)); */
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.05));
+
+    /* box-shadow:inset 0px 0px 2px 2px white; */
+    /* border-bottom: 3px solid white; */
+
+    border-top: 1px solid rgba(255, 255, 255, 0.4); /* highlight line */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);   /* shadow line */
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+
+    border-radius: 10px;
+    /* padding: 4px 10px; */
+    /* margin: 4px; */
+}
+#workspaces{
+    /* Eases the transition outside with smoother gradients*/
+    /* box-shadow: 20px 0px 20px 20px #fcfcfc; */
+}
+#workspaces button:first-child{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+#workspaces button:not(:first-child){
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+#workspaces button:not(:last-child){
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+#workspaces button:last-child{
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+}
+#workspaces button{
+    /* color: black; */
+    /* border: none; */
+    /* outline: solid 5px #757575; */
+    /* box-shadow:inset 0px 0px 0px 1px #fcfcfc; */
+
+    /* White inwards glow */
+    /* box-shadow:inset 0px 0px 5px 5px #fcfcfc; */
+
+    /* background-image: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.05)); */
+}
+#workspaces button {
+    color: white;
+}
+#workspaces button:hover, #workspaces button.special:hover {
+    background: transparent;
+    background: linear-gradient(0deg, rgba(160, 236, 254, 0.5) 0%, rgba(185, 241, 254, 0.5) 60%, rgba(215, 247, 254, 0.5) 79%, rgba(250, 254, 255, 0.5) 100%);
+    /* background: linear-gradient(to bottom, rgba(160, 236, 254, 0.5), rgba(250, 254, 255, 0.25)); */
+    background: linear-gradient(to bottom, rgba(160, 236, 254, 0.5), rgba(185, 241, 254, 0.25));
+    /* border-bottom: 3px solid #ffb86c; */
+    /* color: #ffb86c; */
+    color: white;
+}
+#workspaces button.active {
+    background: linear-gradient(0deg, rgba(161, 252, 184, 0.5) 0%, rgba(186, 253, 203, 0.5) 60%, rgba(215, 254, 225, 0.5) 79%, rgba(250, 255, 251, 0.5) 100%);
+    /* background: linear-gradient(to bottom, rgba(161, 252, 184, 0.5), rgba(250, 255, 251, 0.25)); */
+    background: linear-gradient(to bottom, rgba(161, 252, 184, 0.5), rgba(186, 253, 203, 0.25));
+    /* color: black; */
+    /* border-bottom: 3px solid transparent; */
+}
+#workspaces button.special.active, #workspaces button.urgent {
+    background: linear-gradient(0deg, rgba(255, 208, 158, 0.5) 0%, rgba(255, 220, 184, 0.5) 49%, rgba(255, 235, 214, 0.5) 49%, rgba(255, 253, 250, 0.5) 100%);
+    /* background: linear-gradient(to bottom, rgba(255, 208, 158, 0.5), rgba(255, 253, 250, 0.25)); */
+    background: linear-gradient(to bottom, rgba(255, 208, 158, 0.5), rgba(255, 220, 184, 0.25));
+    /* color: black; */
+}
+tooltip {
+    background-image: radial-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.05));
+    /* border: 1px solid white; */
+    border-top: 1px solid rgba(255, 255, 255, 0.4); /* highlight line */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);   /* shadow line */
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    
+    border-radius: 10px;
+    
+    /* box-shadow: inset 0px 0px 5px 5px white; */
+    /* box-shadow: 0px 0px 5px 5px rgba(207,207,220,1); */
+    /* box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 1); */
+}
+tooltip label {
+    color: white;
+}
+*{
+    /* text-shadow: 0px 0px 2px rgba(0,0,0,0.5); */
+    /* text-shadow: 0px 0px 2px rgba(255,255,255,1); */
+
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+    /* text-shadow: 0 0 3px rgba(255, 255, 255, 0.6); */
+}

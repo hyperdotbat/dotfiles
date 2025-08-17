@@ -1,5 +1,6 @@
 * {
-    font-family: "Segoe UI Variable Static Text", "Segoe UI", "JetBrainsMonoNL Nerd Font";
+    font-family: "Segoe UI Variable Static Text", "Segoe UI", "JetBrainsMonoNL Nerd Font", "sans-serif";
+    /* font-weight: bold; */
 }
 window#waybar {
     color: black;
@@ -27,7 +28,7 @@ window#waybar {
     /* box-shadow:inset 0px 0px 5px 0px black; */
     /* box-shadow:inset 0px 0px 5px 5px #ffe5c9; */
     /* box-shadow:inset 0px 0px 5px 5px #ffb86c; */
-    box-shadow:inset 0px 0px 5px 5px #ffffff;
+    box-shadow:inset 0px 0px 5px 5px white;
 
     /* border-bottom: 3px solid white; */
 }

@@ -131,6 +131,11 @@ else
         RANDOM_SELECTION_TEXT="Random\x00icon\x1f$WALLPAPERS_DIR/$RANDOM_SELECTED"
     fi
     
+    if pgrep -x rofi; then
+        killall rofi
+        exit 0
+    fi
+    
     theme_override_flag=()
     if [ "$USE_THEME_OVERRIDE" = true ]; then
         theme_override_flag=(-theme-str "$r_override")

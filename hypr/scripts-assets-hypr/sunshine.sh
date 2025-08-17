@@ -21,11 +21,20 @@ fi
 if [ "$CONNECTED" = false ]; then
     echo 'monitor = $monitorSecond, disable' > $monitors_import_file
     nohup hyprsunset --gamma 0 > /dev/null 2>&1 &
+
+#     echo 'monitor = $monitorSecond, disable
+# monitor = $monitorMainPhysical, disable
+# monitor = $monitorVirtual, 1920x1080@60, 0x0, 1
+# $monitorMain=$monitorVirtual' > "$monitors_import_file"
+
+#     echo 'monitor = $monitorSecond, disable
+# monitor = $monitorMainPhysical, disable' > $monitors_import_file
+
     disown
-    echo "Connected"
+    echo "Sunshine Connected"
 else
     echo '' > $monitors_import_file
     killall hyprsunset
     ./wallpaper_set_current.sh
-    echo "Disconnected"
+    echo "Sunshine Disconnected"
 fi
