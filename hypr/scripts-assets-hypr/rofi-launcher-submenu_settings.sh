@@ -27,6 +27,9 @@ else
     _text_toggle_hyprsunset_daemon+=" (is Off)"
 fi
 
+_text_ssh="Open SSH"
+_text_update="Update system"
+
 
 options=(
     "$_text_pick_wallpaper_from_slideshow"
@@ -34,6 +37,8 @@ options=(
     "$_text_toggle_darkmode_daemon"
     "$_text_toggle_hyprsunset_daemon"
     "$_text_dim_displays"
+    "$_text_ssh"
+    "$_text_update"
 )
 
 r_override=""
@@ -86,5 +91,13 @@ if [[ "$SELECTED" == "$_text_toggle_hyprsunset_daemon" ]]; then
 fi
 if [[ "$SELECTED" == "$_text_dim_displays" ]]; then
     ./sunshine.sh
+    exit 0
+fi
+if [[ "$SELECTED" == "$_text_ssh" ]]; then
+    ./rofi-launcher-submenu_ssh.sh
+    exit 0
+fi
+if [[ "$SELECTED" == "$_text_update" ]]; then
+    ./update-system.sh
     exit 0
 fi

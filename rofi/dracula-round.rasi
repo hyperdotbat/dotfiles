@@ -10,7 +10,9 @@ configuration {
     font: "Jetbrains Mono 12";
     foreground: #f8f8f2;
     background-color: #282a36;
-    active-background: #6272a4;
+    background-color: #1E1E2E;
+    /*active-background: #6272a4;*/
+    active-background: #bd93f9;
     urgent-background: #ff5555;
     urgent-foreground: #282a36;
     selected-background: @active-background;
@@ -22,10 +24,10 @@ configuration {
 
 #window {
     background-color: @background-color;
-    border:           3;
-    border-radius:    0;
+    border:           4;
+    border-radius:    12;
     border-color:     @bordercolor;
-    padding:          15;
+    padding:          12;
 }
 #mainbox {
     border:  0;
@@ -65,7 +67,9 @@ configuration {
 }
 #element.selected.normal {
     background-color: @selected-background;
-    text-color:       @foreground;
+    /*text-color:       @foreground;*/
+    text-color:       @background-color;
+    border-radius: 10px;
 }
 #element.selected.urgent {
     background-color: @selected-urgent-background;

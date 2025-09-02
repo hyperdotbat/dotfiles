@@ -22,18 +22,25 @@
     margin-left: 8px;
 }
 
-#group-minimized {
-    border-left: solid;
-    border-left-width: 0.5;
-}
-
-#custom-power {
-    margin-right: 16px;
-}
 
 #power-profiles-daemon {
     margin-right: 8px;
 }
 #idle_inhibitor {
     margin-right: 16px;
+}
+
+#group-minimized {
+    border-left: solid;
+    border-left-width: 0.5;
+}
+
+
+/* #custom-power {
+    margin-right: 16px;
+} */
+#custom-power {
+    padding-left: 10px;
+    padding-right: 14px;
+    margin: 0px;
 }

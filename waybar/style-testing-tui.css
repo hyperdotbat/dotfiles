@@ -56,3 +56,9 @@ tooltip label {
 *{
     text-shadow: none;
 }
+
+#custom-power:hover {
+    background: white;
+    color: #282a36;
+    margin-bottom: 2px;
+}

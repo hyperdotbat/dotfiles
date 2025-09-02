@@ -53,6 +53,8 @@ alias ytx='yt-x'
 alias fetch='fastfetch' #'neofetch'
 alias ff='fastfetch'
 
+alias dots='z ~/dotfiles'
+
 alias freeze-state='echo freeze | sudo tee /sys/power/state'
 
 alias vidcompress='~/scripts/vidcompress.sh'

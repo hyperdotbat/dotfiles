@@ -1,0 +1,47 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMonoNL Nerd Font";
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #081921;
+    color: white;
+    border-bottom: 2px solid #feff01;
+}
+tooltip {
+  background: #081921;
+  border: 2px solid #feff01;
+}
+tooltip label {
+  color: white;
+}
+#workspaces button {
+    background: transparent;
+    color: white;
+    /* border-bottom: 3px solid transparent; */
+    margin-bottom: 2px;
+    padding: 6px;
+}
+
+#workspaces button:hover, #workspaces button.special:hover {
+    background: #ff1791;
+    color: #282a36;
+}
+#workspaces button.active, #workspaces button.special.active {
+    background: #feff01;
+    color: rgba(40, 42, 54, 1);
+}
+#workspaces button.special {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+#custom-power:hover {
+    background: #ff1791;
+    color: #282a36;
+    margin-bottom: 2px;
+}

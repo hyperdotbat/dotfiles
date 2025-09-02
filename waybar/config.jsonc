@@ -8,16 +8,18 @@
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces",
-        "hyprland/submap",
+        "hyprland/submap"
         // "hyprland/window",
         // "custom/media",
-        "mpd"
+        // "mpd"
+        // "group/mpd"
     ],
     "modules-center": [
         //"hyprland/window"
 	    "clock"
     ],
     "modules-right": [
+        // "group/mpd-vertical",
         // "idle_inhibitor",
         // "power-profiles-daemon",
         "cpu",
@@ -236,9 +238,17 @@
         "on-scroll-down": "$HOME/.config/hypr/scripts-assets-hypr/volume-set.sh -"
     },
 
-    "custom/expand": {
+    "custom/expand-left": {
         "tooltip": false,
         "format": "\uf0d9",
+    },
+    "custom/expand-right": {
+        "tooltip": false,
+        "format": "\uf0da",
+    },
+    "custom/expand-down": {
+        "tooltip": false,
+        "format": "\uf0d7",
     },
     "tray": {
         // "icon-size": 21,
@@ -251,7 +261,7 @@
     "group/minimized": {
         "orientation": "inherit",
         // "modules": ["custom/expand", "tray"],
-        "modules": ["custom/expand", "idle_inhibitor", "power-profiles-daemon", "tray"],
+        "modules": ["custom/expand-left", "idle_inhibitor", "power-profiles-daemon", "tray"],
         "drawer": {
             "transition-duration": 500,
             "children-class": "minimized",
@@ -274,5 +284,31 @@
     	"on-click": "wlogout",
     	"on-click-right": "$HOME/.config/hypr/scripts-assets-hypr/suspend.sh",
     	"on-click-middle": "systemctl poweroff"
-    }
+    },
+
+
+
+    "group/mpd": {
+        "orientation": "inherit",
+        // "modules": ["custom/expand", "tray"],
+        "modules": [ "custom/expand-right", "mpd" ],
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "minimized",
+            "transition-left-to-right": true,
+            "click-to-reveal": true
+        }
+    },
+
+    "group/mpd-vertical": {
+        "orientation": "vertical",
+        // "modules": ["custom/expand", "tray"],
+        "modules": [ "custom/expand-down", "mpd" ],
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "minimized",
+            "transition-left-to-right": true,
+            "click-to-reveal": true
+        }
+    },
 }
