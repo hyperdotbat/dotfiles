@@ -1,0 +1,100 @@
+* {
+    /* border: none; */
+    /* border-radius: 0; */
+    font-family: "JetBrainsMonoNL Nerd Font";
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 0;
+}
+
+
+window#waybar {
+    /* background: #282a36; */
+    background-color: transparent;
+    /* color: #D3C6AA; */
+    /* border-radius: 12px; */
+}
+
+.modules-left,
+.modules-center,
+.modules-right
+{
+    background: #272E33;
+    border-radius: 12px;
+    border: 3px solid #DABC7F;
+    /* border-color: #DABC7F; */
+    border-color: #A7C080;
+    padding: 0 12px;
+    margin: 6px 6px;
+}
+.modules-left{
+    padding-left: 0;
+    padding-right: 0;
+}
+#workspaces{
+    margin-right: 0;
+    padding: 0;
+}
+#workspaces button:first-child{
+    border-radius: 8px 0 0 8px;
+}
+#workspaces button:last-child{
+    border-radius: 0 8px 8px 0;
+}
+.modules-center{
+    color: #D3C6AA;
+    border-color: #DABC7F;
+}
+.modules-right{
+    padding-right: 0;
+    /* border-color: #A7C080; */
+    color: #D3C6AA;
+}
+/* Accidentaly made something cool */
+/* Corners up are rounded but bottom are not */
+/* Would be cool with no upper gaps */
+/* .modules-left,
+.modules-center,
+.modules-right{
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+} */
+
+tooltip {
+  background: #272E33;
+  border: 3px solid #DABC7F;
+  border-radius: 12px;
+}
+tooltip label {
+  color: #D3C6AA;
+}
+#workspaces button {
+    background: transparent;
+    color: #D3C6AA;
+}
+
+/* #workspaces button:hover, #workspaces button.special:hover { */
+#workspaces button:hover, #workspaces button.special:hover, #workspaces button.special.active {
+    background: #DABC7F;
+    /* color: #D3C6AA; */
+    color: #272E33;
+}
+/* #workspaces button.active, #workspaces button.special.active { */
+#workspaces button.active {
+    background: #A7C080;
+    color: #272E33;
+}
+#workspaces button.urgent {
+    background: #E57E80;
+    color: #272E33;
+}
+#workspaces button.special {
+    color: rgba(255, 255, 255, 0.5);
+    color: #44475a;
+}
+
+#custom-power:hover {
+    background: #DABC7F;
+    color: #272E33;
+    border-radius: 0 8px 8px 0;
+}

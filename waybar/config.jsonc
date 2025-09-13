@@ -28,7 +28,7 @@
         "backlight",
         "hyprland/language",
         "battery",
-        "battery#bat2",
+        // "battery#bat1",
         //"clock",
         "pulseaudio",
         "network",
@@ -138,11 +138,11 @@
         "on-click": "$HOME/.config/hypr/scripts-assets-hypr/screenshot-grimblast.sh area",
         "on-click-right": "$HOME/.config/hypr/scripts-assets-hypr/screenshots-dir-open.sh"
     },
-    // "memory": {
-    //     "format": "{}%  ",
-    //     "on-click": "$HOME/.config/hypr/scripts-assets-hypr/screenshot-grimblast.sh area",
-    //     "on-click-right": "$HOME/.config/hypr/scripts-assets-hypr/screenshots-dir-open.sh"
-    // },
+    "memory": {
+        "format": "{}%  ",
+        "on-click": "$HOME/.config/hypr/scripts-assets-hypr/screenshot-grimblast.sh area",
+        "on-click-right": "$HOME/.config/hypr/scripts-assets-hypr/screenshots-dir-open.sh"
+    },
     "temperature": {
         // "thermal-zone": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",

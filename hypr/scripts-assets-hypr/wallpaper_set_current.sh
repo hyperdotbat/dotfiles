@@ -12,9 +12,9 @@ fi
 WALLPAPERS_DIR="${WALLPAPERS_DIR_OG/#\~/$HOME}"
 WALLPAPERS_DIR="${WALLPAPERS_DIR%/}"
 
-WALLPAPER_CURRENT="Abstract/nord-shards.png"
+WALLPAPER_CURRENT="Nature-irl/stairs_everforest.jpg"
 wallpaper_current_path=".wallpaper_current_path_cache"
-if [ -f "$wallpaper_current_path" ]; then
+if [ -f "$wallpaper_current_path" ] && grep -q '[^[:space:]]' "$wallpaper_current_path"; then
     WALLPAPER_CURRENT=$(<$wallpaper_current_path)
 else
     touch "$wallpaper_current_path"

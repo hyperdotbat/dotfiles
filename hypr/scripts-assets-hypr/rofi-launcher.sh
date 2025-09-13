@@ -23,6 +23,7 @@ else
     _text_darkmode+="darkmode"
 fi
 
+_text_mpd=$(~/scripts/mpc-info-oneliner.sh)
 
 if [ "$USE_NERD_FONT_ICONS" = true ]; then
     _text_app_launcher=" $_text_app_launcher"
@@ -45,6 +46,7 @@ options=(
     "$_text_hyprsunset"
     "$_text_darkmode"
     "$_text_dotfiles"
+    "$_text_mpd"
     "$_text_logout_menu"
     "$_text_more"
 )
@@ -85,46 +87,42 @@ fi
 SELECTED=$(printf "%s\n" "${options[@]}" | rofi -dmenu -theme-str "$r_override" -markup-rows -i -p "" -me-select-entry '' -me-accept-entry 'MousePrimary')
 
 killall rofi
-if [[ "$SELECTED" == "$_text_app_launcher" ]]; then
-    ./launch-rofi.sh &
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_wallpaper_picker" ]]; then
-    ./wallpaper_picker.sh &
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_window_switcher" ]]; then
-    ./hyprswitch.sh &
-    # hyprswitch gui
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_file_browser" ]]; then
-    xdg-open "$HOME" &
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_terminal" ]]; then
-    x-terminal-emulator "$HOME" &
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_hyprsunset" ]]; then
-    ./hyprsunset-toggle.sh &
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_darkmode" ]]; then
-    ./toggle-darkmode.sh &
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_dotfiles" ]]; then
-    code "$HOME/dotfiles" &
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_logout_menu" ]]; then
-    wlogout &
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_more" ]]; then
-    ./rofi-launcher-submenu_settings.sh &
-    exit 0
-fi
+case "$SELECTED" in
+    "$_text_app_launcher")
+        ./launch-rofi.sh &
+        ;;
+    "$_text_wallpaper_picker")
+        ./wallpaper_picker.sh &
+        ;;
+    "$_text_window_switcher")
+        ./hyprswitch.sh &
+        # hyprswitch gui
+        ;;
+    "$_text_file_browser")
+        xdg-open "$HOME" &
+        ;;
+    "$_text_terminal")
+        x-terminal-emulator "$HOME" &
+        ;;
+    "$_text_hyprsunset")
+        ./hyprsunset-toggle.sh &
+        ;;
+    "$_text_darkmode")
+        ./toggle-darkmode.sh &
+        ;;
+    "$_text_dotfiles")
+        code "$HOME/dotfiles" &
+        ;;
+    "$_text_mpd")
+        mpc toggle
+        ;;
+    "$_text_logout_menu")
+        wlogout &
+        ;;
+    "$_text_more")
+        ./rofi-launcher-submenu_settings.sh &
+        ;;
+esac
 
 disown
+exit 0

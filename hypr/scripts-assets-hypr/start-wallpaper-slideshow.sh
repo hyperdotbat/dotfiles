@@ -31,7 +31,7 @@ if [ "$SLIDESHOW_ENABLED" = true ]; then
         LAST_SLIDESHOW_RUN_TIME=$CURRENT_DATE
 
         wallpapers_slideshow_timer_file=".wallpapers_slideshow_timer_cache"
-        if [ -f "$wallpapers_slideshow_timer_file" ]; then
+        if [ -f "$wallpapers_slideshow_timer_file" ] && grep -q '[^[:space:]]' "$wallpapers_slideshow_timer_file"; then
             LAST_SLIDESHOW_RUN_TIME=$(<$wallpapers_slideshow_timer_file)
         fi
 

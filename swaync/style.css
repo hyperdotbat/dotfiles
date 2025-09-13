@@ -1,0 +1,30 @@
+/* Notification container */
+.notification {
+    background: #1E1E2E;
+    border: 4px solid #BD93F9;
+    border-radius: 12px;
+}
+.notification.critical {
+    background: #1E1E2E;
+    border: 4px solid #FF5555;
+    border-radius: 12px;
+}
+
+/* Title text */
+.notification .title {
+    color: #FF79C6;
+    font-weight: bold;
+}
+
+/* Body text */
+.notification .body {
+    color: #F8F8F2;
+}
+
+/* Action buttons */
+.notification .action-button {
+    background: #6272A4;
+    color: #F8F8F2;
+    border-radius: 6px;
+}
+

@@ -2,7 +2,7 @@
 cd "$(dirname "$0")" || exit 1
 
 IS_ENABLED=true
-DARKMODE_HOUR=21
+DARKMODE_HOUR=20
 LIGHTMODE_HOUR=6
 
 isdarkmode_enabled=false

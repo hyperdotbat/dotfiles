@@ -7,12 +7,14 @@ _text_homelab="Homelab"
 _text_cenovo="Cenovo"
 _text_komorebi="Komorebi"
 _text_hoshizora="Hoshizora"
+_text_lenbian="Lenbian"
 
 options=(
     "$_text_homelab"
     "$_text_cenovo"
     "$_text_komorebi"
     "$_text_hoshizora"
+    "$_text_lenbian"
 )
 
 r_override=""
@@ -47,19 +49,21 @@ fi
 SELECTED=$(printf "%s\n" "${options[@]}" | rofi -dmenu -theme-str "$r_override" -markup-rows -i -p "" -me-select-entry '' -me-accept-entry 'MousePrimary')
 
 killall rofi
-if [[ "$SELECTED" == "$_text_homelab" ]]; then
-    kitty -e bash -i -c "ssh_homelab"
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_cenovo" ]]; then
-    kitty -e bash -i -c "ssh_cenovo"
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_komorebi" ]]; then
-    kitty -e bash -i -c "ssh_komorebi"
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_hoshizora" ]]; then
-    kitty -e bash -i -c "ssh_hoshizora"
-    exit 0
-fi
+case "$SELECTED" in
+    "$_text_homelab")
+        kitty -e bash -i -c "ssh_homelab"
+        ;;
+    "$_text_cenovo")
+        kitty -e bash -i -c "ssh_cenovo"
+        ;;
+    "$_text_komorebi")
+        kitty -e bash -i -c "ssh_komorebi"
+        ;;
+    "$_text_hoshizora")
+        kitty -e bash -i -c "ssh_hoshizora"
+        ;;
+    "$_text_lenbian")
+        kitty -e bash -i -c "ssh_lenbian"
+        ;;
+esac
+exit 0

@@ -2,9 +2,12 @@ vim.cmd("syntax on")
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Use terminal colors
+vim.o.termguicolors = false
+
 -- Colorscheme (Dracula)
-vim.opt.termguicolors = true
-vim.cmd.colorscheme('dracula')
+-- vim.opt.termguicolors = true
+-- vim.cmd.colorscheme('dracula')
 
 -- Map Ctrl+Z to Undo
 vim.keymap.set('n', '<C-z>', 'u', { noremap = true })
@@ -40,7 +43,7 @@ vim.api.nvim_set_keymap('n', '<Up>', 'g<Up>', { noremap = true, silent = true })
 -- Visual Block rebound to Alt+V (since Ctrl+V is paste in my kitty cfg)
 vim.keymap.set('n', '<M-v>', '<C-v>', { noremap = true })
 
--- Clipboard (untested?)
+-- Clipboard
 if vim.fn.has("clipboard") == 1 then
   vim.g.clipboard = {
     name = "wl-clipboard",

@@ -2,10 +2,10 @@ syntax on
 set number
 set relativenumber
 
-if v:version < 802
-    packadd! dracula
-endif
-colorscheme dracula
+" if v:version < 802
+"     packadd! dracula
+" endif
+" colorscheme dracula
 
 " Ctrl+Z Undo
 nnoremap <C-z> u

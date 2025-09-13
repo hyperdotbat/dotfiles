@@ -40,10 +40,15 @@ alias ....="z ../../.."
 alias z..="z .."
 alias cd..="cd .."
 
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
 alias ssh_hoshizora="~/scripts/ssh_hoshizora.sh"
 alias ssh_komorebi="~/scripts/ssh_komorebi.sh"
 alias ssh_homelab="~/scripts/ssh_homelab.sh"
 alias ssh_cenovo="~/scripts/ssh_cenovo.sh"
+alias ssh_lenbian="~/scripts/ssh_lenbian.sh"
 
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
@@ -75,7 +80,7 @@ ytmp4() {
 	    --embed-thumbnail \
 	    -o "$output_dir/%(title)s.%(ext)s" \
 	    "$url"
-    xdg-open "$output_dir"
+    xdg-open "$output_dir" &
 }
 #ytmp4() {
 #    local url="$1"
@@ -109,7 +114,7 @@ ytmp3() {
 #        fi
 #    done
 
-    xdg-open "$output_dir"
+    xdg-open "$output_dir" &
 }
 ytmp3clean() {
     local url="$1"
@@ -120,7 +125,7 @@ ytmp3clean() {
 	    --embed-metadata \
 	    -o "$output_dir/%(title)s.%(ext)s" \
 	    "$url"
-    xdg-open "$output_dir"
+    xdg-open "$output_dir" &
 }
 
 vidcut-default() {

@@ -1,6 +1,6 @@
 include ~/.config/kitty/themes.conf
 # Dracula color
-# wayland_titlebar_color #21222c
+wayland_titlebar_color #21222c
 
 font_family      JetBrains Mono Nerd Font
 bold_font        JetBrains Mono Nerd Font Bold

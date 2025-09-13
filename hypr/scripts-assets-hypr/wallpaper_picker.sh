@@ -153,7 +153,7 @@ else
     if [[ -n "$SELECTED" ]]; then
         # Overwrite current wallpapers directory path
         echo "${WALLPAPERS_DIR/#\/$HOME/~}" > ".wallpapers_dir_cache"
-        echo "Set ${WALLPAPERS_DIR/#\/$HOME/~} as current wallpaper_dir_cache"
+        echo "Set ${WALLPAPERS_DIR/#\/$HOME/~} as current wallpapers_dir_cache"
 
         WALLPAPER="$WALLPAPERS_DIR/$SELECTED"
         echo "$WALLPAPER"

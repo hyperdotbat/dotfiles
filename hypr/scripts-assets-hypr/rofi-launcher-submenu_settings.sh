@@ -27,6 +27,13 @@ else
     _text_toggle_hyprsunset_daemon+=" (is Off)"
 fi
 
+_text_toggle_grayscale="Toggle Grayscale"
+if [ "$(hyprshade current)" = "grayscale" ]; then
+    _text_toggle_grayscale+=" (is On)"
+else
+    _text_toggle_grayscale+=" (is Off)"
+fi
+
 _text_ssh="Open SSH"
 _text_update="Update system"
 
@@ -36,6 +43,7 @@ options=(
     "$_text_toggle_wallpaper_slideshow"
     "$_text_toggle_darkmode_daemon"
     "$_text_toggle_hyprsunset_daemon"
+    "$_text_toggle_grayscale"
     "$_text_dim_displays"
     "$_text_ssh"
     "$_text_update"
@@ -73,31 +81,30 @@ fi
 SELECTED=$(printf "%s\n" "${options[@]}" | rofi -dmenu -theme-str "$r_override" -markup-rows -i -p "" -me-select-entry '' -me-accept-entry 'MousePrimary')
 
 killall rofi
-if [[ "$SELECTED" == "$_text_pick_wallpaper_from_slideshow" ]]; then
-    ./wallpaper_picker_slideshow.sh
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_toggle_wallpaper_slideshow" ]]; then
-    ./toggle-wallpaper-slideshow.sh
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_toggle_darkmode_daemon" ]]; then
-    ./toggle-darkmode-daemon.sh
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_toggle_hyprsunset_daemon" ]]; then
-    ./toggle-hyprsunset-daemon.sh
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_dim_displays" ]]; then
-    ./sunshine.sh
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_ssh" ]]; then
-    ./rofi-launcher-submenu_ssh.sh
-    exit 0
-fi
-if [[ "$SELECTED" == "$_text_update" ]]; then
-    ./update-system.sh
-    exit 0
-fi
+case "$SELECTED" in
+    "$_text_pick_wallpaper_from_slideshow")
+        ./wallpaper_picker_slideshow.sh
+        ;;
+    "$_text_toggle_wallpaper_slideshow")
+        ./toggle-wallpaper-slideshow.sh
+        ;;
+    "$_text_toggle_darkmode_daemon")
+        ./toggle-darkmode-daemon.sh
+        ;;
+    "$_text_toggle_hyprsunset_daemon")
+        ./toggle-hyprsunset-daemon.sh
+        ;;
+    "$_text_toggle_grayscale")
+        hyprshade toggle grayscale
+        ;;
+    "$_text_dim_displays")
+        ./sunshine.sh
+        ;;
+    "$_text_ssh")
+        ./rofi-launcher-submenu_ssh.sh
+        ;;
+    "$_text_update")
+        ./update-system.sh
+        ;;
+esac
+exit 0

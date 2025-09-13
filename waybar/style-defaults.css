@@ -14,7 +14,7 @@
 
 #tray {
     margin: 0;
-    margin-right: 10;
+    margin-right: 10px;
     padding: 0;
 }
 
@@ -23,6 +23,10 @@
 }
 
 
+#backlight {
+    margin-right: 4px;
+}
+#battery,
 #power-profiles-daemon {
     margin-right: 8px;
 }
@@ -35,10 +39,6 @@
     border-left-width: 0.5;
 }
 
-
-/* #custom-power {
-    margin-right: 16px;
-} */
 #custom-power {
     padding-left: 10px;
     padding-right: 14px;
