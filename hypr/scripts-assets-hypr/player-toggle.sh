@@ -1,4 +1,6 @@
 #!/bin/bash
+cd "$(dirname "$0")" || exit 1
+
 # playerctl seems to always favor the browser instead of the last played source
 # this is supposed to fix it
 # WIP doesnt seem to work

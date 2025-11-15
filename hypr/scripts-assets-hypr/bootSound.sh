@@ -1,3 +1,2 @@
 #!/bin/bash
-cd "$(dirname "$0")" || exit 1
-play ./bootSound.wav
+play $(dirname "$0")/bootSound.wav

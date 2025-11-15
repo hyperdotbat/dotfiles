@@ -8,6 +8,7 @@ _text_cenovo="Cenovo"
 _text_komorebi="Komorebi"
 _text_hoshizora="Hoshizora"
 _text_lenbian="Lenbian"
+_text_pakku="Pakku"
 
 options=(
     "$_text_homelab"
@@ -15,6 +16,7 @@ options=(
     "$_text_komorebi"
     "$_text_hoshizora"
     "$_text_lenbian"
+    "$_text_pakku"
 )
 
 r_override=""
@@ -51,19 +53,22 @@ SELECTED=$(printf "%s\n" "${options[@]}" | rofi -dmenu -theme-str "$r_override" 
 killall rofi
 case "$SELECTED" in
     "$_text_homelab")
-        kitty -e bash -i -c "ssh_homelab"
+        kitty -e bash -i -c "clear && ssh_homelab"
         ;;
     "$_text_cenovo")
-        kitty -e bash -i -c "ssh_cenovo"
+        kitty -e bash -i -c "clear && ssh_cenovo"
         ;;
     "$_text_komorebi")
-        kitty -e bash -i -c "ssh_komorebi"
+        kitty -e bash -i -c "clear && ssh_komorebi"
         ;;
     "$_text_hoshizora")
-        kitty -e bash -i -c "ssh_hoshizora"
+        kitty -e bash -i -c "clear && ssh_hoshizora"
         ;;
     "$_text_lenbian")
-        kitty -e bash -i -c "ssh_lenbian"
+        kitty -e bash -i -c "clear && ssh_lenbian"
+        ;;
+    "$_text_pakku")
+        kitty -e bash -i -c "clear && ssh_pakku"
         ;;
 esac
 exit 0

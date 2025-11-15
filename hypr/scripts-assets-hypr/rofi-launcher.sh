@@ -23,7 +23,7 @@ else
     _text_darkmode+="darkmode"
 fi
 
-_text_mpd=$(~/scripts/mpc-info-oneliner.sh)
+_text_mpd=$(./mpc-info-oneliner.sh)
 
 if [ "$USE_NERD_FONT_ICONS" = true ]; then
     _text_app_launcher=" $_text_app_launcher"

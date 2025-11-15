@@ -1,6 +1,6 @@
 #!/bin/bash
 cd "$(dirname "$0")" || exit 1
-
+# exit 1
 ## Script executed when connecting/disconnecting from sunshine to disable second screen and dim main
 
 monitors_import_file="../.import-monitors_cache.conf"
@@ -28,7 +28,9 @@ if [ "$CONNECTED" = false ]; then
 # $monitorMain=$monitorVirtual' > "$monitors_import_file"
 
 #     echo 'monitor = $monitorSecond, disable
-# monitor = $monitorMainPhysical, disable' > $monitors_import_file
+# monitor = $monitorMainPhysical, disable
+# monitor = DP-3, 960x544@60, 0x0, 1
+# $monitorMain=DP-3' > $monitors_import_file
 
     disown
     echo "Sunshine Connected"

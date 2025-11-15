@@ -1,4 +1,6 @@
 #!/bin/bash
+cd "$(dirname "$0")" || exit 1
+
 mode=${1:-"drun"}
 if pgrep -x rofi; then
     killall rofi

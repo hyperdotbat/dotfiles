@@ -49,6 +49,7 @@ alias ssh_komorebi="~/scripts/ssh_komorebi.sh"
 alias ssh_homelab="~/scripts/ssh_homelab.sh"
 alias ssh_cenovo="~/scripts/ssh_cenovo.sh"
 alias ssh_lenbian="~/scripts/ssh_lenbian.sh"
+alias ssh_pakku="~/scripts/ssh_pakku.sh"
 
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
@@ -57,6 +58,7 @@ alias ytx='yt-x'
 
 alias fetch='fastfetch' #'neofetch'
 alias ff='fastfetch'
+alias ff-clean='fastfetch --config ""'
 
 alias dots='z ~/dotfiles'
 
@@ -243,6 +245,8 @@ flac-extract-cover-rockbox(){
 }
 
 #alias mv-from-children='find . -mindepth 2 -type f -exec mv -t . {} +'
+
+alias find-dotfiles-no-extension='find . -type f ! -name "*.*" -o -type f -name ".*" ! -name ".*.*"'
 
 alias restart-audio-engine='systemctl --user restart pipewire pipewire-pulse pipewire-virtual-sinks wireplumber'
 alias restart-display-manager="sudo systemctl restart display-manager"
