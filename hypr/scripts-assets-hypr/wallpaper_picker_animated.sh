@@ -1,20 +1,20 @@
 #!/bin/bash
+# temporarily cloned and modified the regular wallpaper picker, no saving/restore functionality etc
 cd "$(dirname "$0")" || exit 1
 
 SEARCH_RECURSIVELY=true
 IGNORE_HIDDEN=true
 SHOW_RANDOM_SELECTION=false
-FILTEROUT_ANIMATED_FOR_OTHER_THAN_SWWW=false # not really needed as for eg. hyprpaper should just set the first frame of .gif or .webp as static
 
-TITLE_TEXT="Pick a wallpaper "
+TITLE_TEXT="Pick an animated wallpaper "
 USE_THEME_OVERRIDE=true
 USE_ICONS_EVEN_IN_SIMPLE_MODE=true
 
-WALLPAPER_SET_SCRIPT="./wallpaper_set_save.sh"
+WALLPAPER_SET_SCRIPT="./wallpaper-mpvpaper.sh"
 
-WALLPAPERS_DIR_OG="~/Pictures/Wallpapers"
+WALLPAPERS_DIR_OG="~/Videos/WallpapersAnimated"
 # Picker is the only one that should always work from "all" directory
-wallpapers_dir_file=".wallpapers_dir"
+wallpapers_dir_file=".wallpapers_dir_animated"
 if [ -f "$wallpapers_dir_file" ] && grep -q '[^[:space:]]' "$wallpapers_dir_file"; then
     WALLPAPERS_DIR_OG=$(<$wallpapers_dir_file)
 else
@@ -43,40 +43,11 @@ else
         depth_param="-maxdepth 1"
     fi
 
-    # extractable shared piece of code with `start-wallpaper-slideshow.sh`
-    WALLPAPER_TOOL="hyprpaper"
-    wallpaper_tool_file=".wallpaper_set_tool"
-    if [ -f "$wallpaper_tool_file" ] && grep -q '[^[:space:]]' "$wallpaper_tool_file"; then
-        WALLPAPER_TOOL=$(<$wallpaper_tool_file)
-    else
-        echo "$WALLPAPER_TOOL" > "$wallpaper_tool_file"
-    fi
-    if [ "$WALLPAPER_TOOL" == "swww" ] || [ "$FILTEROUT_ANIMATED_FOR_OTHER_THAN_SWWW" = false ]; then
-        mapfile -t WALLPAPERS < <(
-            find -L "$WALLPAPERS_DIR" $depth_param -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) |
-            sed "s|$WALLPAPERS_DIR/||" |
-            sort
-        )
-    else
-        filter_animated_webps() {
-            while read -r wp; do
-                ext="${wp##*.}"
-                if [[ "$ext" =~ ^[Ww][Ee][Bb][Pp]$ ]]; then
-                    if webpmux -info "$WALLPAPERS_DIR/$wp" 2>/dev/null | grep -q "animation"; then
-                        continue
-                    fi
-                fi
-                echo "$wp"
-            done
-        }
-
-        mapfile -t WALLPAPERS < <(
-            find -L "$WALLPAPERS_DIR" $depth_param -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) |
-            sed "s|$WALLPAPERS_DIR/||" |
-            sort |
-            filter_animated_webps
-        )
-    fi
+    mapfile -t WALLPAPERS < <(
+        find -L "$WALLPAPERS_DIR" $depth_param -type f \( -iname "*.mp4" -o -iname "*.webm" -o -iname "*.webp" -o -iname "*.gif" \) |
+        sed "s|$WALLPAPERS_DIR/||" |
+        sort
+    )
 
     if [ "$IGNORE_HIDDEN" = true ]; then
         mapfile -t WALLPAPERS < <(
@@ -85,7 +56,7 @@ else
     fi
 
     if [[ ${#WALLPAPERS[@]} -eq 0 ]]; then
-        echo "No valid wallpapers found in $WALLPAPERS_DIR"
+        echo "No valid animated wallpapers found in $WALLPAPERS_DIR"
         exit 1
     fi
 
@@ -117,12 +88,27 @@ else
     r_override+="element-icon { size: ${ICON_SIZE}% ; }"
 
     entries=""
+    CACHE_DIR="$HOME/.cache/wallpaper_thumbs"
+    mkdir -p "$CACHE_DIR"
     for i in "${!WALLPAPERS[@]}"; do
         file="${WALLPAPERS[$i]}"
-        file_path=$WALLPAPERS_DIR/$file
-        entries+="$file\x00icon\x1f$file_path"
+        file_path="$WALLPAPERS_DIR/$file"
+        filename=$(basename "$file_path")
+        ext="${filename##*.}"
+        base="${filename%.*}"
+        icon_path="$file_path"
+
+        if [[ "$ext" == "mp4" ]]; then
+            thumb="$CACHE_DIR/${file//\//_}.png"
+            if [[ ! -f "$thumb" ]]; then
+                ffmpeg -y -i "$file_path" -ss 00:00:01 -vframes 1 -vf "scale=-1:360" "$thumb" &>/dev/null
+            fi
+            icon_path="$thumb"
+        fi
+
+        entries+="$file\x00icon\x1f$icon_path"
         if [[ $i -lt $((${#WALLPAPERS[@]} - 1)) ]]; then
-            entries+=$'\n'
+            entries+="\n"
         fi
     done
 
@@ -137,18 +123,28 @@ else
         exit 0
     fi
     
+    STOP_TEXT=""
+    if pgrep -f "mpvpaper" >/dev/null; then
+        STOP_TEXT="Stop\n"
+    fi
+    
     theme_override_flag=()
     if [ "$USE_THEME_OVERRIDE" = true ]; then
         theme_override_flag=(-theme-str "$r_override")
     fi
     if [ "$USE_THEME_OVERRIDE" = false ] && [ "$USE_ICONS_EVEN_IN_SIMPLE_MODE" = false ]; then
-        SELECTED=$((printf 'Random\n'; printf '%s\n' "${WALLPAPERS[@]}") | rofi -dmenu -p "$TITLE_TEXT")
+        SELECTED=$((printf 'Random\n'; printf $STOP_TEXT; printf '%s\n' "${WALLPAPERS[@]}") | rofi -dmenu -p "$TITLE_TEXT")
     else
-        SELECTED=$(echo -e "$RANDOM_SELECTION_TEXT\n$entries" | rofi -dmenu "${theme_override_flag[@]}" -markup-rows -i -p "$TITLE_TEXT" -me-select-entry '' -me-accept-entry 'MousePrimary')
+        SELECTED=$(echo -e "$RANDOM_SELECTION_TEXT\n$STOP_TEXT$entries" | rofi -dmenu "${theme_override_flag[@]}" -markup-rows -i -p "$TITLE_TEXT" -me-select-entry '' -me-accept-entry 'MousePrimary')
     fi
 
     if [[ "$SELECTED" == "Random" ]]; then
         SELECTED=$RANDOM_SELECTED
+    fi
+
+    if [[ "$SELECTED" == "Stop" ]]; then
+        killall mpvpaper
+        exit 1
     fi
 
     if [[ -n "$SELECTED" ]]; then

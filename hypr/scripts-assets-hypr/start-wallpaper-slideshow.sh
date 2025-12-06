@@ -82,7 +82,7 @@ if [ "$SLIDESHOW_ENABLED" = true ]; then
             else
                 if [[ "$IGNORE_FIRST_RUN" = false || "$FIRST_RUN_PASSED" = true ]] || [ "$FORCE_REFRESH_ON_START" = true ]; then
                     # extractable shared piece of code with `wallpaper_picker.sh`
-                    WALLPAPER_TOOL="hyprpaper"
+                    WALLPAPER_TOOL="swww"
                     wallpaper_tool_file=".wallpaper_set_tool"
                     if [ -f "$wallpaper_tool_file" ] && grep -q '[^[:space:]]' "$wallpaper_tool_file"; then
                         WALLPAPER_TOOL=$(<$wallpaper_tool_file)

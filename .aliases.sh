@@ -244,6 +244,10 @@ flac-extract-cover-rockbox(){
 	ffmpeg -i "$1" -an -vcodec copy cover.jpg && mogrify -resize 500x500\! -interlace none cover.jpg
 }
 
+magick-3000(){
+	magick "$1" -resize 3000x3000 "${1%.*}_3000x.${1##*.}"
+}
+
 #alias mv-from-children='find . -mindepth 2 -type f -exec mv -t . {} +'
 
 alias find-dotfiles-no-extension='find . -type f ! -name "*.*" -o -type f -name ".*" ! -name ".*.*"'

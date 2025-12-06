@@ -9,6 +9,7 @@
     "modules-left": [
         "hyprland/workspaces",
         "hyprland/submap"
+        // "niri/workspaces"
         // "hyprland/window",
         // "custom/media",
         // "mpd"

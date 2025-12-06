@@ -13,6 +13,8 @@ else
     _text_toggle_wallpaper_slideshow+=" (is Off)"
 fi
 
+_text_pick_wallpaper_animated="Pick Wallpaper Animated"
+
 _text_toggle_darkmode_daemon="Toggle Darkmode Daemon"
 if [ "$(./toggle-darkmode-daemon.sh '--dry-run')" -eq 0 ]; then
     _text_toggle_darkmode_daemon+=" (is On)"
@@ -41,6 +43,7 @@ _text_update="Update system"
 options=(
     "$_text_pick_wallpaper_from_slideshow"
     "$_text_toggle_wallpaper_slideshow"
+    "$_text_pick_wallpaper_animated"
     "$_text_toggle_darkmode_daemon"
     "$_text_toggle_hyprsunset_daemon"
     "$_text_toggle_grayscale"
@@ -87,6 +90,9 @@ case "$SELECTED" in
         ;;
     "$_text_toggle_wallpaper_slideshow")
         ./toggle-wallpaper-slideshow.sh
+        ;;
+    "$_text_pick_wallpaper_animated")
+        ./wallpaper_picker_animated.sh
         ;;
     "$_text_toggle_darkmode_daemon")
         ./toggle-darkmode-daemon.sh
