@@ -12,7 +12,7 @@ _text_hyprsunset="Hyprsunset"
 _text_darkmode="Toggle darkmode"
 _text_dotfiles="Configure dotfiles"
 _text_logout_menu="Logout Menu"
-_text_more="More options..."
+_text_more="------------" #"More options..."
 
 # Show darkmode/lightmode based on whats currently enabled
 _text_darkmode="Toggle "
@@ -37,6 +37,50 @@ if [ "$USE_NERD_FONT_ICONS" = true ]; then
     _text_logout_menu=" $_text_logout_menu"
 fi
 
+## more options
+_text_pick_wallpaper_from_slideshow="Pick Wallpaper from Slideshow"
+
+_text_toggle_wallpaper_slideshow="Toggle Wallpaper Slideshow"
+if [ "$(./toggle-wallpaper-slideshow.sh '--dry-run')" -eq 0 ]; then
+    _text_toggle_wallpaper_slideshow+=" (is On)"
+else
+    _text_toggle_wallpaper_slideshow+=" (is Off)"
+fi
+
+_text_pick_wallpaper_animated="Pick Wallpaper Animated"
+
+_text_toggle_darkmode_daemon="Toggle Darkmode Daemon"
+if [ "$(./toggle-darkmode-daemon.sh '--dry-run')" -eq 0 ]; then
+    _text_toggle_darkmode_daemon+=" (is On)"
+else
+    _text_toggle_darkmode_daemon+=" (is Off)"
+fi
+
+_text_toggle_hyprsunset_daemon="Toggle Hyprsunset Daemon"
+if [ "$(./toggle-hyprsunset-daemon.sh '--dry-run')" -eq 0 ]; then
+    _text_toggle_hyprsunset_daemon+=" (is On)"
+else
+    _text_toggle_hyprsunset_daemon+=" (is Off)"
+fi
+
+_text_toggle_grayscale="Toggle Grayscale"
+if [ "$(hyprshade current)" = "grayscale" ]; then
+    _text_toggle_grayscale+=" (is On)"
+else
+    _text_toggle_grayscale+=" (is Off)"
+fi
+
+_text_dim_displays="Dim All Displays"
+_text_display_100="Set brightness to 100%"
+# _text_display_m20="Set brightness -20%"
+# _text_display_p20="Set brightness +20%"
+_text_display_50="Set brightness to 50%"
+_text_display_0="Set brightness to 0%"
+_text_hyprsnow="Toggle Hyprsnow"
+
+_text_ssh="Open SSH"
+_text_update="Update system"
+
 options=(
     "$_text_app_launcher"
     "$_text_wallpaper_picker"
@@ -48,7 +92,22 @@ options=(
     "$_text_dotfiles"
     "$_text_mpd"
     "$_text_logout_menu"
+
+    ## more options
     "$_text_more"
+    "$_text_pick_wallpaper_from_slideshow"
+    "$_text_toggle_wallpaper_slideshow"
+    "$_text_pick_wallpaper_animated"
+    "$_text_toggle_darkmode_daemon"
+    "$_text_toggle_hyprsunset_daemon"
+    "$_text_toggle_grayscale"
+    # "$_text_dim_displays"
+    "$_text_display_100"
+    "$_text_display_50"
+    "$_text_display_0"
+    "$_text_hyprsnow"
+    "$_text_ssh"
+    "$_text_update"
 )
 
 r_override=""
@@ -116,11 +175,52 @@ case "$SELECTED" in
     "$_text_mpd")
         mpc toggle
         ;;
+
+    # "$_text_more")
+    #     ./rofi-launcher-submenu_settings.sh &
+    ## more options
+
     "$_text_logout_menu")
         wlogout &
         ;;
-    "$_text_more")
-        ./rofi-launcher-submenu_settings.sh &
+    "$_text_pick_wallpaper_from_slideshow")
+        ./wallpaper_picker_slideshow.sh
+        ;;
+    "$_text_toggle_wallpaper_slideshow")
+        ./toggle-wallpaper-slideshow.sh
+        ;;
+    "$_text_pick_wallpaper_animated")
+        ./wallpaper_picker_animated.sh
+        ;;
+    "$_text_toggle_darkmode_daemon")
+        ./toggle-darkmode-daemon.sh
+        ;;
+    "$_text_toggle_hyprsunset_daemon")
+        ./toggle-hyprsunset-daemon.sh
+        ;;
+    "$_text_toggle_grayscale")
+        hyprshade toggle grayscale
+        ;;
+    "$_text_dim_displays")
+        ./sunshine.sh
+        ;;
+    "$_text_display_100")
+        ddcutil setvcp 10 100
+        ;;
+    "$_text_display_50")
+        ddcutil setvcp 10 50
+        ;;
+    "$_text_display_0")
+        ddcutil setvcp 10 0
+        ;;
+    "$_text_hyprsnow")
+        ./toggle_hyprsnow.sh
+        ;;
+    "$_text_ssh")
+        ./rofi-launcher-submenu_ssh.sh
+        ;;
+    "$_text_update")
+        ./update-system.sh
         ;;
 esac
 

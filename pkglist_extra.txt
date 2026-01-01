@@ -16,3 +16,8 @@ cava
 yazi
 eza
 dysk
+
+feishin
+
+mpvpaper
+hyprsnow

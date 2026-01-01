@@ -59,8 +59,13 @@ if [ "$SAVE_SCREENSHOTS" = true ]; then
         mkdir -p "$SCREENSHOTS_DIR/$MONTH_DIR"
         FINAL_PATH="$SCREENSHOTS_DIR/$MONTH_DIR/$SCREENSHOT_NAME"
     fi
+    TEMP_PATH=$HOME/.cache/$SCREENSHOT_NAME
 
-    grimblast "$freeze_param" copysave "$TYPE" "$FINAL_PATH" && play_sound
+    grimblast "$freeze_param" copysave "$TYPE" "$TEMP_PATH"
+    #this could potentially fix any freezing issue?
+    mv "$TEMP_PATH" "$FINAL_PATH"
+    play_sound
 else
-    grimblast "$freeze_param" copy "$TYPE" && play_sound
+    grimblast "$freeze_param" copy "$TYPE"
+    play_sound
 fi

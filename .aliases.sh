@@ -44,6 +44,8 @@ mkcd() {
   mkdir -p "$1" && cd "$1"
 }
 
+alias cpw='cp -iv'
+
 alias ssh_hoshizora="~/scripts/ssh_hoshizora.sh"
 alias ssh_komorebi="~/scripts/ssh_komorebi.sh"
 alias ssh_homelab="~/scripts/ssh_homelab.sh"
@@ -96,6 +98,22 @@ ytmp4() {
 #	    "$url"
 #    xdg-open "$output_dir"
 #}
+ytogg() {
+    local url="$1"
+    local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"
+    mkdir -p "$output_dir"
+
+    yt-dlp -f "ba" -x \
+        --audio-format vorbis \
+        --audio-quality 4 \
+        --embed-metadata \
+        --embed-thumbnail \
+        --convert-thumbnails jpg \
+        -o "$output_dir/%(title)s.%(ext)s" \
+        "$url"
+
+    xdg-open "$output_dir" &
+}
 ytmp3() {
     local url="$1"
     local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"

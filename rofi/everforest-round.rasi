@@ -9,6 +9,7 @@ configuration {
     foreground: #D3C6AA;
     background-color: #272E33;
     active-background: #A7C080;
+    active-background: #7FBBB3; // winter color
     urgent-background: #E57E80;
     urgent-foreground: #272E33;
     selected-background: @active-background;

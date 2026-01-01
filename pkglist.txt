@@ -23,9 +23,11 @@ rofimoji
 rofi-calc
 wtype
 wl-clip-persist
+wf-recorder
 clipse
 dunst
 swaync
+mako
 wlogout
 better-control
 sox
