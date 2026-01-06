@@ -112,6 +112,44 @@ ytogg() {
         -o "$output_dir/%(title)s.%(ext)s" \
         "$url"
 
+    local file
+    file=$(ls -t "$output_dir"/*.ogg 2>/dev/null | head -n1)
+
+    if [[ -f "$file" ]]; then
+        old_date=$(vorbiscomment -l "$file" | grep '^DATE=' | cut -d= -f2-)
+        if [[ -n "$old_date" ]]; then
+            year=${old_date:0:4}
+            vorbiscomment -w -t "DATE=$year" "$file"
+        fi
+    fi
+
+    xdg-open "$output_dir" &
+}
+ytopus() {
+    local url="$1"
+    local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"
+    mkdir -p "$output_dir"
+
+    yt-dlp -f "ba" -x \
+        --audio-format opus \
+        --audio-quality 0 \
+        --embed-metadata \
+        --embed-thumbnail \
+        --convert-thumbnails jpg \
+        -o "$output_dir/%(title)s.%(ext)s" \
+        "$url"
+
+    local file
+    file=$(ls -t "$output_dir"/*.opus 2>/dev/null | head -n1)
+
+    if [[ -f "$file" ]]; then
+        old_date=$(vorbiscomment -l "$file" | grep '^DATE=' | cut -d= -f2-)
+        if [[ -n "$old_date" ]]; then
+            year=${old_date:0:4}
+            vorbiscomment -w -t "DATE=$year" "$file"
+        fi
+    fi
+
     xdg-open "$output_dir" &
 }
 ytmp3() {
@@ -283,3 +321,6 @@ alias clock='tty-clock -c'
 alias lavat-lava='lavat -c yellow -R1 -k red'
 alias lavat-candy='lavat -c green -R1 -k magenta'
 alias lavat-blob='lavat -c green -R1 -k cyan -C -r 3 -b 8'
+
+alias archwiki='xdg-open https://wiki.archlinux.org/'
+alias archwiki-offline='xdg-open /usr/share/doc/arch-wiki/html/en/Main_page.html'

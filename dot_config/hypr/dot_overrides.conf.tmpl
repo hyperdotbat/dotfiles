@@ -125,15 +125,17 @@ general {
     col.active_border = $green
     # col.active_border = $purple
 
-    # Gruvbox
-    # col.inactive_border = rgb(282828)
-    # col.active_border = rgb(CC241D)
-
     # Everforest
     col.inactive_border = rgb(272E33)
     # col.active_border = rgb(A7C080)
     col.active_border = rgb(83C092)
     col.active_border = rgb(7FBBB3)
+
+    # Gruvbox
+    {{- if eq .chezmoi.hostname "komorebi" }}
+    col.inactive_border = rgb(282828)
+    col.active_border = rgb(CC241D)
+    {{- end }}
 }
 decoration{
     rounding = 4

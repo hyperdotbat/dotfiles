@@ -1,0 +1,7 @@
+.gitignore
+README.md
+screenshots/
+.credits
+.directory
+pkglist.txt
+pkglist_extra.txt

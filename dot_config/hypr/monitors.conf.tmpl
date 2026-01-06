@@ -1,0 +1,22 @@
+# See https://wiki.hyprland.org/Configuring/Monitors/
+
+{{- if eq .chezmoi.hostname "hoshizora" }}
+monitor = DP-2, 1920x1080@165, 0x0, 1
+monitor = DP-1, 1920x1200@60, 1920x-280, 1, transform, 1
+{{- end }}
+
+{{- if eq .chezmoi.hostname "komorebi" }}
+monitor = eDP-1, 1920x1080@60, 0x0, 1.2
+{{- end }}
+
+{{- if eq .chezmoi.hostname "pakku" }}
+monitor = DSI-1, 1920x1200@60, 0x0, 2, transform, 3
+{{- end }}
+
+
+misc{
+    # vrr = 3
+    # direct_scanout = 2
+    mouse_move_enables_dpms = false
+    key_press_enables_dpms = true
+}

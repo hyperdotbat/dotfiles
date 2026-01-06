@@ -7,6 +7,6 @@
 # wayland_titlebar_color #21222c
 
 # BEGIN_KITTY_THEME
-# Adwaita dark
+# 1984 Dark
 include current-theme.conf
 # END_KITTY_THEME

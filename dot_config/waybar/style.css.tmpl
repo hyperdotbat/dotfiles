@@ -7,7 +7,15 @@
 /* @import url("style-dracula-islands.css"); */
 /* @import url("style-everforest-islands.css"); */
 @import url("style-everforest-islands_winter.css");
-/* @import url("style-gruvbox-islands.css"); */
+
+{{- if eq .chezmoi.hostname "komorebi" }}
+@import url("style-gruvbox-islands.css");
+{{- end }}
+
+{{- if eq .chezmoi.hostname "pakku" }}
+@import url("style-testing-tui.css");
+{{- end }}
+
 /* @import url("style-cyberpunk.css"); */
 @import url("dynamic-imports.css");
 @import url(".overrides.css");/*# sourceMappingURL=style.css.map */
