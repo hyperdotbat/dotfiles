@@ -1,0 +1,15 @@
+# include color_schemes/dracula.conf
+#include color_schemes/everforest_dark_medium.conf
+#include color_schemes/everblush.conf
+include color_schemes/Everforest Dark Hard.conf
+
+{{- if eq .chezmoi.hostname "komorebi" }}
+include color_schemes/Gruvbox Dark.conf
+{{- end }}
+
+{{- if eq .chezmoi.hostname "pakku" }}
+include color_schemes/1984 Dark.conf
+{{- end }}
+
+# Dracula titlebar
+# wayland_titlebar_color #21222c
