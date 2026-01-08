@@ -36,25 +36,6 @@ general {
 # 	}
 # }
 
-## TUI-like tight interface
-# general {
-#     gaps_in = 0
-#     gaps_out = 0
-    
-#     border_size = 2
-    
-#     col.inactive_border = rgba(262626ff)
-#     col.active_border = rgba(B589D6ff)
-# }
-# decoration{
-#   rounding = 0
-#   rounding_power = 0
-# 	shadow{
-#         enabled = false
-# 	}
-#     dim_inactive = true
-#     dim_strength = 0.1
-# }
 
 
 ## Vaporwave
@@ -145,6 +126,28 @@ decoration{
         special = false
     }
 }
+
+## TUI-like tight interface
+{{- if eq .chezmoi.hostname "pakku" }}
+general {
+     gaps_in = 0
+     gaps_out = 0
+    
+     border_size = 2
+   
+     col.inactive_border = rgba(262626ff)
+     col.active_border = rgba(B589D6ff)
+}
+  decoration{
+    rounding = 0
+    rounding_power = 0
+	shadow{
+        enabled = false
+    }
+    dim_inactive = true
+    dim_strength = 0.2
+}
+{{- end }}
 
 ## Cyberpunk / Corpserunner
 # general {

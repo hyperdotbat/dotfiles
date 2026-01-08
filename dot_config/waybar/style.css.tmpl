@@ -6,14 +6,15 @@
 /* @import url("style-dracula-flat.css"); */
 /* @import url("style-dracula-islands.css"); */
 /* @import url("style-everforest-islands.css"); */
-@import url("style-everforest-islands_winter.css");
 
 {{- if eq .chezmoi.hostname "komorebi" }}
 @import url("style-gruvbox-islands.css");
-{{- end }}
 
-{{- if eq .chezmoi.hostname "pakku" }}
+{{- else if eq .chezmoi.hostname "pakku" }}
 @import url("style-testing-tui.css");
+
+{{- else }}
+@import url("style-everforest-islands_winter.css");
 {{- end }}
 
 /* @import url("style-cyberpunk.css"); */

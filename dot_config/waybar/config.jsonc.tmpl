@@ -23,11 +23,15 @@
         // "group/mpd-vertical",
         // "idle_inhibitor",
         // "power-profiles-daemon",
+
+	{{- if eq .chezmoi.hostname "hoshizora" }}
         "cpu",
         // "memory",
         "temperature",
-        "backlight",
         "hyprland/language",
+	{{- end }}
+
+        "backlight",
         "battery",
         // "battery#bat1",
         //"clock",
@@ -49,8 +53,13 @@
         "on-scroll-down": "hyprctl dispatch workspace e-1",
         // "format": "{name} {icon}",
         // "format": "{name} {windows}",
+	
+	{{- if eq .chezmoi.hostname "pakku" }}
+        "format": "{name}",
+	{{- else }}
         "format": "{icon} {windows}",
-        // "format": "{id}",
+	{{- end }}
+
         "format-icons": {
             "1": "1",//"1  ",
             "2": "2",//"2  ",
