@@ -5,3 +5,4 @@ screenshots/
 .directory
 *.txt
 .config/hypr/scripts-assets-hypr/.wallpaper_cache
+.librewolf
