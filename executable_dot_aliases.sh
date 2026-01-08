@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# alias editaliases="$EDITOR ~/.aliases.sh && source ~/.aliases.sh"
+alias editaliases="chezmoi edit --apply ~/.aliases.sh && source ~/.aliases.sh"
+
 alias v='nvim' #'vim'
 alias vi='vim'
 alias nv='nvim'
@@ -98,60 +101,54 @@ ytmp4() {
 #	    "$url"
 #    xdg-open "$output_dir"
 #}
-ytogg() {
-    local url="$1"
-    local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"
-    mkdir -p "$output_dir"
-
-    yt-dlp -f "ba" -x \
-        --audio-format vorbis \
-        --audio-quality 4 \
-        --embed-metadata \
-        --embed-thumbnail \
-        --convert-thumbnails jpg \
-        -o "$output_dir/%(title)s.%(ext)s" \
-        "$url"
-
-    local file
-    file=$(ls -t "$output_dir"/*.ogg 2>/dev/null | head -n1)
-
-    if [[ -f "$file" ]]; then
-        old_date=$(vorbiscomment -l "$file" | grep '^DATE=' | cut -d= -f2-)
-        if [[ -n "$old_date" ]]; then
-            year=${old_date:0:4}
-            vorbiscomment -w -t "DATE=$year" "$file"
-        fi
-    fi
-
-    xdg-open "$output_dir" &
-}
 ytopus() {
     local url="$1"
-    local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"
-    mkdir -p "$output_dir"
-
-    yt-dlp -f "ba" -x \
+    
+    local file
+    file=$(yt-dlp -f "ba" -x \
         --audio-format opus \
         --audio-quality 0 \
         --embed-metadata \
         --embed-thumbnail \
         --convert-thumbnails jpg \
-        -o "$output_dir/%(title)s.%(ext)s" \
+        --print after_move:filepath \
+        -o "/tmp/ytdlp/%(title)s.%(ext)s" \
         "$url"
+    )
 
-    local file
-    file=$(ls -t "$output_dir"/*.opus 2>/dev/null | head -n1)
+    echo "Downloaded file: $file"
 
     if [[ -f "$file" ]]; then
-        old_date=$(vorbiscomment -l "$file" | grep '^DATE=' | cut -d= -f2-)
+        old_date=$(kid3-cli -c "get date" "$file")
+
         if [[ -n "$old_date" ]]; then
             year=${old_date:0:4}
-            vorbiscomment -w -t "DATE=$year" "$file"
+            kid3-cli -c "set date $year" "$file"
         fi
-    fi
 
-    xdg-open "$output_dir" &
+        local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"
+        mkdir -p "$output_dir"
+        mv "$file" "$output_dir/"
+
+        xdg-open "$output_dir" &
+    fi
 }
+#ytogg() {
+#    local url="$1"
+#    local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"
+#    mkdir -p "$output_dir"
+#
+#    yt-dlp -f "ba" -x \
+#        --audio-format vorbis \
+#        --audio-quality 4 \
+#        --embed-metadata \
+#        --embed-thumbnail \
+#        --convert-thumbnails jpg \
+#        -o "$output_dir/%(title)s.%(ext)s" \
+#        "$url"
+#
+#    xdg-open "$output_dir" &
+#}
 ytmp3() {
     local url="$1"
     local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"

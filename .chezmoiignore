@@ -3,5 +3,5 @@ README.md
 screenshots/
 .credits
 .directory
-pkglist.txt
-pkglist_extra.txt
+*.txt
+.config/hypr/scripts-assets-hypr/.wallpaper_cache
