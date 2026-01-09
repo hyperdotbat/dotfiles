@@ -182,9 +182,19 @@ configuration {
     display-window: "󱂬 window:";
     display-combi:  "󰕘 combi:";
     display-filebrowser: "󰉋 filebrowser:";
-
+    
+    {{- if eq .chezmoi.hostname "pakku" }}
+    dpi: 160;
+    {{- else }}
     dpi: 120;
+    {{- end }}
 }
+
+{{- if eq .chezmoi.hostname "pakku" }}
+window {
+    height: 40px;
+}
+{{- end }}
 
 @import "style.rasi"
 @import ".import-darkmode_cache.rasi"

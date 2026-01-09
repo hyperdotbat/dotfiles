@@ -1,5 +1,10 @@
 #window {
+    {{- if eq .chezmoi.hostname "pakku" }}
+    width: 55%;
+    height: 100%;
+    {{- else }}
     width: 35%;
+    {{- end }}
 }
 element-icon{
     size: 40px;
