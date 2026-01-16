@@ -130,6 +130,9 @@ ytopus() {
         mkdir -p "$output_dir"
         mv "$file" "$output_dir/"
 
+        local filename=$(basename "$file")
+        echo "$output_dir/$filename"
+
         xdg-open "$output_dir" &
     fi
 }
@@ -151,25 +154,28 @@ ytopus() {
 #}
 ytmp3() {
     local url="$1"
-    local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"
-    mkdir -p "$output_dir"
 
-    #yt-dlp -x --audio-format mp3 \
-    yt-dlp -f "ba" -x --audio-format mp3 --audio-quality 0 \
+    yt-dlp -f "ba" -x --audio-format mp3 \
+        --audio-quality 0 \
 	    --embed-metadata \
 	    --embed-thumbnail \
 	    --convert-thumbnails jpg \
-	    -o "$output_dir/%(title)s.%(ext)s" \
+        --print after_move:filepath \
+        -o "/tmp/ytdlp/%(title)s.%(ext)s" \
 	    "$url"
     
-    # Fix metadata for all MP3s in the output directory
-#    for file in "$output_dir"/*.mp3; do
-#        if [[ -f "$file" ]]; then
-#            ffmpeg -i "$file" -q:a 0 -map_metadata 0 -id3v2_version 3 "${file%.mp3}.tmp.mp3" && mv "${file%.mp3}.tmp.mp3" "$file"
-#        fi
-#    done
+    echo "Downloaded file: $file"
 
-    xdg-open "$output_dir" &
+    if [[ -f "$file" ]]; then
+        local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"
+        mkdir -p "$output_dir"
+        mv "$file" "$output_dir/"
+
+        local filename=$(basename "$file")
+        echo "$output_dir/$filename"
+
+        xdg-open "$output_dir" &
+    fi
 }
 ytmp3clean() {
     local url="$1"
@@ -321,3 +327,5 @@ alias lavat-blob='lavat -c green -R1 -k cyan -C -r 3 -b 8'
 
 alias archwiki='xdg-open https://wiki.archlinux.org/'
 alias archwiki-offline='xdg-open /usr/share/doc/arch-wiki/html/en/Main_page.html'
+
+alias tray-find="busctl --user --list | grep StatusNotifier"

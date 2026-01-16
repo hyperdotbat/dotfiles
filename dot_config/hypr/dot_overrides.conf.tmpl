@@ -112,8 +112,8 @@ general {
     col.active_border = rgb(83C092)
     col.active_border = rgb(7FBBB3)
 
-    # Gruvbox
     {{- if eq .chezmoi.hostname "komorebi" }}
+    # Gruvbox
     col.inactive_border = rgb(282828)
     col.active_border = rgb(CC241D)
     {{- end }}
@@ -130,13 +130,13 @@ decoration{
 ## TUI-like tight interface
 {{- if eq .chezmoi.hostname "pakku" }}
 general {
-     gaps_in = 0
-     gaps_out = 0
-    
-     border_size = 2
-   
-     col.inactive_border = rgba(262626ff)
-     col.active_border = rgba(B589D6ff)
+    gaps_in = 0
+    gaps_out = 0
+
+    border_size = 2
+
+    col.inactive_border = rgba(262626ff)
+    col.active_border = rgba(B589D6ff)
 }
   decoration{
     rounding = 0
