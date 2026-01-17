@@ -3,26 +3,32 @@
 
 [ -f "$XDG_CONFIG_HOME/shell/aliases.sh" ] && source "$XDG_CONFIG_HOME/shell/aliases.sh"
 [ -f "$XDG_CONFIG_HOME/shell/aliases-arch.sh" ] && source "$XDG_CONFIG_HOME/shell/aliases-arch.sh"
-[ -f "$XDG_CONFIG_HOME/shell/aliases_$(hostname).sh" ] && source "$XDG_CONFIG_HOME/shell/aliases_$(hostname).sh"
+[ -f "$XDG_CONFIG_HOME/shell/aliases_$(uname -n).sh" ] && source "$XDG_CONFIG_HOME/shell/aliases_$(uname -n).sh"
 
-autoload -U colors && colors
 zmodload zsh/complist
-#autoload -U compinit && compinit
+autoload -U compinit && compinit
+autoload -U colors && colors
 
 # prompt | vsc (git) integration
 autoload -Uz vcs_info
 # only show branch name
 zstyle ':vcs_info:git:*' formats '%b'
-zstyle ':vcs_info:git:*' actionformats '%b|%a'
+zstyle ':vcs_info:git:*' actionformats '%b' #|%a'
 precmd() { vcs_info }
 setopt prompt_subst
 
 #PROMPT=$'\n''%F{blue}%n@%m %F{green}%~ %F{red}$vcs_info_msg_0_ %F{cyan}➜%f '
-PROMPT=$'\n''%F{240}[%F{2}%n%F{6}@%F{4}%m%F{240}] %F{3}%~ %F{13}$vcs_info_msg_0_
-%F{1}λ%f '
-%F{1}λ%f '
+PROMPT=$'\n'$'%F{240}[%F{2}%n%F{6}@%F{4}%m%F{240}] %F{3}%~ %F{13}$vcs_info_msg_0_\n%F{1}λ%f '
 
-zstyle ':completion:*' menu select
+# cmp opts
+zstyle ':completion:*' menu select # tab opens cmp menu
+zstyle ':completion:*' special-dirs true # force . and .. to show in cmp menu
+if [ -f /usr/share/dircolors/dircolors.256color ]; then
+    eval "$(dircolors -b /usr/share/dircolors/dircolors.256color)"
+fi
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} ma=0\;33 # colorize cmp menu
+#zstyle ':completion:*' file-list true # more detailed list
+zstyle ':completion:*' squeeze-slashes false # explicit disable to allow /*/ expansion
 
 setopt append_history inc_append_history share_history # better history
 # on exit, history appends rather than overwrites; history is appended as soon as cmds executed; history shared across sessions
@@ -33,7 +39,7 @@ setopt no_case_glob no_case_match # make cmp case insensitive
 setopt globdots # include dotfiles
 setopt extended_glob # match ~ # ^
 setopt interactive_comments # allow comments in shell
-unsetopt prompt_sp # dont autoclean blanklines?
+unsetopt prompt_sp # dont autoclean blanklines
 stty stop undef # disable accidental ctrl s ?
 
 
@@ -57,6 +63,19 @@ bindkey '^f' openranger
 if [[ -n "$SSH_CONNECTION" && -z $TMUX ]]; then
     bind '"\C-d": "exit\015"'  # Bind Ctrl+D to 'exit' in tmux
 fi
+
+bindkey -e
+bindkey '^[[H' beginning-of-line  # Home
+bindkey '^[[F' end-of-line        # End
+bindkey '^[[1~' beginning-of-line # alternative Home
+bindkey '^[[4~' end-of-line       # alternative End
+bindkey '^[[3~' delete-char
+bindkey '^k' kill-line
+
+# requires zsh-autosuggestions package
+[ -f "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# requires zsh-syntax-highlighting package
+[ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # fastfetch on start :)
 [ -f "$XDG_CONFIG_HOME/shell/fetch.sh" ] && source "$XDG_CONFIG_HOME/shell/fetch.sh" 

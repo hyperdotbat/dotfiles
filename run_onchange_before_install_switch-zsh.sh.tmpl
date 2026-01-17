@@ -1,0 +1,7 @@
+#!/bin/bash
+
+{{- if eq (index .chezmoi.osRelease "prettyName") "Arch Linux" }}
+sudo pacman -S zsh zsh-autosuggestions zsh-syntax-highlighting
+chsh -s /bin/zsh
+echo "Please log out and back in"
+{{- end }}
