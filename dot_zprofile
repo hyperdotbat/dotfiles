@@ -1,0 +1,26 @@
+#!/bin/sh
+# env vars to set on login, zsh settings in .zshrc
+# read first
+
+export EDITOR="nvim"
+export TERM="kitty"
+export TERMINAL=$TERM
+export MUSPLAYER="rmpc"
+export BROWSER="librewolf"
+export BROWSER2="firefox"
+
+# XDG base dir specification
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# bootstrap .zshrc to ~/.config/zsh/.zshrc, any other zsh config can also reside there
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# add scripts to path
+export PATH="$XDG_CONFIG_HOME/scripts:$PATH"
+export PATH="$HOME/.dotnet/tools:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+export DATE=$(date "+%A, %B %e  %__I:%M%P")

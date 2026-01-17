@@ -1,0 +1,64 @@
+# main zsh settings. env in ~/.zprofile
+# read second
+
+[ -f "$XDG_CONFIG_HOME/shell/aliases.sh" ] && source "$XDG_CONFIG_HOME/shell/aliases.sh"
+[ -f "$XDG_CONFIG_HOME/shell/aliases-arch.sh" ] && source "$XDG_CONFIG_HOME/shell/aliases-arch.sh"
+[ -f "$XDG_CONFIG_HOME/shell/aliases_$(hostname).sh" ] && source "$XDG_CONFIG_HOME/shell/aliases_$(hostname).sh"
+
+autoload -U colors && colors
+zmodload zsh/complist
+#autoload -U compinit && compinit
+
+# prompt | vsc (git) integration
+autoload -Uz vcs_info
+# only show branch name
+zstyle ':vcs_info:git:*' formats '%b'
+zstyle ':vcs_info:git:*' actionformats '%b|%a'
+precmd() { vcs_info }
+setopt prompt_subst
+
+#PROMPT=$'\n''%F{blue}%n@%m %F{green}%~ %F{red}$vcs_info_msg_0_ %F{cyan}➜%f '
+PROMPT=$'\n''%F{240}[%F{2}%n%F{6}@%F{4}%m%F{240}] %F{3}%~ %F{13}$vcs_info_msg_0_
+%F{1}λ%f '
+PROMPT=$'\n''%F{240}[%F{2}%n%F{6}@%F{4}%m%F{240}] %F{3}%~ %F{13}%k$vcs_info_msg_0_
+%F{1}λ%f '
+
+zstyle ':completion:*' menu select
+
+setopt append_history inc_append_history share_history # better history
+# on exit, history appends rather than overwrites; history is appended as soon as cmds executed; history shared across sessions
+setopt auto_menu menu_complete # autocmp first menu match
+setopt autocd # type a dir to cd
+setopt auto_param_slash # when a dir is completed, add a / instead of a trailing space
+setopt no_case_glob no_case_match # make cmp case insensitive
+setopt globdots # include dotfiles
+setopt extended_glob # match ~ # ^
+setopt interactive_comments # allow comments in shell
+unsetopt prompt_sp # dont autoclean blanklines?
+stty stop undef # disable accidental ctrl s ?
+
+
+HISTSIZE=1000000
+SAVEHIST=1000000
+HISTFILE="$XDG_CACHE_HOME/zsh_history"
+HISTCONTROL=ignoreboth
+
+# ctrl+r use fzf
+source <(fzf --zsh)
+
+
+openranger(){
+    ranger <$TTY
+    zle redisplay
+}
+zle -N openranger
+bindkey '^f' openranger
+
+# idk if this works
+if [[ -n "$SSH_CONNECTION" && -z $TMUX ]]; then
+    bind '"\C-d": "exit\015"'  # Bind Ctrl+D to 'exit' in tmux
+fi
+
+# fastfetch on start :)
+~/.fetchbashrc.sh
+~/.local/scripts/arch_update_reminder.sh
