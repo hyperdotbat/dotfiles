@@ -27,3 +27,4 @@ alias hyprconfig="cd ~/.config/hypr && code ." #ranger" #"v ~/.config/hypr/hyprl
 alias hyprcfg="hyprconfig"
 alias dotfilescfg="cd ~/dotfiles && code ."
 
+alias update-linux-lts="sudo pacman -Syu linux-lts && sudo mkinitcpio -P && sudo dkms autoinstall"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # alias editaliases="$EDITOR ~/.aliases.sh && source ~/.aliases.sh"
-alias editaliases="chezmoi edit --apply ~/.aliases.sh && source ~/.aliases.sh"
+alias editaliases="chezmoi edit --apply ~/.config/shell/aliases.sh && source ~/.config/shell/aliases.sh"
 
 alias v='nvim' #'vim'
 alias vi='vim'

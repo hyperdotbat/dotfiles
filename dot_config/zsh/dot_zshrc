@@ -22,7 +22,7 @@ PROMPT=$'\n'$'%F{240}[%F{2}%n%F{6}@%F{4}%m%F{240}] %F{3}%~ %F{13}$vcs_info_msg_0
 
 # cmp opts
 zstyle ':completion:*' menu select # tab opens cmp menu
-zstyle ':completion:*' special-dirs true # force . and .. to show in cmp menu
+#zstyle ':completion:*' special-dirs true # force . and .. to show in cmp menu
 if [ -f /usr/share/dircolors/dircolors.256color ]; then
     eval "$(dircolors -b /usr/share/dircolors/dircolors.256color)"
 fi
@@ -30,8 +30,9 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} ma=0\;33 # colorize cmp me
 #zstyle ':completion:*' file-list true # more detailed list
 zstyle ':completion:*' squeeze-slashes false # explicit disable to allow /*/ expansion
 
-setopt append_history inc_append_history share_history # better history
-# on exit, history appends rather than overwrites; history is appended as soon as cmds executed; history shared across sessions
+setopt append_history inc_append_history # better history
+# on exit, history appends rather than overwrites; history is appended as soon as cmds executed
+#setopt share_history # shared history across sessions
 setopt auto_menu menu_complete # autocmp first menu match
 setopt autocd # type a dir to cd
 setopt auto_param_slash # when a dir is completed, add a / instead of a trailing space
