@@ -81,3 +81,6 @@ bindkey '^k' kill-line
 # fastfetch on start :)
 [ -f "$XDG_CONFIG_HOME/shell/fetch.sh" ] && source "$XDG_CONFIG_HOME/shell/fetch.sh" 
 ~/.local/scripts/arch_update_reminder.sh
+
+export VITASDK=/usr/local/vitasdk
+export PATH=$VITASDK/bin:$PATH

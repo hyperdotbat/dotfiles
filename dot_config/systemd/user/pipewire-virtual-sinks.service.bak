@@ -1,0 +1,21 @@
+[Unit]
+Description=PipeWire Virtual Audio Sinks
+After=pipewire.socket pipewire.service pipewire-pulse.service
+#Requires=pipewire.socket
+
+[Service]
+Type=simple
+ExecStartPre=/bin/sleep 5
+#ExecStart=/bin/bash -c "/usr/bin/pw-cli create-node adapter { factory.name=support.null-audio-sink node.name=system_sink media.class=Audio/Sink object.linger=true }"
+ExecStart=/bin/bash -c '/usr/bin/pw-cli create-node adapter { factory.name=support.null-audio-sink audio.format="S32LE" node.name=system_sink media.class=Audio/Sink object.linger=true } && \
+/usr/bin/pw-cli create-node adapter { factory.name=support.null-audio-sink node.name=discord_sink audio.format="S32LE" media.class=Audio/Sink object.linger=true } && \
+/usr/bin/pw-cli create-node adapter { factory.name=support.null-audio-sink node.name=spotify_sink audio.format="S32LE" media.class=Audio/Sink object.linger=true } \
+'
+#RemainAfterExit=true
+Restart=on-failure
+#User=%u
+
+[Install]
+WantedBy=default.target
+#WantedBy=multi-user.target
+

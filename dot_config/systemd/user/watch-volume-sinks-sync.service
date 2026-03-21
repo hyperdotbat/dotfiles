@@ -1,0 +1,15 @@
+[Unit]
+Description=Sync virtual sink volumes with system sink
+After=pipewire.service
+Requires=pipewire.service
+
+[Service]
+ExecStart=%h/.local/scripts/watch-volume-sinks-sync.sh
+Restart=on-failure
+RestartSec=1
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
+

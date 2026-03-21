@@ -1,0 +1,12 @@
+[Unit]
+Description=Restart Dash to Dock after login delay
+After=graphical-session.target
+
+[Service]
+ExecStart=%h/.local/scripts/dash-to-dock-restart.sh
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
+

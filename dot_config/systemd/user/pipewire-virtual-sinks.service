@@ -1,0 +1,16 @@
+[Unit]
+Description=PipeWire Virtual Audio Sinks
+After=pipewire.socket pipewire.service pipewire-pulse.service
+
+[Service]
+Type=simple
+ExecStartPre=/bin/sleep 5
+ExecStart=/bin/bash -c '
+pw-cli create-node adapter "{ factory.name=support.null-audio-sink node.name=system_sink media.class=Audio/Sink audio.format=S32LE audio.channels=2 audio.position=[ FL FR ] object.linger=true }" && \
+pw-cli create-node adapter "{ factory.name=support.null-audio-sink node.name=chat_sink media.class=Audio/Sink audio.format=S32LE audio.channels=2 audio.position=[ FL FR ] object.linger=true }" && \
+pw-cli create-node adapter "{ factory.name=support.null-audio-sink node.name=music_sink media.class=Audio/Sink audio.format=S32LE audio.channels=2 audio.position=[ FL FR ] object.linger=true }"'
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+

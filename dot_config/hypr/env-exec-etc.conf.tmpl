@@ -68,7 +68,11 @@ exec-once = $scriptsEtcDir/hyprsunset.sh
 # Applets, notification managers etc
 exec-once = nm-applet &
 # exec-once = waybar &
+{{- if eq .chezmoi.hostname "hoshizora" }}
+exec-once = sleep 1 && ignis init &
+{{- else }}
 exec-once = $scriptsEtcDir/start-waybar.sh &
+{{- end }}
 exec-once = dunst &
 # exec-once = swaync & # playing around with swaync, havent used it enough
 exec-once = wl-clip-persist --clipboard regular & #--write-timeout 1000 # persistant clipboard, but seems to break some (Chromium) apps more?
@@ -89,7 +93,9 @@ exec-once = bash -c "sleep 0.1 && qpwgraph -a -m & while ! pgrep -x qpwgraph >/d
 
 exec-once = $scriptsEtcDir/autostart-outside.sh
 
-
+{{- if eq .chezmoi.hostname "hoshizora" }}
+exec-once = ydotoold &
+{{- end }}
 
 #############################
 ### ENVIRONMENT VARIABLES ###

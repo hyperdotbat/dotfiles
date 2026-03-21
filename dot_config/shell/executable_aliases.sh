@@ -82,11 +82,37 @@ ytmp4() {
     local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"
     mkdir -p "$output_dir"
 
+    #--cookies "~/Documents/cookies-youtube-com.txt" \
     yt-dlp -f "bestvideo[ext=mp4]+bestaudio" \
 	    --embed-metadata \
 	    --embed-thumbnail \
+        --convert-thumbnails jpg \
 	    -o "$output_dir/%(title)s.%(ext)s" \
 	    "$url"
+    xdg-open "$output_dir" &
+}
+ytmp4-adv() {
+    local url="$1"
+    local output_dir="${2:-$HOME/YT-DLP/$(date +%Y-%m-%d)}"
+    mkdir -p "$output_dir"
+
+    #yt-dlp \
+    #    -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]" \
+    yt-dlp \
+        -f "bestvideo[ext=mp4][height<=1080]+bestaudio[ext=m4a]/best[ext=mp4][height<=1080]" \
+        --cookies "~/Documents/cookies-youtube-com.txt" \
+        --merge-output-format mp4 \
+        --embed-metadata \
+        --embed-thumbnail \
+        --convert-thumbnails jpg \
+        --write-info-json \
+        --write-description \
+        --write-subs \
+        --sub-langs "en,pl,ja" \
+        --mtime \
+        -o "$output_dir/%(playlist_index)02d. %(title)s [%(upload_date>%Y-%m-%d)s] [%(id)s].%(ext)s" \
+        "$url"
+
     xdg-open "$output_dir" &
 }
 #ytmp4() {
@@ -156,6 +182,7 @@ ytmp3() {
     local url="$1"
 
     yt-dlp -f "ba" -x --audio-format mp3 \
+        --cookies "~/Documents/cookies-youtube-com.txt" \
         --audio-quality 0 \
 	    --embed-metadata \
 	    --embed-thumbnail \
@@ -306,12 +333,16 @@ flac-extract-cover-rockbox(){
 magick-3000(){
 	magick "$1" -resize 3000x3000 "${1%.*}_3000x.${1##*.}"
 }
+magick-500(){
+	magick "$1" -resize 500x500 "${1%.*}_500x.${1##*.}"
+}
 
 #alias mv-from-children='find . -mindepth 2 -type f -exec mv -t . {} +'
 
 alias find-dotfiles-no-extension='find . -type f ! -name "*.*" -o -type f -name ".*" ! -name ".*.*"'
 
 alias restart-audio-engine='systemctl --user restart pipewire pipewire-pulse pipewire-virtual-sinks wireplumber'
+#alias restart-audio-engine='systemctl --user restart pipewire pipewire-pulse wireplumber'
 alias restart-display-manager="sudo systemctl restart display-manager"
 
 alias untar-gz='tar -xvzf'

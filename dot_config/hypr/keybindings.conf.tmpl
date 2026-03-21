@@ -44,11 +44,13 @@ bind = $mainMod, M, exec, $musicPlayer
 bind = $mainMod SHIFT, M, exec, $musicPlayerTermOpen
 
 # Window / Tiling management
-bind = $mainMod, Q, killactive,
-bind = $mainMod, Q, exec, $scriptsEtcDir/kill.sh,
-bind = $mainMod CTRL SHIFT, Q, exit,
-bind = $mainMod, G, togglesplit, # dwindle
-bind = $mainMod CTRL, F, pseudo, # dwindle
+#bind = $mainMod, Q, killactive
+bind = $mainMod, Q, exec, $scriptsEtcDir/kill.sh
+bind = $mainMod CTRL SHIFT, Q, exit
+bind = $mainMod, G, togglesplit # dwindle
+bind = $mainMod, G, layoutmsg, promote # scrolling
+bind = $mainMod SHIFT, mouse:274, layoutmsg, promote # scrolling
+bind = $mainMod CTRL, F, pseudo # dwindle
 bind = $mainMod, F, fullscreen
 bind = $mainMod SHIFT, F, togglefloating
 
@@ -62,6 +64,9 @@ bind = $mainMod, h, movefocus, l
 bind = $mainMod, l, movefocus, r
 bind = $mainMod, k, movefocus, u
 bind = $mainMod, j, movefocus, d
+# for scroller layout
+bind = $mainMod CTRL, mouse_up, movefocus, l
+bind = $mainMod CTRL, mouse_down, movefocus, r
 
 # to make floating windows go on top when focused
 ## (I dont even use floating windows lol they are unusable in combination with tiling using keyboard anyways)
@@ -138,8 +143,8 @@ bind = $mainMod, mouse_down, workspace, e+1
 bind = $mainMod, mouse_up, workspace, e-1
 bind = $mainMod SHIFT, mouse_down, movetoworkspace, e+1
 bind = $mainMod SHIFT, mouse_up, movetoworkspace, e-1
-bind = $mainMod CTRL, mouse_down, movetoworkspacesilent, e+1
-bind = $mainMod CTRL, mouse_up, movetoworkspacesilent, e-1
+bind = $mainMod $altMod, mouse_down, movetoworkspacesilent, e+1
+bind = $mainMod $altMod, mouse_up, movetoworkspacesilent, e-1
 
 # $altMod-TAB with hyprswitch
 bind = $altMod, TAB, exec, $scriptsEtcDir/hyprswitch.sh
@@ -267,7 +272,11 @@ bind = $mainMod CTRL SHIFT, semicolon, exec, $scriptsEtcDir/toggle-darkmode.sh
 bind = $mainMod CTRL SHIFT, H, exec, $scriptsEtcDir/sunshine.sh
 
 # Toggle waybar
+{{- if eq .chezmoi.hostname "hoshizora" }}
+bindr = $mainMod, W, exec, pkill ignis && ignis init &
+{{- else }}
 bindr = $mainMod, W, exec, pkill start-waybar.sh || $scriptsEtcDir/start-waybar.sh
+{{- end }}
 
 # Toggle pin window
 bind = $mainMod, P, pin
@@ -278,6 +287,10 @@ bind = $mainMod CTRL SHIFT, R, exec, hyprctl dispatch submap reset
 # Suspend
 bind = $mainMod CTRL SHIFT, delete, exec, $scriptsEtcDir/suspend.sh
 
-# Equibop (Discord) toggle mute / deafen
-# bind = , Scroll_Lock, exec, equibop --toggle-deafen
-# bind = , Pause, exec, equibop --toggle-mic
+{{- if eq .chezmoi.hostname "hoshizora" }}
+# Minecraft F3 hold
+# bind = , mouse:276, exec, $scriptsEtcDir/m4-f3-press.sh
+# bindr = , mouse:276, exec, $scriptsEtcDir/m4-f3-release.sh
+# bind = , mouse:275, exec, $scriptsEtcDir/m5-f3-shift-press.sh
+# bindr = , mouse:275, exec, $scriptsEtcDir/m5-release.sh
+{{- end }}
