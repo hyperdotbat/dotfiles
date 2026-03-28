@@ -17,7 +17,7 @@ if [ -z "$1" ]; then
 fi
 
 
-if [ "$WALLPAPER_TOOL" == "swww" ]; then
+if [ "$WALLPAPER_TOOL" == "awww" ]; then
     SWWW_TRANSITION_DURATION=2
     SWWW_TRANSITION_FPS=60 #165
 
@@ -34,7 +34,7 @@ if [ "$WALLPAPER_TOOL" == "swww" ]; then
         SWWW_WIPE_ANGLE=$((RANDOM % 360))
     fi
 
-    if ! swww img "$WALLPAPER" \
+    if ! awww img "$WALLPAPER" \
 	    --transition-type "$SWWW_TRANSITION_TYPE" \
 	    --transition-duration "$SWWW_TRANSITION_DURATION" \
         --transition-angle "$SWWW_WIPE_ANGLE" \

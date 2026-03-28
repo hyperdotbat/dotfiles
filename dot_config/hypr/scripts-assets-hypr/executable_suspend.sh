@@ -19,8 +19,8 @@ if [ -f "$wallpaper_tool_file" ] && grep -q '[^[:space:]]' "$wallpaper_tool_file
 fi
 
 wallpaper_restore() {
-    if [ "$WALLPAPER_TOOL" = "swww" ]; then
-        sleep 0.5 && swww restore
+    if [ "$WALLPAPER_TOOL" = "awww" ]; then
+        sleep 0.5 && awww restore
     fi
     # i actually have no clue if hyprpaper works with like secondary display restoring
 }

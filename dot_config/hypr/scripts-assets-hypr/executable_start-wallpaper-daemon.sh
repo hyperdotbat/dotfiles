@@ -9,8 +9,8 @@ else
     echo "$WALLPAPER_TOOL" > "$wallpaper_tool_file"
 fi
 
-if [ "$WALLPAPER_TOOL" == "swww" ]; then
-    swww-daemon &
+if [ "$WALLPAPER_TOOL" == "awww" ]; then
+    awww-daemon &
 fi
 if [ "$WALLPAPER_TOOL" == "hyprpaper" ]; then
     hyprpaper &

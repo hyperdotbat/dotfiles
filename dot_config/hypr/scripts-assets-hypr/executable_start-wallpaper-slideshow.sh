@@ -82,14 +82,14 @@ if [ "$SLIDESHOW_ENABLED" = true ]; then
             else
                 if [[ "$IGNORE_FIRST_RUN" = false || "$FIRST_RUN_PASSED" = true ]] || [ "$FORCE_REFRESH_ON_START" = true ]; then
                     # extractable shared piece of code with `wallpaper_picker.sh`
-                    WALLPAPER_TOOL="swww"
+                    WALLPAPER_TOOL="awww"
                     wallpaper_tool_file=".wallpaper_set_tool"
                     if [ -f "$wallpaper_tool_file" ] && grep -q '[^[:space:]]' "$wallpaper_tool_file"; then
                         WALLPAPER_TOOL=$(<$wallpaper_tool_file)
                     else
                         echo "$WALLPAPER_TOOL" > "$wallpaper_tool_file"
                     fi
-                    if [ "$WALLPAPER_TOOL" == "swww" ] || [ "$FILTEROUT_ANIMATED_FOR_OTHER_THAN_SWWW" = false ]; then
+                    if [ "$WALLPAPER_TOOL" == "awww" ] || [ "$FILTEROUT_ANIMATED_FOR_OTHER_THAN_SWWW" = false ]; then
                         mapfile -t WALLPAPERS < <(
                             find -L "$WALLPAPERS_DIR" $depth_param -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) |
                             sed "s|$WALLPAPERS_DIR/||" |

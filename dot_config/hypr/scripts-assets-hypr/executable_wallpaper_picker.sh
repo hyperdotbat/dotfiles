@@ -51,7 +51,7 @@ else
     else
         echo "$WALLPAPER_TOOL" > "$wallpaper_tool_file"
     fi
-    if [ "$WALLPAPER_TOOL" == "swww" ] || [ "$FILTEROUT_ANIMATED_FOR_OTHER_THAN_SWWW" = false ]; then
+    if [ "$WALLPAPER_TOOL" == "awww" ] || [ "$FILTEROUT_ANIMATED_FOR_OTHER_THAN_SWWW" = false ]; then
         mapfile -t WALLPAPERS < <(
             find -L "$WALLPAPERS_DIR" $depth_param -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) |
             sed "s|$WALLPAPERS_DIR/||" |
