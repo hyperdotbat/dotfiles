@@ -10,6 +10,7 @@ monitor = $monitorSecond, 1920x1200@60, 1920x-280, 1, transform, 1
 {{- if eq .chezmoi.hostname "komorebi" }}
 $monitorMain=eDP-1
 monitor = $monitorMain, 1920x1080@60, 0x0, 1.2
+monitor = , preferred, auto, 1, mirror, $monitorMain
 {{- end }}
 
 {{- if eq .chezmoi.hostname "pakku" }}

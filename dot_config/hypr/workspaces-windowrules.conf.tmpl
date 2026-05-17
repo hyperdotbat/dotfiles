@@ -4,6 +4,7 @@ $monitorMainLayoutDwindleOpt=layout:dwindle,layoutopt:orientation:right
 $monitorMainLayoutOpt=layout:scrolling
 $monitorSecondLayoutOpt=layout:dwindle,layoutopt:orientation:top,new_status:slave
 
+{{- if eq .chezmoi.hostname "hoshizora" }}
 workspace = 1, persistent:true, monitor:$monitorMain,$monitorMainLayoutOpt
 workspace = 2, persistent:true, monitor:$monitorMain,$monitorMainLayoutOpt
 workspace = 3, persistent:true, monitor:$monitorMain,$monitorMainLayoutOpt
@@ -14,6 +15,18 @@ workspace = 7, persistent:false, monitor:$monitorSecond,$monitorSecondLayoutOpt
 workspace = 8, persistent:false, monitor:$monitorSecond,$monitorSecondLayoutOpt
 workspace = 9, persistent:false, monitor:$monitorSecond,$monitorSecondLayoutOpt
 workspace = 10, persistent:false, monitor:$monitorSecond,$monitorSecondLayoutOpt
+{{- else }}
+workspace = 1, persistent:true, monitor:$monitorMain,$monitorMainLayoutOpt
+workspace = 2, persistent:true, monitor:$monitorMain,$monitorMainLayoutOpt
+workspace = 3, persistent:true, monitor:$monitorMain,$monitorMainLayoutOpt
+workspace = 4, persistent:true, monitor:$monitorMain,$monitorMainLayoutOpt
+workspace = 5, persistent:true, monitor:$monitorMain,$monitorMainLayoutOpt
+workspace = 6, persistent:false, monitor:$monitorMain,$monitorMainLayoutOpt
+workspace = 7, persistent:false, monitor:$monitorMain,$monitorMainLayoutOpt
+workspace = 8, persistent:false, monitor:$monitorMain,$monitorMainLayoutOpt
+workspace = 9, persistent:false, monitor:$monitorMain,$monitorMainLayoutOpt
+workspace = 10, persistent:false, monitor:$monitorMain,$monitorMainLayoutOpt
+{{- end }}
 
 # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 # Ignore maximize requests from apps. You'll probably like this.
@@ -246,6 +259,7 @@ windowrule {
   no_screen_share = on
   match:class = com.obsproject.Studio
 }
+# TODO: add some way to toggle?
 # windowrule {
 #   name = discord-noscreenshare
 #   no_screen_share = on
