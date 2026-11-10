@@ -1,0 +1,301 @@
+-- See https://wiki.hyprland.org/Configuring/Keywords/
+-- Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local altMod = "ALT"
+-- mainMod = "ALT"
+-- altMod = "SUPER" -- replace altMod with "Windows"
+
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
+hl.bind("CTRL + " .. altMod .. " + T", hl.dsp.exec_cmd("terminal"))
+
+hl.bind(mainMod .. " + CTRL +" .. altMod .. " + R", hl.dsp.exec_cmd("hyprctl reload"))
+
+-- Rofi main launcher
+-- hl.bind(mainMod .. "SHIFT + A", hl.dsp.exec_cmd(scriptsEtcDir .. "rofi-launcher.sh"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(scriptsEtcDir .. "rofi-launcher.sh"))
+-- Rofi app launcher
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(menu))
+-- Rofi run
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu .. " run"))
+-- Quick terminal scratchpad
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("kitten quick-access-terminal"))
+-- Rofi process killer
+hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd(scriptsEtcDir .. "rofi-killer.sh"))
+-- Rofi window picker
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu .. " window"))
+-- Rofi SSH picker
+hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd(scriptsEtcDir .. "rofi-launcher-submenu_ssh.sh"))
+
+-- Logout Menu
+hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd(logoutMenu))
+hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd(logoutMenu))
+
+-- Essentials ig
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(fileManagerTermOpen))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(codeEditorTermOpen))
+-- hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd(codeEditor))
+-- hl.bind(mainMod .. " + SHIFT + Z, hl.dsp.exec_cmd(codeEditorTermOpen))
+hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd(calculator))
+-- hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser .. " --new-tab ~/startpage/index.html"))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd(musicPlayer))
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd(musicPlayerTermOpen))
+
+-- Window / Tiling management
+hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+-- hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(scriptsEtcDir .. "kill.sh"))
+hl.bind(mainMod .. " + CTRL + SHIFT + Q", hl.dsp.exit())
+-- hl.bind(mainMod .. " + G", hl.dsp.layout("rotatesplit")) -- dwindle
+hl.bind(mainMod .. " + G", hl.dsp.layout("promote")) -- scrolling
+hl.bind(mainMod .. " + SHIFT + mouse:274", hl.dsp.layout("promote")) -- scrolling
+hl.bind(mainMod .. " + CTRL + F", hl.dsp.window.pseudo()) -- dwindle
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.float())
+
+-- Move focus with mainMod + arrow keys
+hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "l" }))
+hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "r" }))
+hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "u" }))
+hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "d" }))
+-- VIM motions
+hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "l" }))
+hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "r" }))
+hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "u" }))
+hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "d" }))
+-- for scroller layout
+hl.bind(mainMod .. " + CTRL + mouse_down", hl.dsp.focus({ direction = "l" }))
+hl.bind(mainMod .. " + CTRL + mouse_up", hl.dsp.focus({ direction = "r" }))
+
+-- to make floating windows go on top when focused
+---- (I dont even use floating windows lol they are unusable in combination with tiling using keyboard anyways)
+hl.bind(mainMod .. " + left", hl.dsp.window.alter_zorder({ mode = "top" }))
+hl.bind(mainMod .. " + right", hl.dsp.window.alter_zorder({ mode = "top" }))
+hl.bind(mainMod .. " + up", hl.dsp.window.alter_zorder({ mode = "top" }))
+hl.bind(mainMod .. " + down", hl.dsp.window.alter_zorder({ mode = "top" }))
+-- VIM motions
+hl.bind(mainMod .. " + h", hl.dsp.window.alter_zorder({ mode = "top" }))
+hl.bind(mainMod .. " + l", hl.dsp.window.alter_zorder({ mode = "top" }))
+hl.bind(mainMod .. " + k", hl.dsp.window.alter_zorder({ mode = "top" }))
+hl.bind(mainMod .. " + j", hl.dsp.window.alter_zorder({ mode = "top" }))
+
+
+-- Move window with mainMod + shift + arrow keys
+hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move({ direction = "l" }))
+hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "r" }))
+hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({ direction = "u" }))
+hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move( { direction = "d" }))
+-- VIM motions
+hl.bind(mainMod .. " + SHIFT + h", hl.dsp.window.move({ direction = "l" }))
+hl.bind(mainMod .. " + SHIFT + l", hl.dsp.window.move({ direction = "r" }))
+hl.bind(mainMod .. " + SHIFT + k", hl.dsp.window.move({ direction = "u" }))
+hl.bind(mainMod .. " + SHIFT + j", hl.dsp.window.move({ direction = "d" }))
+
+
+-- Scale window with mainMod + ctrl + arrow keys
+hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
+-- VIM motions
+hl.bind(mainMod .. " + CTRL + h", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
+
+-- Switch workspaces with mainMod + [0-9]
+for i = 1, 9 do
+    hl.bind(mainMod .. " + " .. i, hl.dsp.focus({workspace = i}))
+end
+hl.bind(mainMod .. " + 0", hl.dsp.focus({workspace = 10}))
+-- hl.bind(mainMod .. " + TAB", hl.dsp.focus({workspace = "previous"}))
+hl.bind(mainMod .. " + TAB", hl.dsp.focus({workspace = "previous_per_monitor"}))
+
+-- Next/prev workspace with Super + pageUp/Down
+hl.bind(mainMod .. " + page_up", hl.dsp.focus({workspace = "e+1"}))
+hl.bind(mainMod .. " + page_down", hl.dsp.focus({workspace = "e-1"}))
+hl.bind(mainMod .. " + SHIFT + page_up", hl.dsp.window.move({ workspace = "e+1", follow = true }))
+hl.bind(mainMod .. " + SHIFT + page_down", hl.dsp.window.move({ workspace = "e-1", follow = true }))
+hl.bind(mainMod .. " + CTRL + page_up", hl.dsp.window.move({ workspace = "e+1", follow = false }))
+hl.bind(mainMod .. " + CTRL + page_down", hl.dsp.window.move({ workspace = "e-1", follow = false }))
+-- HOME/END as well because of my 65% kb (I dont wanna hold FN down)
+hl.bind(mainMod .. " + HOME", hl.dsp.focus({workspace = "e+1"}))
+hl.bind(mainMod .. " + END", hl.dsp.focus({workspace = "e-1"}))
+hl.bind(mainMod .. " + SHIFT + HOME", hl.dsp.window.move({ workspace = "e+1", follow = true }))
+hl.bind(mainMod .. " + SHIFT + END", hl.dsp.window.move({ workspace = "e-1", follow = true }))
+hl.bind(mainMod .. " + CTRL + HOME", hl.dsp.window.move({ workspace = "e+1", follow = false }))
+hl.bind(mainMod .. " + CTRL + END", hl.dsp.window.move({ workspace = "e-1", follow = false }))
+-- Super + Mouse4&5
+hl.bind(mainMod .. " + mouse:276", hl.dsp.focus({workspace = "e+1"}))
+hl.bind(mainMod .. " + mouse:275", hl.dsp.focus({workspace = "e-1"}))
+hl.bind(mainMod .. " + SHIFT + mouse:276", hl.dsp.window.move({ workspace = "e+1", follow = true }))
+hl.bind(mainMod .. " + SHIFT + mouse:275", hl.dsp.window.move({ workspace = "e-1", follow = true }))
+hl.bind(mainMod .. " + CTRL + mouse:276", hl.dsp.window.move({ workspace = "e+1", follow = false }))
+hl.bind(mainMod .. " + CTRL + mouse:275", hl.dsp.window.move({ workspace = "e-1", follow = false }))
+-- Alternatively make it toggle previous
+-- hl.bind(mainMod .. " + mouse:275", workspace, previous
+-- hl.bind(mainMod .. " + mouse:276", workspace, previous
+
+-- Scroll through existing workspaces with mainMod + scroll
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({workspace = "e+1"}))
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({workspace = "e-1"}))
+hl.bind(mainMod .. " + SHIFT + mouse_up", hl.dsp.window.move({ workspace = "e+1", follow = true }))
+hl.bind(mainMod .. " + SHIFT + mouse_down", hl.dsp.window.move({ workspace = "e-1", follow = true }))
+hl.bind(mainMod .. "+" .. altMod .. " + mouse_up", hl.dsp.window.move({ workspace = "e+1", follow = false }))
+hl.bind(mainMod .. "+" .. altMod .. " + mouse_down", hl.dsp.window.move({ workspace = "e-1", follow = false }))
+
+-- altMod+TAB with hyprswitch
+-- hl.bind(altMod .. " + TAB", hl.dsp.exec_cmd(scriptsEtcDir .. "hyprswitch.sh"))
+-- hl.bind(altMod .. " + SHIFT + TAB", hl.dsp.exec_cmd(scriptsEtcDir .. "hyprswitch.sh -r"))
+
+-- alt+TAB using focus last
+hl.bind(altMod .. " + TAB", hl.dsp.focus({ last = true }))
+hl.bind(altMod .. " + CTRL + TAB", hl.dsp.focus({ urgent_or_last = true }))
+-- TODO: add way to toggle between floating
+
+-- WIN+TAB with hyprswitch
+-- hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd(scriptsEtcDir .. "hyprswitch.sh -w"))
+-- hl.bind(mainMod .. " + SHIFT + TAB", hl.dsp.exec_cmd(scriptsEtcDir .. "hyprswitch.sh -wr"))
+-- hl.bind(mainMod .. " + mouse:275", hl.dsp.exec_cmd(scriptsEtcDir .. "hyprswitch.sh -wr"))
+-- hl.bind(mainMod .. " + mouse:276", hl.dsp.exec_cmd(scriptsEtcDir .. "hyprswitch.sh -w"))
+
+-- Move active window to a workspace with mainMod + SHIFT + [0-9]
+for i = 1, 9 do
+    hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i, follow = true }))
+end
+hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10, follow = true }))
+for i = 1, 9 do
+    hl.bind(mainMod .. " + CTRL + " .. i, hl.dsp.window.move({ workspace = i, follow = false }))
+end
+hl.bind(mainMod .. " + CTRL + 0", hl.dsp.window.move({ workspace = 10, follow = false }))
+
+-- TODO: move workspace to monitor binds?
+--hl.bind(mainMod .. " + CTRL + comma", moveworkspacetomonitor, DP-1
+--hl.bind(mainMod .. " + CTRL + period", moveworkspacetomonitor, DP-2
+
+--hl.bind("CTRL altMod mainMod SHIFT, comma, movecurrentworkspacetomonitor, l
+--hl.bind("CTRL altMod mainMod SHIFT, period, movecurrentworkspacetomonitor, r
+
+-- Scratchpads
+hl.bind(mainMod .. " + D", hl.dsp.workspace.toggle_special("dc"))
+hl.bind(mainMod .. " + SHIFT + D", hl.dsp.window.move({ workspace = "special:dc", follow = true }))
+hl.bind(mainMod .. " + CTRL + D", hl.dsp.window.move({ workspace = "special:dc", follow = false }))
+
+hl.bind(mainMod .. " + X", hl.dsp.workspace.toggle_special("spc"))
+hl.bind(mainMod .. " + SHIFT + X", hl.dsp.window.move({ workspace = "special:spc", follow = true }))
+hl.bind(mainMod .. " + CTRL + X", hl.dsp.window.move({ workspace = "special:spc", follow = false }))
+
+hl.bind(mainMod .. " + C", hl.dsp.workspace.toggle_special("gpt"))
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.move({ workspace = "special:gpt", follow = true }))
+hl.bind(mainMod .. " + CTRL + C", hl.dsp.window.move({ workspace = "special:gpt", follow = false }))
+
+-- Move/resize windows with mainMod + LMB/RMB and dragging
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+hl.bind(mainMod .. " + mouse:274", hl.dsp.window.float())
+
+-- For touchpad
+-- hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
+-- hl.bind("SUPER + CTRL", hl.dsp.window.drag(), { mouse = true })
+-- hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
+-- hl.bind("SUPER + ALT", hl.dsp.window.resize(), { mouse = true })
+
+-- Laptop multimedia keys for volume and LCD brightness
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(scriptsEtcDir .. "volume-set_and_notify.sh +"), { repeating = true, locked = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(scriptsEtcDir .. "volume-set_and_notify.sh -"), { repeating = true, locked = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(scriptsEtcDir .. "volume-set_and_notify.sh mute-toggle"), { repeating = true, locked = true })
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { repeating = true, locked = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s 10%+"), { repeating = true, locked = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 10%-"), { repeating = true, locked = true })
+-- Volume control with Super+Shift+Scroll
+hl.bind(mainMod .. " + SHIFT + mouse_up", hl.dsp.exec_cmd(scriptsEtcDir .. "volume-set_and_notify.sh +"), { repeating = true, locked = true })
+hl.bind(mainMod .. " + SHIFT + mouse_down", hl.dsp.exec_cmd(scriptsEtcDir .. "volume-set_and_notify.sh -"), { repeating = true, locked = true })
+
+-- Requires playerctl
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+-- Because Media keys dont work on my GMK67
+hl.bind("CTRL + " .. altMod .. " + P", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("MOD5 + P", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("CTRL + " .. altMod .. " + bracketleft", hl.dsp.exec_cmd("playerctl next"), { locked = true })
+hl.bind("MOD5 + bracketleft", hl.dsp.exec_cmd("playerctl next"), { locked = true })
+hl.bind("MOD5 + bracketright", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+hl.bind("CTRL + " .. altMod .. " + bracketright", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+
+-- Screenshotting
+hl.bind("Print", hl.dsp.exec_cmd(scriptsEtcDir .. "screenshot-grimblast.sh active"))
+--hl.bind(mainMod .. " + SHIFT, S, hl.dsp.exec_cmd(scriptsEtcDir .. "screenshot-grimblast.sh area"))
+hl.bind("SHIFT + Print", hl.dsp.exec_cmd(scriptsEtcDir .. "screenshot-grimblast.sh area"))
+hl.bind("CTRL + Print", hl.dsp.exec_cmd(scriptsEtcDir .. "screenshot-grimblast.sh output"))
+hl.bind("CTRL + SHIFT + Print", hl.dsp.exec_cmd(scriptsEtcDir .. "screenshot-grimblast.sh screen"))
+hl.bind(altMod .. " + SHIFT + 1", hl.dsp.exec_cmd(scriptsEtcDir .. "screenshot-grimblast.sh active"))
+hl.bind(altMod .. " + SHIFT + 2", hl.dsp.exec_cmd(scriptsEtcDir .. "screenshot-grimblast.sh output"))
+hl.bind(altMod .. " + SHIFT + 3", hl.dsp.exec_cmd(scriptsEtcDir .. "screenshot-grimblast.sh area"))
+hl.bind(altMod .. " + SHIFT + 4", hl.dsp.exec_cmd(scriptsEtcDir .. "toggle_recording.sh"))
+-- Open screenshots directory
+hl.bind(mainMod .. " + CTRL + SHIFT + S", hl.dsp.exec_cmd(scriptsEtcDir .. "screenshots-dir-open.sh"))
+
+-- Color picker
+hl.bind(altMod .. " + CTRL + SHIFT + P", hl.dsp.exec_cmd("hyprpicker -a"))
+
+-- Wallpaper picker
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(scriptsEtcDir .. "wallpaper_picker.sh"))
+hl.bind(mainMod .. " + CTRL + SHIFT + W", hl.dsp.exec_cmd(scriptsEtcDir .. "wallpaper_picker_animated.sh"))
+
+-- Clipboard manager
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(scriptsEtcDir .. "toggle_clipse.sh"))
+
+-- Task manager
+hl.bind("CTRL + SHIFT + grave", hl.dsp.exec_cmd(scriptsEtcDir .. "open-task-manager.sh &")) -- CTRL+SHIFT+ESCAPE
+hl.bind("CTRL + " .. altMod .. " + delete", hl.dsp.exec_cmd(scriptsEtcDir .. "open-task-manager.sh &"))
+
+-- Toggle smartgaps / no-gaps
+-- TODO: change them around to make more sense
+hl.bind(mainMod .. "+" .. altMod .. " + F", hl.dsp.exec_cmd(scriptsEtcDir .. "toggle-smartgaps.sh"))
+hl.bind(mainMod .. " + CTRL + " .. altMod .. " + F", hl.dsp.exec_cmd(scriptsEtcDir .. "toggle-nogaps.sh"))
+
+-- Emoji picker
+hl.bind(mainMod .. " + period", hl.dsp.exec_cmd(scriptsEtcDir .. "rofi-emoji.sh"))
+
+-- Force toggle dark-mode
+hl.bind(mainMod .. " + CTRL + SHIFT + semicolon", hl.dsp.exec_cmd(scriptsEtcDir .. "toggle-darkmode.sh"))
+
+-- Kill hyprsunset for if I were to get stuck in Sunshine
+hl.bind(mainMod .. " + CTRL + SHIFT + H", hl.dsp.exec_cmd(scriptsEtcDir .. "sunshine.sh"))
+
+-- Toggle waybar
+{{- if false }}
+{{- if eq .chezmoi.hostname "hoshizora" }}
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("pkill ignis && ignis init &"), { release = true })
+{{- else }}
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("pkill start-waybar.sh || " .. scriptsEtcDir .. "start-waybar.sh"), { release = true })
+{{- end }}
+{{- end }}
+
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("pkill start-waybar.sh || " .. scriptsEtcDir .. "start-waybar.sh"), { release = true })
+
+-- Toggle pin window
+hl.bind(mainMod .. " + P", hl.dsp.window.pin())
+
+-- Reset any submap if stuck
+hl.bind(mainMod .. " + CTRL + SHIFT + R", hl.dsp.submap("reset"))
+
+-- Suspend
+hl.bind(mainMod .. " + CTRL + SHIFT + delete", hl.dsp.exec_cmd(scriptsEtcDir .. "suspend.sh"))
+
+-- Pass to OBS
+hl.bind("CTRL + F9", hl.dsp.pass({ window = "class:^(com\\.obsproject\\.Studio)$" }))
+hl.bind("CTRL + F10", hl.dsp.pass({ window = "class:^(com\\.obsproject\\.Studio)$" }))
+
+{{- if eq .chezmoi.hostname "hoshizora" }}
+-- Minecraft F3 hold
+-- hl.bind(", mouse:276, scriptsEtcDir .. "m4-f3-press.sh
+-- bindr = , mouse:276, scriptsEtcDir .. "m4-f3-release.sh
+-- hl.bind(", mouse:275, scriptsEtcDir .. "m5-f3-shift-press.sh
+-- bindr = , mouse:275, scriptsEtcDir .. "m5-release.sh
+
+-- hl.bind("mouse:276", hl.dsp.send_shortcut({ key = "F3", window = "class:^(Minecraft)$" }), { release = true })
+{{- end }}

@@ -1,6 +1,6 @@
 #!/bin/bash
 cd "$(dirname "$0")" || exit 1
-nogaps_import_file="../.import-nogaps_cache.conf"
+nogaps_import_file="../.import-nogaps_cache.lua"
 NOGAPS_ENABLED=false
 if [ -f "$nogaps_import_file" ] && grep -q '[^[:space:]]' "$nogaps_import_file"; then
     NOGAPS_ENABLED=true
@@ -16,7 +16,7 @@ fi
 
 
 if [ "$NOGAPS_ENABLED" = false ]; then
-    echo 'source = .overrides_nogaps.conf' > $nogaps_import_file
+    echo 'require("./.overrides_nogaps.lua")' > $nogaps_import_file
 else
     echo '' > $nogaps_import_file
 fi

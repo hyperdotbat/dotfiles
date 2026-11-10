@@ -23,7 +23,7 @@ alias os-age='~/scripts/check_os_age.sh'
 
 alias mnt='sudo mount -o uid=hyper,gid=hyper'
 
-alias ls='eza --group-directories-first --icons'
+alias ls='eza --group-directories-first --icons always'
 alias l="ls"
 alias ll="ls -lA"
 alias lsa='ls -a'

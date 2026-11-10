@@ -1,6 +1,6 @@
 #!/bin/bash
 cd "$(dirname "$0")" || exit 1
-smartgaps_import_file="../.import-smartgaps_cache.conf"
+smartgaps_import_file="../.import-smartgaps_cache.lua"
 SMARTGAPS_ENABLED=false
 if [ -f "$smartgaps_import_file" ] && grep -q '[^[:space:]]' "$smartgaps_import_file"; then
     SMARTGAPS_ENABLED=true
@@ -16,7 +16,7 @@ fi
 
 
 if [ "$SMARTGAPS_ENABLED" = false ]; then
-    echo 'source = .overrides_smartgaps.conf' > $smartgaps_import_file
+    echo 'require("./.overrides_smartgaps.lua")' > $smartgaps_import_file
 else
     echo '' > $smartgaps_import_file
 fi

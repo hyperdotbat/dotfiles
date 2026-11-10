@@ -1,0 +1,474 @@
+-- See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
+-- monitorMainLayoutOpt=layoutopt:orientation:right,new_status:master
+-- TODO: fix layoutopt
+-- monitorMainLayoutDwindleOpt=layout:dwindle,layoutopt:orientation:right
+-- monitorMainLayoutOpt=layout:scrolling
+-- monitorSecondLayoutOpt=layout:dwindle,layoutopt:orientation:top,new_status:slave
+local monitorMainLayoutDwindleOpt = { layout = "dwindle" }
+local monitorMainLayoutOpt = { layout = "scrolling" }
+local monitorSecondLayoutOpt = { layout = "dwindle" }
+
+-- {{- if eq .chezmoi.hostname "hoshizora" }}
+-- hl.workspace_rule({workspace="1", persistent=true, monitor=monitorMain, monitorMainLayoutOpt})
+-- hl.workspace_rule({workspace="2", persistent=true, monitor=monitorMain, monitorMainLayoutOpt})
+-- hl.workspace_rule({workspace="3", persistent=true, monitor=monitorMain, monitorMainLayoutOpt})
+-- hl.workspace_rule({workspace="4", persistent=true, monitor=monitorMain, monitorMainLayoutOpt})
+-- hl.workspace_rule({workspace="5", persistent=true, monitor=monitorMain, monitorMainLayoutDwindleOpt})
+-- hl.workspace_rule({workspace="6", persistent=false, monitor=monitorSecond, monitorSecondLayoutOpt})
+-- hl.workspace_rule({workspace="7", persistent=false, monitor=monitorSecond, monitorSecondLayoutOpt})
+-- hl.workspace_rule({workspace="8", persistent=false, monitor=monitorSecond, monitorSecondLayoutOpt})
+-- hl.workspace_rule({workspace="9", persistent=false, monitor=monitorSecond, monitorSecondLayoutOpt})
+-- hl.workspace_rule({workspace="10", persistent=false, monitor=monitorSecond, monitorSecondLayoutOpt})
+-- {{- else }}
+local monitorMainWorkspaces = {
+    [1] = true,
+    [2] = true,
+    [3] = true,
+    [4] = true,
+    [5] = true,
+}
+
+for i = 1, 10 do
+    hl.workspace_rule({
+        workspace = tostring(i),
+        persistent = i <= 5,
+        monitor = monitorMain,
+        layout = "scrolling",
+    })
+end
+-- {{- end }}
+
+-- See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+-- Ignore maximize requests from apps. You'll probably like this.
+hl.window_rule( {
+  name = "ignore-maximize",
+  suppress_event = "maximize",
+  match = {
+    class = ".*",
+  },
+})
+
+
+-- Fix some dragging issues with XWayland
+hl.window_rule( {
+  name = "xwayland-fix",
+  no_initial_focus = true,
+  match = {
+    class = "^",
+    title = "^",
+    xwayland = true,
+    float = true,
+    fullscreen = false,
+    pin = false,
+  },
+})
+
+
+-- Focus browser when link opened
+hl.window_rule( {
+  name = "browser-focus",
+  focus_on_activate = true,
+  match = {
+    class = "^(browser)",
+  },
+})
+hl.window_rule( {
+  name = "steam-focus",
+  focus_on_activate = true,
+  workspace = "4",
+  match = {
+    class = "^(steam)",
+  },
+})
+hl.window_rule( {
+  name = "spotify-focus",
+  focus_on_activate = true,
+  match = {
+    class = "^(Spotify)",
+  },
+})
+hl.window_rule( {
+  name = "VSC-focus",
+  focus_on_activate = true,
+  match = {
+    class = "^(VSCodium)",
+  },
+})
+hl.window_rule( {
+  name = "vsc-focus",
+  focus_on_activate = true,
+  match = {
+    class = "^(vscodium)",
+  },
+})
+hl.window_rule( {
+  name = "codium-focus",
+  focus_on_activate = true,
+  match = {
+    class = "^(codium)",
+  },
+})
+hl.window_rule( {
+  name = "code-focus",
+  focus_on_activate = true,
+  match = {
+    class = "^(code)",
+  },
+})
+hl.window_rule( {
+  name = "Code-focus",
+  focus_on_activate = true,
+  match = {
+    class = "^(Code)",
+  },
+})
+hl.window_rule( {
+  name = "VSCode-focus",
+  focus_on_activate = true,
+  match = {
+    class = "^(VSCode)",
+  },
+})
+hl.window_rule( {
+  name = "notion-focus",
+  focus_on_activate = true,
+  match = {
+    class = "^(Notion)",
+  },
+})
+
+
+-- Clipse
+hl.window_rule( {
+  name = "clipse-float",
+  float = true,
+  match = {
+    class = "(clipse)",
+  },
+})
+hl.window_rule( {
+  name = "clipse-size",
+  size = {652, 652},
+  match = {
+    class = "(clipse)",
+  },
+})
+
+
+-- Fix Chromium PWAs and other apps floating
+-- hl.window_rule(v2 = tile, xwayland:1
+hl.window_rule( {
+  name = "chromium-float-fix",
+  tile = true,
+  match = {
+    class = "^(Chromium)",
+  },
+})
+hl.window_rule( {
+  name = "aseprite-float-fix",
+  tile = true,
+  match = {
+    class = "^(Aseprite)",
+  },
+})
+hl.window_rule( {
+  name = "outlook-float-fix",
+  tile = true,
+  match = {
+    initial_title = "^(Outlook (PWA))",
+  },
+})
+hl.window_rule( {
+  name = "godot-float-fix",
+  tile = true,
+  match = {
+    class = "^(Godot)",
+  },
+})
+
+
+-- Make PiP float and pin
+hl.window_rule( {
+  name = "pip",
+  float = true,
+  pin = true,
+  match = {
+    title = "^(Picture in picture)",
+  },
+})
+hl.window_rule( {
+  name = "pip_1",
+  float = true,
+  pin = true,
+  match = {
+    title = "^(Picture-in-Picture)",
+  },
+})
+
+
+-- Actually force floating on some apps
+hl.window_rule( {
+  name = "bevy-float",
+  float = true,
+  match = {
+    title = "^(Bevy App)",
+  },
+})
+
+
+-- Specific workspace for apps
+hl.window_rule( {
+  name = "steam-workspace4",
+  workspace = "4",
+  match = {
+    class = "^(steam_app_.*)",
+  },
+})
+hl.window_rule( {
+  name = "osu-workspace4",
+  workspace = "4",
+  match = {
+    class = "^(osu*)",
+  },
+})
+hl.window_rule( {
+  name = "prismlauncher-workspace4",
+  workspace = "4",
+  match = {
+    class = "^(com.prismlauncher.PrismLauncher)",
+  },
+})
+hl.window_rule( {
+  name = "prismlauncher-workspace4_1",
+  workspace = "4",
+  match = {
+    class = "^(prismlauncher)",
+  },
+})
+hl.window_rule( {
+  name = "minecraft-workspace4",
+  workspace = "4",
+  match = {
+    class = "^(Minecraft*)",
+  },
+})
+hl.window_rule( {
+  name = "hytalelauncher-workspace4",
+  workspace = "4",
+  match = {
+    class = "^(com.hypixel.HytaleLauncher)",
+  },
+})
+hl.window_rule( {
+  name = "hytale-workspace4",
+  workspace = "4",
+  match = {
+    class = "^(HytaleClient)",
+  },
+})
+hl.window_rule( {
+  name = "teams-workspace5",
+  workspace = "5",
+  match = {
+    class = "^(teams-for-linux)",
+  },
+})
+
+hl.window_rule( {
+  name = "discord-workspace_dc",
+  workspace = "special:dc silent",
+  match = {
+    class = "^(discord)",
+  },
+})
+hl.window_rule( {
+  name = "toggl-workspace_spc",
+  workspace = "special:spc",
+  match = {
+    initial_title = " = ^(Toggl Track)",
+  },
+})
+hl.window_rule( {
+  name = "spotify-workspace_spc",
+  workspace = "special:spc",
+  match = {
+    class = "^(spotify)",
+  },
+})
+hl.window_rule( {
+  name = "ytmusic-workspace_spc",
+  workspace = "special:spc",
+  match = {
+    class = "^(com.github.th_ch.youtube_music)",
+  },
+})
+hl.window_rule( {
+  name = "feishin-workspace_spc",
+  workspace = "special:spc",
+  match = {
+    class = "^(feishin)",
+  },
+})
+hl.window_rule( {
+  name = "chatgpt-workspace_gpt",
+  workspace = "special:gpt",
+  match = {
+    initial_title = " = ^(ChatGPT)",
+  },
+})
+
+
+-- NoScreenShare for apps requiring privacy
+hl.window_rule( {
+  name = "bitwarden-noscreenshare",
+  no_screen_share = true,
+  match = {
+    class = "Bitwarden",
+  },
+})
+hl.window_rule( {
+  name = "bitwarden-noscreenshare_1",
+  no_screen_share = true,
+  match = {
+    title = "(?i)(.*Bitwarden.*)",
+  },
+})
+hl.window_rule( {
+  name = "mbank-noscreenshare",
+  no_screen_share = true,
+  match = {
+    title = "(?i)(.*mBank.*)",
+  },
+})
+hl.window_rule( {
+  name = "obs-noscreenshare",
+  no_screen_share = true,
+  match = {
+    class = "com.obsproject.Studio",
+  },
+})
+-- TODO: add some way to toggle?
+-- hl.window_rule( {
+--   name = discord-noscreenshare
+--   no_screen_share = true,
+--   match = {
+--  class = "discord",
+-- },
+-- }
+
+
+-- No blur on popups etc
+hl.window_rule( {
+  name = "noblur-popups",
+  no_blur = true,
+  match = {
+    class = "^()",
+    title = "^()",
+  },
+})
+
+
+-- Fix popups like JetBrains IDE losing focus and glitching out (not fully working)
+hl.window_rule( {
+  name = "jetbrains-focus",
+  stay_focused = true,
+  match = {
+    class = "^(jetbrains-rider)",
+    title = "(^)",
+  },
+})
+hl.window_rule( {
+  name = "jetbrains-focus_1",
+  stay_focused = true,
+  match = {
+    class = "^(jetbrains.*)",
+    title = "(^)",
+  },
+})
+
+-- -- Fix odd behaviors in IntelliJ IDEs --
+--! Fix splash screen showing in weird places and prevent annoying focus takeovers
+hl.window_rule( {
+  name = "jetbrains-fix",
+  center = true,
+  no_initial_focus = true,
+  border_size = 0,
+  match = {
+    class = "^(jetbrains-.*)",
+    title = "^(splash)",
+    float = true,
+  },
+})
+--! Center popups/find windows
+hl.window_rule( {
+  name = "jetbrains-fix_1",
+  center = true,
+  stay_focused = true,
+  border_size = 0,
+  match = {
+    class = "^(jetbrains-.*)",
+    title = "^( )",
+    float = true,
+  },
+})
+--! Disable window flicker when autocomplete or tooltips appear
+hl.window_rule( {
+  name = "jetbrains-fix_2",
+  no_initial_focus = true,
+  match = {
+    class = "^(jetbrains-.*)",
+    title = "^(win.*)",
+    float = true,
+  },
+})
+
+
+-- Notion doesnt work yet
+hl.window_rule( {
+  name = "notion-fix",
+  center = true,
+  stay_focused = true,
+  border_size = 0,
+  match = {
+    class = "^(Notion)",
+    title = "^( )",
+    float = true,
+  },
+})
+hl.window_rule( {
+  name = "notion-fix_1",
+  no_initial_focus = true,
+  match = {
+    class = "^(Notion)",
+    title = "^(win.*)",
+    float = true,
+  },
+})
+
+
+-- Fix GIMP dialogues
+hl.window_rule( {
+  name = "gimp-fix",
+  float = true,
+  match = {
+    class = "gimp",
+  },
+})
+hl.window_rule( {
+  name = "gimp-fix_1",
+  tile = true,
+  match = {
+    class = "gimp",
+    initial_title = " = ^(GNU Image Manipulation Program)",
+  },
+})
+
+
+-- Stop Discord autofocusing on startup
+-- hl.window_rule(v2 = nofocus,class:^(discord)
+
+-- attempt at fixing Steam's notification showing on wrong screen
+-- (always the most bottom right corner, on a second monitor)
+-- hl.window_rule(v2 = move 0 0,class:^(steamwebhelper)
+-- hl.window_rule(v2 = monitor 0,class:^(steamwebhelper)
+-- hl.window_rule(v2 = monitor monitorMain,class:^(steamwebhelper)

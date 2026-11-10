@@ -1,11 +1,4 @@
 @import url("style-defaults.css");
-/* @import url("style-aero-metal.css"); */
-/* @import url("style-webcore.css"); */
-/* @import url("style-testing-tui.css"); */
-/* @import url("style-aero-glass.css"); */
-/* @import url("style-dracula-flat.css"); */
-/* @import url("style-dracula-islands.css"); */
-/* @import url("style-everforest-islands.css"); */
 
 {{- if eq .chezmoi.hostname "komorebi" }}
 @import url("style-gruvbox-islands.css");
@@ -14,7 +7,7 @@
 @import url("style-testing-tui.css");
 
 {{- else }}
-@import url("style-everforest-islands_winter.css");
+@import url("style-aero-glass.css");
 {{- end }}
 
 /* @import url("style-cyberpunk.css"); */

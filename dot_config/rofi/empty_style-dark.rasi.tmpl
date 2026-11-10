@@ -2,4 +2,7 @@
 
 {{- if eq .chezmoi.hostname "komorebi" }}
 @theme "gruvbox-round"
+
+{{- else if eq .chezmoi.hostname "hoshizora" }}
+@theme "aero-glass"
 {{- end }}

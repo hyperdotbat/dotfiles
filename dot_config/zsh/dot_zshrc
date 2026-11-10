@@ -48,6 +48,7 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 HISTFILE="$XDG_CACHE_HOME/zsh_history"
 HISTCONTROL=ignoreboth
+setopt HIST_IGNORE_ALL_DUPS # ignore duplicates in history
 
 # ctrl+r use fzf
 source <(fzf --zsh)

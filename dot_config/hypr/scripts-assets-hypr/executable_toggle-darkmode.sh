@@ -34,9 +34,9 @@ fi
 
 ## Hyprwm
 HYPRLAND_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/hypr"
-HYPRLAND_override_darkmode_file="$HYPRLAND_CONFIG_DIR/.import-darkmode_cache.conf"
+HYPRLAND_override_darkmode_file="$HYPRLAND_CONFIG_DIR/.import-darkmode_cache.lua"
 if [ "$DARKMODE_ENABLE" = true ]; then
-    echo 'source = .overrides_darkmode.conf' > $HYPRLAND_override_darkmode_file
+    echo 'require("./.overrides_darkmode.lua")' > $HYPRLAND_override_darkmode_file
 else
     echo '' > $HYPRLAND_override_darkmode_file
 fi

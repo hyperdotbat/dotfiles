@@ -1,0 +1,146 @@
+-- Refer to https://wiki.hyprland.org/Configuring/Variables/
+
+-- https://wiki.hyprland.org/Configuring/Variables/--general
+
+hl.config({
+    general = {
+        gaps_in = 5,
+        gaps_out = 20,
+
+        border_size = 4,
+
+        -- https://wiki.hyprland.org/Configuring/Variables/--variable-types for info about colors
+        -- col.active_border = rgba(50fa7bff)
+        -- col.active_border = rgba(bd93f9ff)
+        -- col.active_border = rgba(207,207,220,1) rgba(250,250,255,1) rgba(207,207,220,1) 45deg
+        col = {
+            border_active = {
+                colors = { colors.cyan, colors.green },
+                -- angle = 45,
+            },
+
+            -- col.inactive_border = rgba(282a36ff)
+            -- col.inactive_border = rgba(00000000)
+            border_inactive = {
+                colors = { colors.bg },
+            }
+            -- col.inactive_border = rgba(ffffff11) rgba(ffffff55) rgba(ffffff11) 45deg
+            -- col.inactive_border = rgba(ffffff55) rgba(ffffff11) rgba(ffffff55) rgba(ffffff11) rgba(ffffff55) 45deg
+        },
+
+        -- Set to true enable resizing windows by clicking and dragging on borders and gaps
+        resize_on_border = true,
+
+        -- Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
+        allow_tearing = true,
+
+        -- layout = master,
+        --{{- if eq .chezmoi.hostname "pakku" }}
+        --    layout = dwindle,
+        --{{- else }}
+            layout = "scrolling",
+        --{{- end }}
+    }
+})
+
+-- https://wiki.hyprland.org/Configuring/Variables/--decoration
+hl.config({
+        decoration = {
+        -- rounding = 8
+        -- rounding_power = 4
+
+        shadow = {
+            enabled = true,
+            range = 4,
+            render_power = 2,
+            color = colors.black,
+        },
+
+        active_opacity = 1.0,
+        -- inactive_opacity = 0.8,
+        -- dim_inactive = true,
+        dim_strength = 0.2,
+
+        -- https://wiki.hyprland.org/Configuring/Variables/--blur
+        blur = {
+            enabled = false,
+            -- special = true,
+            size = 5, -- 8
+            passes = 2,
+        
+            noise = 0.2, -- 0.0117
+            -- contrast = 0.8916, -- 0.8916
+            brightness = 0.5172, -- 0.8172
+            -- vibrancy = 1, -- 0.1696
+            -- vibrancy_darkness = 0, -- 0
+        }
+    }
+})
+
+-- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+hl.config({
+    dwindle = {
+        preserve_split = true -- You probably want this
+        -- smart_split = true
+    }
+})
+
+-- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+hl.config({
+    master = {
+        new_status = "master",
+        new_on_top = true,
+
+        -- new_on_top = false,
+        orientation = "right", -- defined by workspace rules anyways
+        -- orientation = "center",
+        -- slave_count_for_center_master = 0,
+        -- always_keep_position = true,
+        -- mfact = 0.5,
+    }
+})
+
+-- See https://wiki.hyprland.org/Configuring/Scrolling-Layout/ for more
+hl.config({
+    scrolling = {
+        -- focus_fit_method = 1,
+        -- follow_focus = false,
+        follow_min_visible = 1.0, -- setting to 1.0 fixes bug where you cant click to focus while disabling hover to focus
+    }
+})
+
+
+hl.config({
+    binds = {
+        scroll_event_delay = 50,
+        -- workspace_back_and_forth = true, -- turned off because it clashes with hide_special_on_workspace_change
+        hide_special_on_workspace_change = true,
+        -- movefocus_cycles_fullscreen = true, -- sadly unusable on more than 1 monitor
+        drag_threshold = 15,
+    }
+})
+
+hl.config({
+    cursor = {
+        default_monitor = monitorMain,
+        inactive_timeout = 5
+    }
+})
+
+-- https://wiki.hyprland.org/Configuring/Variables/--misc
+hl.config({
+    misc = {
+        -- focus_on_activate = true,
+        middle_click_paste = false, -- doesnt seem to work anyways?
+        -- initial_workspace_tracking = 2, -- default is 1 - single shot
+        -- mouse_move_focuses_monitor = false, -- doesnt seem to change anything?
+
+        on_focus_under_fullscreen = 1,
+
+        anr_missed_pings = 5,
+    },
+
+    xwayland = {
+        force_zero_scaling = true
+    }
+})

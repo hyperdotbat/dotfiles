@@ -1,7 +1,17 @@
 @import url("style-defaults.css");
 
+{{- if eq .chezmoi.hostname "komorebi" }}
+@import url("style-gruvbox-islands.css");
+
+{{- else if eq .chezmoi.hostname "pakku" }}
+@import url("style-testing-tui.css");
+
+{{- else }}
 // @import url("style-dracula-flat.css");
-@import url("style-aero-metal.css");
+// @import url("style-aero-metal.css");
+@import url("style-aero-glass.css");
+//@import url("style-everforest-islands_winter.css");
+{{- end }}
 
 @import url("dynamic-imports.css");
 
